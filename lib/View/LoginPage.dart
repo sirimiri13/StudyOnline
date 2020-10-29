@@ -54,17 +54,18 @@ class _LoginPage extends State<LoginPage> {
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         )
     );
-    // final registerButton = Padding(
-    //   padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
-    //   child: OutlineButton(
-    //     onPressed: () {
-    //
-    //     },
-    //     disabledBorderColor: Colors.transparent,
-    //     padding: EdgeInsets.all(12),
-    //     child: Text('Create a new account?', style: TextStyle(color: Colors.indigo)),
-    //   )
-    // );
+    final ForgotPasswordButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
+      child: OutlineButton(
+        onPressed: () {
+
+        },
+        disabledBorderColor: Colors.transparent,
+        padding: EdgeInsets.all(12),
+        borderSide: BorderSide.none,
+        child: Text('Forget password?', style: TextStyle(color: Colors.indigo)),
+      )
+    );
     return Scaffold(
       backgroundColor: Colors.white,
         body: Center(
@@ -79,7 +80,7 @@ class _LoginPage extends State<LoginPage> {
                   passwordTextField,
                   SizedBox(height: 8.0),
                   loginButton,
-
+                  ForgotPasswordButton,
                 ]
             )
         )
