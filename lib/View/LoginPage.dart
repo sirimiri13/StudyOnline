@@ -8,8 +8,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-
-
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -68,6 +66,10 @@ class _LoginPage extends State<LoginPage> {
     );
     return Scaffold(
       backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text('LOGIN'),
+          backgroundColor: Colors.indigo
+        ),
         body: Center(
             child: ListView(
                 shrinkWrap: true,

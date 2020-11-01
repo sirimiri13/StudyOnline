@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'LoginPage.dart';
+import 'RegisterPage.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
@@ -17,7 +18,7 @@ class _HomePage extends State<HomePage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          //Navigator.of(context).pushNamed(HomePage.tag);
+          Navigator.of(context).pushNamed(LoginPage.tag);
         },
         padding: EdgeInsets.all(20),
         color: Colors.indigo,
@@ -31,7 +32,7 @@ class _HomePage extends State<HomePage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: (){
-
+          Navigator.of(context).pushNamed(RegisterPage.tag);
         },
         padding: EdgeInsets.all(20),
         child: Text('Sign Up',style: TextStyle(color: Colors.indigo)),
@@ -71,6 +72,4 @@ class _HomePage extends State<HomePage> {
 
       );
   }
-
-
 }

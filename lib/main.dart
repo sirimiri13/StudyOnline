@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'View/LoginPage.dart';
 import 'View/HomePage.dart';
+import 'View/RegisterPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
     HomePage.tag: (context) => HomePage(),
+    RegisterPage.tag: (context) => RegisterPage(),
   };
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
-
       ),
-      home: LoginPage(),
+      home: HomePage(),
       routes: routes,
     );
   }
