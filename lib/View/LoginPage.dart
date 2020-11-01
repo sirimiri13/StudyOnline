@@ -69,6 +69,7 @@ class _LoginPage extends State<LoginPage> {
         appBar: AppBar(
           title: Text('LOGIN'),
           backgroundColor: Colors.indigo
+
         ),
         body: Center(
             child: ListView(

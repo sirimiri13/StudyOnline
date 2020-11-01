@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'MainPage.dart';
+import 'LoginPage.dart';
 
 
 class RegisterPage extends StatefulWidget{
@@ -52,7 +54,8 @@ class _RegisterPage extends State<RegisterPage>{
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-        },
+          Navigator.popAndPushNamed(context, LoginPage.tag);
+     },
         padding: EdgeInsets.all(20),
         color: Colors.indigo,
         child: Text('Register', style: TextStyle(color: Colors.white)),

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'LoginPage.dart';
 import 'RegisterPage.dart';
 
-class HomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   static String tag = 'home-page';
   @override
-  _HomePage createState() => new _HomePage();
+  _MainPage createState() => new _MainPage();
 }
 
-class _HomePage extends State<HomePage> {
+class _MainPage extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final loginButton = Padding(
