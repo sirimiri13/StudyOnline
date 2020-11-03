@@ -1,9 +1,9 @@
 //Main.dart
 import 'package:flutter/material.dart';
-import 'View/LoginPage.dart';
-import 'View/MainPage.dart';
-import 'View/RegisterPage.dart';
-import 'View/BottomNavigation.dart';
+import 'source/LoginPage/LoginPage.dart';
+import 'source/MainPage/MainPage.dart';
+import 'source/RegisterPage/RegisterPage.dart';
+import 'source/BottomNavigation.dart';
 
 void main() => runApp(MyApp());
 

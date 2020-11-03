@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'LoginPage.dart';
-import 'RegisterPage.dart';
+import '../LoginPage/LoginPage.dart';
+import '../RegisterPage/RegisterPage.dart';
 
 class MainPage extends StatefulWidget {
   static String tag = 'home-page';
