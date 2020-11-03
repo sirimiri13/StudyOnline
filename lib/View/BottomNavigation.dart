@@ -41,6 +41,10 @@ class _BottomNavigation extends State<BottomNavigation>{
             title: Text('Search'),
             icon: Icon(Icons.youtube_searched_for),
           ),
+          BottomNavigationBarItem(
+            title: Text('Account'),
+            icon: Icon(Icons.account_circle_rounded),
+          ),
         ],
       ),
     );
