@@ -9,6 +9,7 @@ _BottomNavigation createState() => new _BottomNavigation();
 class _BottomNavigation extends State<BottomNavigation>{
   int _currentIndex = 0;
 
+
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
@@ -22,6 +23,7 @@ class _BottomNavigation extends State<BottomNavigation>{
         selectedLabelStyle: textTheme.caption,
         unselectedLabelStyle: textTheme.caption,
         onTap: (value) {
+            setState(() => _currentIndex = value);
         },
         items: [
           BottomNavigationBarItem(

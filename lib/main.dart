@@ -5,6 +5,7 @@ import 'source/MainPage/MainPage.dart';
 import 'source/RegisterPage/RegisterPage.dart';
 import 'source/BottomNavigation.dart';
 import 'source/DownloadPage/DownloadPage.dart';
+import 'source/SearchPage/SearchPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,16 +16,16 @@ class MyApp extends StatelessWidget {
     RegisterPage.tag: (context) => RegisterPage(),
     BottomNavigation.tag: (context) => BottomNavigation(),
     DownloadPage.tag: (context) => DownloadPage(),
+    SearchPage.tag: (context) => SearchPage(),
   };
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: MainPage(),
+      home: BottomNavigation(),
       routes: routes,
     );
   }
