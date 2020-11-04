@@ -7,53 +7,42 @@ class DownloadPage extends StatefulWidget{
 }
 
 class _DownloadPage extends State<DownloadPage> {
+  final messText = Container(
+    padding: EdgeInsets.only(top: 100.0),
+    child: Center(
+      child: Text('Search a course to download')
+    )
+  );
+  List<int> a = [];
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text(
-            'Name',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Age',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Role',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Sarah')),
-            DataCell(Text('19')),
-            DataCell(Text('Student')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Janine')),
-            DataCell(Text('43')),
-            DataCell(Text('Professor')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('William')),
-            DataCell(Text('27')),
-            DataCell(Text('Associate Professor')),
-          ],
-        ),
-      ],
-    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('DOWNLOAD'),
+      ),
+      body : ListView(children: _getListData()),
+      );
   }
-
+  _getListData() {
+    List<Widget> widgets = [];
+    if (a.isNotEmpty) {
+      for (int i = 0; i < a.length; i++) {
+        widgets.add(GestureDetector(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text("hello"),
+          ),
+          onTap: () {
+            print('row tapped $i');
+          },
+        ));
+      }
+    }
+    else {
+      widgets.add(
+        messText,
+      );
+    }
+    return widgets;
+  }
 }

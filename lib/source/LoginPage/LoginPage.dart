@@ -53,10 +53,9 @@ class _LoginPage extends State<LoginPage> {
         )
     );
     final ForgotPasswordButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
+      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 50.0),
       child: OutlineButton(
         onPressed: () {
-
         },
         disabledBorderColor: Colors.transparent,
         padding: EdgeInsets.all(12),
@@ -72,21 +71,28 @@ class _LoginPage extends State<LoginPage> {
 
         ),
         body: Center(
-            child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.only(left: 24.0, right: 24.0,),
-                children: <Widget>[
-                  logo,
-                  SizedBox(height: 28.0),
-                  emailTextField,
-                  SizedBox(height: 8.0),
-                  passwordTextField,
-                  SizedBox(height: 8.0),
-                  loginButton,
-                  ForgotPasswordButton,
-                ]
+          child: Container (
+              padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: 50.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    logo,
+                    SizedBox(height: 28.0),
+                    emailTextField,
+                    SizedBox(height: 8.0),
+                    passwordTextField,
+                    SizedBox(height: 8.0),
+                    loginButton,
+                    ForgotPasswordButton,
+                  ]
+              )
+          )
+
+          // child: Column(
+
+
             )
-        )
-    );
+        );
+    //);
   }
 }

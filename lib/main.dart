@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: BottomNavigation(),
+      home: DownloadPage(),
       routes: routes,
     );
   }

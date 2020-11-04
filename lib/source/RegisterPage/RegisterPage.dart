@@ -66,10 +66,10 @@ class _RegisterPage extends State<RegisterPage>{
         title: Text('REGISTER'),
         backgroundColor: Colors.indigo,
       ),
-      body: Center(
-
-        child: ListView(
-            padding: EdgeInsets.only(left: 24.0, right: 24.0,),
+      body: Container(
+          padding: EdgeInsets.only(left: 24.0, right: 24.0,),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: 10.0),
             Text('Last Name'),
@@ -92,7 +92,10 @@ class _RegisterPage extends State<RegisterPage>{
             SizedBox(height: 4.0),
             confirmPwTextField,
             SizedBox(height: 6.0),
-            registerButton,
+            Center(
+              child: registerButton,
+            )
+
           ]
         )
       )
