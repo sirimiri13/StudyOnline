@@ -24,6 +24,7 @@ class _BottomNavigation extends State<BottomNavigation>{
         unselectedLabelStyle: textTheme.caption,
         onTap: (value) {
             setState(() => _currentIndex = value);
+            print(value);
         },
         items: [
           BottomNavigationBarItem(

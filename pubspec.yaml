@@ -46,6 +46,7 @@ flutter:
     - Assets/images/computer.jpg
     - Assets/images/study.jpg
     - Assets/images/background.jpg
+    - Assets/images/profile.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
