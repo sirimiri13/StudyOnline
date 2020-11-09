@@ -44,7 +44,7 @@ class _MainPage extends State<MainPage> {
       child: Text(
         "WELCOME!",
         style: TextStyle(
-          fontSize: 30.0,
+          fontSize: 25.0,
           color: Colors.indigo,
           inherit: false,
         )

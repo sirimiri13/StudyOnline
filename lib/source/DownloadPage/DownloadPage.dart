@@ -17,9 +17,6 @@ class _DownloadPage extends State<DownloadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('DOWNLOAD'),
-      ),
       body : ListView(children: _getListData()),
       );
   }

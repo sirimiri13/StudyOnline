@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../BottomNavigation.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -45,7 +46,7 @@ class _LoginPage extends State<LoginPage> {
             borderRadius: BorderRadius.circular(24),
           ),
           onPressed: () {
-            //Navigator.of(context).pushNamed(HomePage.tag);
+            Navigator.of(context).pushNamed(BottomNavigation.tag);
           },
           padding: EdgeInsets.all(12),
           color: Colors.indigo,

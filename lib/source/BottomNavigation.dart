@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'HomePage/HomePage.dart';
+import 'DownloadPage/DownloadPage.dart';
+import 'SearchPage/SearchPage.dart';
 
 class BottomNavigation extends StatefulWidget{
 static String tag = "account-manage-page";
@@ -8,12 +11,24 @@ _BottomNavigation createState() => new _BottomNavigation();
 
 class _BottomNavigation extends State<BottomNavigation>{
   int _currentIndex = 0;
+List<Widget> _listPage = <Widget>[
+  HomePage(),
+  DownloadPage(),
+  SearchPage(),
+];
 
-
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      body: Center(
+        child: _listPage[_currentIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -30,7 +45,6 @@ class _BottomNavigation extends State<BottomNavigation>{
           BottomNavigationBarItem(
             title: Text('Home'),
             icon: Icon(Icons.water_damage),
-
           ),
           BottomNavigationBarItem(
             title: Text('Browse'),
@@ -42,7 +56,7 @@ class _BottomNavigation extends State<BottomNavigation>{
           ),
           BottomNavigationBarItem(
             title: Text('Search'),
-            icon: Icon(Icons.youtube_searched_for),
+            icon: Icon(Icons.search),
           ),
           BottomNavigationBarItem(
             title: Text('Account'),
