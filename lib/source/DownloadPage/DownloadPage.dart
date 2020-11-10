@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Struct/Course.dart';
 
-//final _listDownload = getCourseContinue();
-final  _listDownload = [];
+final _listDownload = getCourseContinue();
+//final  _listDownload = [];
 class DownloadPage extends StatefulWidget{
   static String tag = 'download-page';
   @override

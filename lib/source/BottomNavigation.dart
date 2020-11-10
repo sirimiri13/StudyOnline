@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'HomePage/HomePage.dart';
 import 'DownloadPage/DownloadPage.dart';
 import 'SearchPage/SearchPage.dart';
+import 'AccountPage/AccountPage.dart';
+import 'BrowsePage/BrowsePage.dart';
 
 class BottomNavigation extends StatefulWidget{
 static String tag = "account-manage-page";
@@ -13,8 +15,10 @@ class _BottomNavigation extends State<BottomNavigation>{
   int _currentIndex = 0;
 List<Widget> _listPage = <Widget>[
   HomePage(),
+  BrowsePage(),
   DownloadPage(),
   SearchPage(),
+  AccountPage(),
 ];
 
   void _onItemTapped(int index) {

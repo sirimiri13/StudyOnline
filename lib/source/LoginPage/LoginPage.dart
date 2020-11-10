@@ -4,6 +4,9 @@ import '../BottomNavigation.dart';
 
 TextEditingController emailController = new TextEditingController();
 TextEditingController passwordController = new TextEditingController();
+
+bool userNameValidate = false;
+bool passWordValidate = false;
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
   @override
@@ -13,6 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   @override
+
+
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'computer',
@@ -38,6 +43,7 @@ class _LoginPage extends State<LoginPage> {
       obscureText: true,
       decoration: InputDecoration(
           hintText: 'Enter your password',
+        //  errorText: isUserNameValidate ? 'Please enter a Username' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0))
