@@ -12,43 +12,6 @@ class HomePage extends StatefulWidget{
   _HomePage createState() => new _HomePage();
 }
 
-class CourseClass  extends StatelessWidget {
-  //Course(this.name,this.image,this.teacher,this.totalClip);
-  CourseClass({Key key, this.item}) : super(key: key);
-  final Course item;
-  Widget build(BuildContext context) {
-
-    return Container(
-        padding: EdgeInsets.all(2),
-        height: 100,
-        child: Card(
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Image.asset("Assets/images/code3.jpg"),
-                Expanded(
-                    child: Container(
-                        padding: EdgeInsets.all(5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(this.item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text('Teacher: '+ this.item.teacher),
-                            Text('Total clip: '+ this.item.totalClip.toString()),
-                            // RatingBox(),
-                          ],
-                        )
-                    )
-                )
-              ]
-          ),
-        )
-    );
-  }
-}
-
-
 
 Widget continueHorizionList = new Container (
     child: CarouselSlider(
@@ -121,43 +84,6 @@ Widget suggestionHorizontalList = new Container(
 );
 
 
-
-Widget CoursesList = CarouselSlider(
-      options: CarouselOptions(
-        aspectRatio: 2.0,
-        scrollDirection: Axis.vertical,
-        //enlargeCenterPage: true,
-      ),
-      items: itemCourseSuggest.map((item) => Container(
-        child: Container(
-            padding: EdgeInsets.all(2),
-            height: 100,
-            child: Card(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Image.asset(item.image),
-                    Expanded(
-                        child: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text('Teacher: '+ item.teacher),
-                                Text('Total clip: '+ item.totalClip.toString()),
-                                // RatingBox(),
-                              ],
-                            )
-                        )
-                    )
-                  ]
-              ),
-            )
-        ),
-      )).toList()
-  );
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {

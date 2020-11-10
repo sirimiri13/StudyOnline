@@ -74,7 +74,7 @@ List<Course> getCourseContinue() {
   itemCourseContinue.add(
       Course(
           "Mockup",
-          'Assets/images/code4.jpg',
+          'Assets/images/code8.jpg',
           "Roses",
           7
       )
