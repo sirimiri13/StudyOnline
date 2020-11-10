@@ -63,7 +63,7 @@ class _DownloadPage extends State<DownloadPage> {
                   )
               );
             }
-          
+
         },
       ),
     );

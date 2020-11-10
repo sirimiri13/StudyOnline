@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../BottomNavigation.dart';
 
+
+TextEditingController emailController = new TextEditingController();
+TextEditingController passwordController = new TextEditingController();
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
   @override
@@ -20,6 +23,7 @@ class _LoginPage extends State<LoginPage> {
       ),
     );
     final emailTextField = TextField(
+      controller : emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Enter your email',
@@ -29,6 +33,7 @@ class _LoginPage extends State<LoginPage> {
     );
 
     final passwordTextField = TextField(
+      controller : passwordController,
       keyboardType: TextInputType.visiblePassword,
       obscureText: true,
       decoration: InputDecoration(
@@ -46,7 +51,50 @@ class _LoginPage extends State<LoginPage> {
             borderRadius: BorderRadius.circular(24),
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed(BottomNavigation.tag);
+          //   if (passwordController.text.isEmpty|| emailController.text.isEmpty){
+          //     return AlertDialog(
+          //       title: new Text("Login Failed", style: TextStyle(color: Colors.indigo,fontSize: 20.0)),
+          //       content: new Text("Username or Password is empty"),
+          //       actions: <Widget>[
+          //         // usually buttons at the bottom of the dialog
+          //         new FlatButton(
+          //           child: new Text("Try again",style: TextStyle(color: Colors.indigo,fontSize: 18.0)),
+          //           onPressed: () {
+          //             Navigator.of(context).pop();
+          //           },
+          //         ),
+          //       ],
+          //     );
+          //   }
+          // else {
+              if (passwordController.text == emailController.text) {
+                Navigator.of(context).pushNamed(BottomNavigation.tag);
+              }
+              else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    // return object of type Dialog
+                    return AlertDialog(
+                      title: new Text("Login Failed", style: TextStyle(
+                          color: Colors.indigo, fontSize: 20.0)),
+                      content: new Text(
+                          "Username or Passsword is not corrected"),
+                      actions: <Widget>[
+                        // usually buttons at the bottom of the dialog
+                        new FlatButton(
+                          child: new Text("Try again", style: TextStyle(
+                              color: Colors.indigo, fontSize: 18.0)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+        //    }
           },
           padding: EdgeInsets.all(12),
           color: Colors.indigo,
