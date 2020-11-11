@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../Struct/Course.dart';
+import '../DetailCoursePage/DetailCoursePage.dart';
 final List<String> imgList = [
   'Assets/images/code5.jpg', 'Assets/images/code6.jpg','Assets/images/code7.jpg','Assets/images/code8.jpg','Assets/images/code2.jpg'];
 
@@ -93,60 +94,67 @@ class _HomePage extends State<HomePage> {
         .size
         .width;
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text('HOME'),
-        //   backgroundColor: Colors.indigo,
-        // ),
-        body: Container(
-        padding: EdgeInsets.only(left: 10.0, top: 10.0),
-         child: ListView.builder(
-           scrollDirection: Axis.vertical,
-          itemCount: itemCourseSuggest.length+4,
-          itemBuilder: (context, index) {
-             if (index == 0)
-               return suggestionHorizontalList;
-             else if (index == 1)
-               return Text('Continue?', style: TextStyle(fontSize: 18.0,color: Colors.indigo,fontWeight: FontWeight.bold));
-             else if (index == 2)
-               return continueHorizionList;
-             else if (index == 3)
-               return Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold));
-             else
-               return Container(
-                   padding: EdgeInsets.all(2),
-                   height: 100,
-                   child: Card(
-                     child: Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                         children: <Widget>[
-                           Image.asset(itemCourseSuggest[index-4].image),
-                           Expanded(
-                               child: Container(
-                                   padding: EdgeInsets.all(5),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: <Widget>[
-                                       Text(itemCourseSuggest[index-4].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                       Text('Teacher: '+ itemCourseSuggest[index-4].teacher),
-                                       Text('Total clip: '+ itemCourseSuggest[index-4].totalClip.toString()),
-                                       // RatingBox(),
-                                     ],
-                                   )
-                               )
-                           )
-                         ]
-                     ),
-                   )
-               );
-          },
+      // appBar: AppBar(
+      //   title: Text('HOME'),
+      //   backgroundColor: Colors.indigo,
+      // ),
+      body: Container(
+          padding: EdgeInsets.only(left: 10.0, top: 10.0),
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: itemCourseSuggest.length+4,
+            itemBuilder: (context, index) {
+              if (index == 0)
+                return suggestionHorizontalList;
+              else if (index == 1)
+                return Text('Continue?', style: TextStyle(fontSize: 18.0,color: Colors.indigo,fontWeight: FontWeight.bold));
+              else if (index == 2)
+                return continueHorizionList;
+              else if (index == 3)
+                return Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold));
+              else
+                return Container(
+                  padding: EdgeInsets.all(2),
+                  height: 100,
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => DetailCoursePage(dataCourse: itemCourseSuggest[index-4])
+                        ));
+                      },
+                      child: Card(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Image.asset(itemCourseSuggest[index-4].image),
+                              Expanded(
+                                  child: Container(
+                                      padding: EdgeInsets.all(5),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(itemCourseSuggest[index-4].name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                          Text('Teacher: '+ itemCourseSuggest[index-4].teacher),
+                                          Text('Total clip: '+ itemCourseSuggest[index-4].totalClip.toString()),
+                                          // RatingBox(),
+                                        ],
+                                      )
+                                  )
+                              )
+                            ]
+                        ),
+                      )
+                  ),
+                );
+            },
 
 
-    )
+          )
 
-    ),
+      ),
     );
-    }
+  }
 
 
- }
+}
