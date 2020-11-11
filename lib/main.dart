@@ -1,4 +1,5 @@
 //Main.dart
+import 'package:finalproject_1712061/source/AccountPage/AccountPage.dart';
 import 'package:flutter/material.dart';
 import 'source/LoginPage/LoginPage.dart';
 import 'source/MainPage/MainPage.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
     BottomNavigation.tag: (context) => BottomNavigation(),
     DownloadPage.tag: (context) => DownloadPage(),
     SearchPage.tag: (context) => SearchPage(),
-    HomePage.tag: (context) => HomePage()
+    HomePage.tag: (context) => HomePage(),
+    AccountPage.tag: (context) => AccountPage(),
   };
   @override
   Widget build(BuildContext context) {

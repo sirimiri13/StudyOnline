@@ -3,7 +3,7 @@ import '../LoginPage/LoginPage.dart';
 import '../RegisterPage/RegisterPage.dart';
 
 class MainPage extends StatefulWidget {
-  static String tag = 'home-page';
+  static String tag = 'main-page';
   @override
   _MainPage createState() => new _MainPage();
 }
@@ -44,7 +44,7 @@ class _MainPage extends State<MainPage> {
       child: Text(
         "WELCOME!",
         style: TextStyle(
-          fontSize: 25.0,
+          fontSize: 20.0,
           color: Colors.indigo,
           inherit: false,
         )

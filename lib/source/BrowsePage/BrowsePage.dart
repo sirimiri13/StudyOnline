@@ -16,8 +16,6 @@ class BrowsePage extends StatefulWidget{
 
 
 class _BrowsePage extends State<BrowsePage>{
-
-
   Widget themeCourse = new Container (
     child: CarouselSlider(
         options: CarouselOptions(
@@ -210,10 +208,8 @@ _getListSkill(){
                           return Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 3.0, vertical: 18.0),
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.18,
+                            height: MediaQuery.of(context).size.height * 0.25,
+
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: _listAuthor.length,
