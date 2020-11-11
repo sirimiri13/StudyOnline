@@ -115,7 +115,7 @@ class _LoginPage extends State<LoginPage> {
         disabledBorderColor: Colors.transparent,
         padding: EdgeInsets.all(12),
         borderSide: BorderSide.none,
-        child: Text('Forget password?', style: TextStyle(color: Colors.indigo)),
+        child: Text('Forget password?', style: TextStyle(color: Colors.indigo,decoration:TextDecoration.underline)),
       )
     );
     return Scaffold(

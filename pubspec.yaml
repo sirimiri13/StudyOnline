@@ -39,6 +39,8 @@ dev_dependencies:
   dio: 1.0.0
   carousel_slider: ^2.3.1
 
+  imagebutton: ^0.0.6
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -48,6 +50,7 @@ flutter:
     - Assets/images/computer.jpg
     - Assets/images/study.jpg
     - Assets/images/background.jpg
+    - Assets/images/profile-2.jpg
     - Assets/images/profile.jpg
     - Assets/images/code1.jpg
     - Assets/images/code2.jpg

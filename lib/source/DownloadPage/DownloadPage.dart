@@ -1,4 +1,6 @@
+import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
+import '../SearchPage/SearchPage.dart';
 import '../Struct/Course.dart';
 
 final _listDownload = getCourseContinue();
@@ -9,16 +11,21 @@ class DownloadPage extends StatefulWidget{
   _DownloadPage createState() => new _DownloadPage();
 }
 
-class _DownloadPage extends State<DownloadPage> {
 
+
+class _DownloadPage extends State<DownloadPage> {
+  int _itemCount = 0;
   @override
   Widget build(BuildContext context) {
     print(_listDownload.length);
+    if (_listDownload.isEmpty){
+      _itemCount = 1;
+    }
     return Scaffold(
       body : ListView.builder(
-        itemCount: _listDownload.length,
+        itemCount: _listDownload.length + _itemCount,
         itemBuilder: (context,index){
-          if (_listDownload.length != 0){
+          if (_listDownload.length != 0)
             return Container(
                 padding: EdgeInsets.all(2),
                 height: 100,
@@ -46,27 +53,18 @@ class _DownloadPage extends State<DownloadPage> {
                     )
                 )
             );
+          else
+           // return Text('Nothing');
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Text('No Download',style: TextStyle(color: Colors.indigo, fontSize: 20.0)),
+              )
+            );
           }
-          else {
 
-              return Container(
-                  child: Padding(
-                      padding: EdgeInsets.only(top: 30.0),
-                      child: OutlineButton(
-                        onPressed: () {
-                        },
-                        disabledBorderColor: Colors.transparent,
-                        padding: EdgeInsets.all(12),
-                        borderSide: BorderSide.none,
-                        child: Text('Search a course to download', style: TextStyle(color: Colors.indigo)),
-                      )
-                  )
-              );
-            }
-
-        },
-      ),
-    );
+      )
+          );
   }
 // _getListData() {
 //   List<Widget> widgets = [];

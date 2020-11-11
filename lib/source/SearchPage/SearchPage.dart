@@ -12,6 +12,7 @@ class _SearchPage extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo,
         leading: Icon(Icons.search),
         title: TextField(
           decoration: InputDecoration(

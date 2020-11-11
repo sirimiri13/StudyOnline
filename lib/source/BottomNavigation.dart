@@ -6,7 +6,7 @@ import 'AccountPage/AccountPage.dart';
 import 'BrowsePage/BrowsePage.dart';
 
 class BottomNavigation extends StatefulWidget{
-static String tag = "account-manage-page";
+static String tag = 'bottom-navigation';
 @override
 _BottomNavigation createState() => new _BottomNavigation();
 }
