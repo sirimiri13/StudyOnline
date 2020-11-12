@@ -16,7 +16,7 @@ class _ListCourse extends State<ListCourse>{
     return Scaffold (
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title: Text('Video'),
+        title: Text('Courses'),
       ),
       body: ListView.builder(
         itemCount: itemCourse.length,
