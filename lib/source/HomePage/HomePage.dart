@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../Struct/Course.dart';
-import '../DetailCoursePage/DetailCoursePage.dart';
+import '../CoursePage/DetailCoursePage.dart';
+import '../CoursePage/ListCourse.dart';
 final List<String> imgList = [
   'Assets/images/code5.jpg', 'Assets/images/code6.jpg','Assets/images/code7.jpg','Assets/images/code8.jpg','Assets/images/code2.jpg'];
 
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget{
 
 
 Widget continueHorizionList = new Container (
+
     child: CarouselSlider(
       options: CarouselOptions(),
       items: itemCourseContinue.map((item) => Container(
@@ -31,60 +33,6 @@ Widget continueHorizionList = new Container (
 );
 
 
-Widget suggestionHorizontalList = new Container(
-  child: CarouselSlider(
-      options: CarouselOptions(
-        aspectRatio: 2.0,
-        enlargeCenterPage: true,
-        scrollDirection: Axis.horizontal,
-        autoPlay: true,
-      ),
-
-      items: itemCourseSuggest.map((item) =>
-          Container(
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.asset(item.image,fit: BoxFit.cover, width:300.0),
-                        //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(200, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0)
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0),
-                            child: Text(item.name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                ),
-              )
-          )).toList()
-  ),
-);
-
-
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -94,10 +42,6 @@ class _HomePage extends State<HomePage> {
         .size
         .width;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('HOME'),
-      //   backgroundColor: Colors.indigo,
-      // ),
       body: Container(
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
           child: ListView.builder(
@@ -105,11 +49,89 @@ class _HomePage extends State<HomePage> {
             itemCount: itemCourseSuggest.length+4,
             itemBuilder: (context, index) {
               if (index == 0)
-                return suggestionHorizontalList;
+                return  Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => DetailCoursePage()
+                      ));
+                    },
+                    child: CarouselSlider(
+                        options: CarouselOptions(
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                          autoPlay: true,
+                        ),
+                        items: itemCourseSuggest.map((item) =>
+                            Container(
+                                child: Container(
+                                  margin: EdgeInsets.all(5.0),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Image.asset(item.image,fit: BoxFit.cover, width:300.0),
+                                          //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                                          Positioned(
+                                            bottom: 0.0,
+                                            left: 0.0,
+                                            right: 0.0,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(200, 0, 0, 0),
+                                                    Color.fromARGB(0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0, horizontal: 20.0),
+                                              child: Text(item.name,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                  ),
+                                )
+                            )).toList()
+                    ),
+                  ),
+                );
               else if (index == 1)
                 return Text('Continue?', style: TextStyle(fontSize: 18.0,color: Colors.indigo,fontWeight: FontWeight.bold));
               else if (index == 2)
-                return continueHorizionList;
+                return Container (
+                  child: GestureDetector(
+                      onTap: () {
+                        // Navigator.push(context, MaterialPageRoute(
+                        //     builder: (context) => DetailCoursePage(dataCourse: itemCourseSuggest[index-4])
+                        // ));
+                      },
+                      child: CarouselSlider(
+                        options: CarouselOptions(),
+                        items: itemCourseContinue.map((item) => Container(
+                          height: 180,
+                          margin: EdgeInsets.all(5.0),
+                          child: Column(
+                              children: <Widget>[
+                                Image.asset(item.image,fit: BoxFit.cover, width:300.0,height: 160.0),
+                                Text(item.name,style: TextStyle(fontSize: 18.0))
+                              ]
+                          ),
+                        )).toList(),
+                      )
+                  ),
+                );
               else if (index == 3)
                 return Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold));
               else

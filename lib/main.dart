@@ -8,6 +8,7 @@ import 'source/BottomNavigation.dart';
 import 'source/DownloadPage/DownloadPage.dart';
 import 'source/SearchPage/SearchPage.dart';
 import 'source/HomePage/HomePage.dart';
+import 'source/CoursePage/DetailCoursePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     SearchPage.tag: (context) => SearchPage(),
     HomePage.tag: (context) => HomePage(),
     AccountPage.tag: (context) => AccountPage(),
+    DetailCoursePage.tag: (context) => DetailCoursePage(),
   };
   @override
   Widget build(BuildContext context) {

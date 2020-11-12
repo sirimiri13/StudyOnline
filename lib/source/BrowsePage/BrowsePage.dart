@@ -3,6 +3,7 @@ import 'package:imagebutton/imagebutton.dart';
 import '../Struct/Course.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../Struct/Author.dart';
+import '../CoursePage/ListCourse.dart';
 
 
 final itemCourseSuggest = getCourseSuggest();
@@ -111,7 +112,9 @@ _getListSkill(){
                             unpressedImage: Image.asset(
                               "Assets/images/code8.jpg",),
                             onTap: () {
-                              print('test');
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ListCourse()
+                              ));
                             },
                           )
                       );
@@ -134,7 +137,9 @@ _getListSkill(){
                           unpressedImage: Image.asset(
                             "Assets/images/code3.jpg",),
                           onTap: () {
-                            print('test');
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => ListCourse()
+                            ));
                           },
                         ),
                       );

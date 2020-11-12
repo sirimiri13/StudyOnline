@@ -83,13 +83,13 @@ class _AccountPage extends State<AccountPage>{
                         margin: EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children:[
                               Text('First Name: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 30.0),
                               Text(_user.firstName),
-                              SizedBox(width: 60.0),
-                              IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
+                              Container(
+                             child:  IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
                                 onPressed: (){
                                   showDialog<String>(
                                     context: context,
@@ -119,13 +119,15 @@ class _AccountPage extends State<AccountPage>{
                                             onPressed: () {
                                               _user.firstName = editController.text;
                                               Navigator.pop(context);
+
                                               //Navigator.pop(context);
                                             })
                                       ],
                                     ),
                                   );
                                 },
-                              )
+                              ),
+                              ),
                             ]
                         ),
                       ),
@@ -137,13 +139,14 @@ class _AccountPage extends State<AccountPage>{
                         margin: EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children:[
                               Text('Last Name: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 30.0),
                               Text(_user.lastName),
-                              SizedBox(width: 80.0),
-                              IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
+                              Container(
+                                //padding: EdgeInsets.only(left: 60),
+                              child: IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
                                 onPressed: (){
                                   showDialog<String>(
                                     context: context,
@@ -178,8 +181,8 @@ class _AccountPage extends State<AccountPage>{
                                     ),
                                   );
                                 },
-                              )
-
+                              ),
+                              ),
                             ]
                         ),
                       ),
@@ -190,7 +193,7 @@ class _AccountPage extends State<AccountPage>{
                         margin: EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children:[
                               Text('Email: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 65.0),
