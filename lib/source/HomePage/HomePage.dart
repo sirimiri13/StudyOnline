@@ -162,7 +162,7 @@ class _HomePage extends State<HomePage> {
                                           // RatingBox(),
                                         ],
                                       )
-                                  )
+                                   )
                               )
                             ]
                         ),

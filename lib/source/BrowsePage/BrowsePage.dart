@@ -149,7 +149,7 @@ class _BrowsePage extends State<BrowsePage>{
                 return Container(
                   padding: EdgeInsets.only(left: 10.0),
                   margin: EdgeInsets.all(5.0),
-                  child: Text('Courses', style: TextStyle(
+                  child: Text('TOPIC', style: TextStyle(
                       color: Colors.indigo,
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold)),

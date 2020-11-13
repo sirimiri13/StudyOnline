@@ -29,44 +29,47 @@ List<Widget> _listPage = <Widget>[
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      body: Center(
-        child: _listPage[_currentIndex],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        backgroundColor: colorScheme.surface,
-        selectedItemColor: colorScheme.onSurface,
-        unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-        selectedLabelStyle: textTheme.caption,
-        unselectedLabelStyle: textTheme.caption,
-        onTap: (value) {
+    return WillPopScope(
+       onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: _listPage[_currentIndex],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          backgroundColor: colorScheme.surface,
+          selectedItemColor: colorScheme.onSurface,
+          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+          selectedLabelStyle: textTheme.caption,
+          unselectedLabelStyle: textTheme.caption,
+          onTap: (value) {
             setState(() => _currentIndex = value);
             print(value);
-        },
-        items: [
-          BottomNavigationBarItem(
-            title: Text('Home'),
-            icon: Icon(Icons.water_damage),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Browse'),
-            icon: Icon(Icons.wysiwyg_sharp),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Download'),
-            icon: Icon(Icons.arrow_circle_down_rounded),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Search'),
-            icon: Icon(Icons.search),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Account'),
-            icon: Icon(Icons.account_circle_rounded),
-          ),
-        ],
+          },
+          items: [
+            BottomNavigationBarItem(
+              title: Text('Home'),
+              icon: Icon(Icons.water_damage),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Browse'),
+              icon: Icon(Icons.wysiwyg_sharp),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Download'),
+              icon: Icon(Icons.arrow_circle_down_rounded),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Search'),
+              icon: Icon(Icons.search),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Account'),
+              icon: Icon(Icons.account_circle_rounded),
+            ),
+          ],
+        ),
       ),
     );
   }

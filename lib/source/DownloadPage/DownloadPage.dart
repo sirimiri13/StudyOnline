@@ -2,7 +2,7 @@ import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import '../SearchPage/SearchPage.dart';
 import '../Struct/Course.dart';
-
+import '../CoursePage/DetailCoursePage.dart';
 final _listDownload = getCourseContinue();
 //final  _listDownload = [];
 class DownloadPage extends StatefulWidget{
@@ -26,7 +26,13 @@ class _DownloadPage extends State<DownloadPage> {
         itemCount: _listDownload.length + _itemCount,
         itemBuilder: (context,index){
           if (_listDownload.length != 0)
-            return Container(
+            return GestureDetector (
+          onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+          builder: (context) => DetailCoursePage()
+          ));
+          },
+          child: Container(
                 padding: EdgeInsets.all(2),
                 height: 100,
                 child: Card(
@@ -52,6 +58,8 @@ class _DownloadPage extends State<DownloadPage> {
                         ]
                     )
                 )
+
+              ),
             );
           else
            // return Text('Nothing');
@@ -66,34 +74,5 @@ class _DownloadPage extends State<DownloadPage> {
       )
           );
   }
-// _getListData() {
-//   List<Widget> widgets = [];
-//   if (_listDownload.isNotEmpty) {
-//     for (int i = 0; i < a.length; i++) {
-//       widgets.add(GestureDetector(
-//         child: Padding(
-//           padding: EdgeInsets.all(10.0),
-//         ),
-//         onTap: () {
-//           print('row tapped $i');
-//         },
-//       ));
-//     }
-//   }
-//   else {
-//     widgets.add(GestureDetector(
-//         child: Container(
-//             child: Padding(
-//                 padding: EdgeInsets.only(top: 30.0),
-//                 child: OutlineButton(
-//                     borderSide: BorderSide.none,
-//                     child : Text('Search a course to download'),
-//                 )
-//             )
-//         )
-//     )
-//     );
-//   }
-//   return widgets;
-// }
+
 }
