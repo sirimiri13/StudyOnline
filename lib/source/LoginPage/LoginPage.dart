@@ -57,23 +57,7 @@ class _LoginPage extends State<LoginPage> {
             borderRadius: BorderRadius.circular(24),
           ),
           onPressed: () {
-          //   if (passwordController.text.isEmpty|| emailController.text.isEmpty){
-          //     return AlertDialog(
-          //       title: new Text("Login Failed", style: TextStyle(color: Colors.indigo,fontSize: 20.0)),
-          //       content: new Text("Username or Password is empty"),
-          //       actions: <Widget>[
-          //         // usually buttons at the bottom of the dialog
-          //         new FlatButton(
-          //           child: new Text("Try again",style: TextStyle(color: Colors.indigo,fontSize: 18.0)),
-          //           onPressed: () {
-          //             Navigator.of(context).pop();
-          //           },
-          //         ),
-          //       ],
-          //     );
-          //   }
-          // else {
-              if (passwordController.text == emailController.text) {
+              if (passwordController.text == "password" && emailController.text == "username") {
                 Navigator.of(context).pushNamed(BottomNavigation.tag);
               }
               else {
@@ -83,14 +67,14 @@ class _LoginPage extends State<LoginPage> {
                     // return object of type Dialog
                     return AlertDialog(
                       title: new Text("Login Failed", style: TextStyle(
-                          color: Colors.indigo, fontSize: 20.0)),
+                          color: Colors.indigo, fontSize: 18.0)),
                       content: new Text(
-                          "Username or Passsword is not corrected"),
+                          "email : 'username' \npassword : 'password'"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
                         new FlatButton(
                           child: new Text("Try again", style: TextStyle(
-                              color: Colors.indigo, fontSize: 18.0)),
+                              color: Colors.indigo, fontSize: 16.0)),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -111,6 +95,63 @@ class _LoginPage extends State<LoginPage> {
       padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 50.0),
       child: OutlineButton(
         onPressed: () {
+        showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            titleTextStyle : TextStyle(color: Colors.indigo),
+            contentPadding: const EdgeInsets.all(16.0),
+            content: new Row(
+              children: <Widget>[
+                new Expanded(
+                  child: new TextField(
+                    controller: emailController,
+                    autofocus: true,
+                    decoration: new InputDecoration(
+                        labelText: 'Edit',
+                        hintText: 'username',
+                        labelStyle: TextStyle(color: Colors.indigo)
+                  ),
+                )
+                )
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  child: const Text('CANCEL',style: TextStyle(color: Colors.indigo)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              new FlatButton(
+                  child: const Text('DONE',style: TextStyle(color: Colors.indigo)),
+                  onPressed: () {
+                    showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: new Text("Confirm", style: TextStyle(
+                          color: Colors.indigo, fontSize: 18.0)),
+                      content: new Text("Please check your email"),
+                      actions: <Widget>[
+                        // usually buttons at the bottom of the dialog
+                        new FlatButton(
+                          child: new Text("OK", style: TextStyle(
+                              color: Colors.indigo, fontSize: 16.0)),
+                             onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                    }
+                 );
+               //     Navigator.pop(context);
+                  },
+                  )
+            ],
+          );
+        },
+          );
         },
         disabledBorderColor: Colors.transparent,
         padding: EdgeInsets.all(12),
