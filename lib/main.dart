@@ -10,6 +10,10 @@ import 'source/SearchPage/SearchPage.dart';
 import 'source/HomePage/HomePage.dart';
 import 'source/CoursePage/DetailCoursePage.dart';
 
+
+
+
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
