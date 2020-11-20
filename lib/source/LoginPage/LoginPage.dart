@@ -19,6 +19,7 @@ class _LoginPage extends State<LoginPage> {
 
 
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
     final logo = Hero(
       tag: 'computer',
       child: CircleAvatar(
@@ -28,6 +29,7 @@ class _LoginPage extends State<LoginPage> {
       ),
     );
     final emailTextField = TextField(
+      onEditingComplete: () => node.nextFocus(),
       controller : emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
