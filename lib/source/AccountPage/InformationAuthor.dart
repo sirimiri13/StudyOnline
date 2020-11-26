@@ -1,13 +1,14 @@
+import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
 import '../CoursePage/DetailCoursePage.dart';
 import '../CoursePage/ListCourse.dart';
-import '../Struct/Course.dart';
-
-final itemCourse = getCourseSuggest();
+import '../../main.dart';
+import '../Model/Course.dart';
 
 
 class InformationAuthor extends StatefulWidget{
   static String tag = 'information-author';
+
   @override
   _InformationAuthor createState() => new _InformationAuthor();
 }
@@ -23,7 +24,7 @@ class _InformationAuthor extends State<InformationAuthor>{
       ),
      body: Container(
        child: ListView.builder(
-         itemCount: 4 + itemCourse.length,
+        // itemCount: 4 + myCourse.length,
          itemBuilder: (context, index){
            if (index ==0 ) {
              return Container(
@@ -77,15 +78,15 @@ class _InformationAuthor extends State<InformationAuthor>{
                      height: 100,
                      child: GestureDetector(
                          onTap: () {
-                           Navigator.push(context, MaterialPageRoute(
-                               builder: (context) => DetailCoursePage(dataCourse: itemCourse[index-4])
-                           ));
+                           // Navigator.push(context, MaterialPageRoute(
+                           //     builder: (context) => DetailCoursePage(dataCourse: itemCourse[index-4])
+                           // ));
                          },
                          child: Card(
                            child: Row(
                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                children: <Widget>[
-                                 Image.asset(itemCourse[index-4].image),
+                                 Image.asset("Assets/images/code1.jpg"),
                                  Expanded(
                                      child: Container(
                                          padding: EdgeInsets.all(5),
@@ -93,9 +94,9 @@ class _InformationAuthor extends State<InformationAuthor>{
                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: <Widget>[
-                                             Text(itemCourse[index-4].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                             Text('Teacher: '+ itemCourse[index-4].teacher),
-                                             Text('Total clip: '+ itemCourse[index-4].totalClip.toString()),
+                                             Text(listCourse[index-4].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                             Text('Teacher: '),
+                                             Text('Total clip: '),
                                              // RatingBox(),
                                            ],
                                          )

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../LoginPage/LoginPage.dart';
 import '../RegisterPage/RegisterPage.dart';
+import '../../main.dart';
+
+
 
 class MainPage extends StatefulWidget {
   static String tag = 'main-page';
@@ -32,7 +35,7 @@ class _MainPage extends State<MainPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: (){
-          Navigator.of(context).pushNamed(RegisterPage.tag);
+          //Navigator.of(context).pushNamed(RegisterPage.tag);
         },
         padding: EdgeInsets.all(20),
         child: Text('Sign Up',style: TextStyle(color: Colors.indigo)),

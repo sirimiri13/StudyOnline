@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import '../Struct/Course.dart';
+import '../Model/Course.dart';
+import '../../main.dart';
 
 
-
-final itemCourse = getCourseContinue();
+//final itemCourse = getCourseSuggest();
 class DetailCoursePage extends StatefulWidget{
   static String tag = 'detail-course-page';
-  final Course dataCourse;
-  DetailCoursePage({Key key, this.dataCourse}) : super(key: key);
-  Course getDataCourse(){
-    return dataCourse;
-  }
+  //final Course dataCourse;
+  //DetailCoursePage({Key key, this.dataCourse}) : super(key: key);
+
   _DetailCoursePage createState() => new _DetailCoursePage();
 }
 
@@ -26,7 +24,8 @@ class _DetailCoursePage extends State<DetailCoursePage>{
         ),
         body: Container(
             child: ListView.builder(
-                itemCount: 5 + itemCourse.length,
+                //itemCount: 5 + itemCourse.length,
+              itemCount: 6,
                 itemBuilder: (context, index){
                   if (index ==0)
                     return Container(
@@ -98,7 +97,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  Image.asset(itemCourse[index-5].image),
+                                  Image.asset(listCourse[index-5].promoVidUrl),
                                   Expanded(
                                       child: Container(
                                           padding: EdgeInsets.all(5),
@@ -106,7 +105,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text(itemCourse[index-5].name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                              Text(listCourse[index-5].title, style: TextStyle(fontWeight: FontWeight.bold)),
                                               //Text('Teacher: '+ itemCourse[index-6].teacher),
                                               //Text('Total clip: '+ itemCourse[index-6].totalClip.toString()),
                                               // RatingBox(),

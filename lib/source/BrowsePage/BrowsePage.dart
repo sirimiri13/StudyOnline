@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
-import '../Struct/Course.dart';
+import '../Model/Course.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../Struct/Author.dart';
+import '../Model/Author.dart';
 import '../CoursePage/ListCourse.dart';
 import '../AccountPage/InformationAuthor.dart';
+import '../../main.dart';
 
 
-final itemCourseSuggest = getCourseSuggest();
+//final itemCourseSuggest = getCourseSuggest();
 final _listSkill = ['C++','Swift','Python', 'Flutter', 'ASP.NET Core','TypeScript','Machine Learning','JavaScript'];
-final _listAuthor = getListAuthor();
+//final _listAuthor = getListAuthor();
 class BrowsePage extends StatefulWidget{
   static String tag = 'browse-page';
   @override _BrowsePage createState() => new _BrowsePage();
@@ -26,7 +27,7 @@ class _BrowsePage extends State<BrowsePage>{
           scrollDirection: Axis.horizontal,
         ),
 
-        items: itemCourseSuggest.map((item) =>
+        items: listCourse.map((item) =>
             Container(
                 child: Container(
                   margin: EdgeInsets.all(2.0),
@@ -34,7 +35,7 @@ class _BrowsePage extends State<BrowsePage>{
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       child: Stack(
                         children: <Widget>[
-                          Image.asset(item.image,fit: BoxFit.cover, width:350.0),
+                          Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:350.0),
                           //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
                           Positioned(
                             bottom: 0.0,
@@ -53,7 +54,7 @@ class _BrowsePage extends State<BrowsePage>{
                               ),
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 20.0),
-                              child: Text(item.name,
+                              child: Text(item.title,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20.0,
@@ -170,7 +171,7 @@ class _BrowsePage extends State<BrowsePage>{
                           scrollDirection: Axis.horizontal,
                         ),
 
-                        items: itemCourseSuggest.map((item) =>
+                        items: listCourse.map((item) =>
                             Container(
                                 child: Container(
                                   margin: EdgeInsets.all(2.0),
@@ -178,7 +179,7 @@ class _BrowsePage extends State<BrowsePage>{
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                       child: Stack(
                                         children: <Widget>[
-                                          Image.asset(item.image,fit: BoxFit.cover, width:350.0),
+                                          Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:350.0),
                                           //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
                                           Positioned(
                                             bottom: 0.0,
@@ -197,7 +198,7 @@ class _BrowsePage extends State<BrowsePage>{
                                               ),
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 10.0, horizontal: 20.0),
-                                              child: Text(item.name,
+                                              child: Text(item.title,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20.0,
@@ -281,7 +282,7 @@ class _BrowsePage extends State<BrowsePage>{
                       height: MediaQuery.of(context).size.height * 0.25,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: _listAuthor.length,
+                          itemCount: 1,
                           itemBuilder: (context, indexAuthor) {
                             return Container(
                               padding: EdgeInsets.only(right: 15.0),
@@ -300,9 +301,9 @@ class _BrowsePage extends State<BrowsePage>{
                                               children: <Widget>[
                                                 CircleAvatar(
                                                   radius: 50,
-                                                  backgroundImage: AssetImage(_listAuthor[indexAuthor].image),
+                                                  backgroundImage: AssetImage("Assets/images/profile-2.jpg"),
                                                 ),
-                                                Text(_listAuthor[indexAuthor].name, style: TextStyle(fontSize: 11.0)),
+                                                Text("ABC", style: TextStyle(fontSize: 11.0)),
                                               ]
                                           )
                                       ),

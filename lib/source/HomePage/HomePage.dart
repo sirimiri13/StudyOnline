@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../Struct/Course.dart';
+import '../Model/Course.dart';
 import '../CoursePage/DetailCoursePage.dart';
 import '../CoursePage/ListCourse.dart';
-final List<String> imgList = [
-  'Assets/images/code5.jpg', 'Assets/images/code6.jpg','Assets/images/code7.jpg','Assets/images/code8.jpg','Assets/images/code2.jpg'];
+import '../../main.dart';
 
-final itemCourseSuggest = getCourseSuggest();
-final itemCourseContinue = getCourseContinue();
+// final List<String> imgList = [
+//   'Assets/images/code5.jpg', 'Assets/images/code6.jpg','Assets/images/code7.jpg','Assets/images/code8.jpg','Assets/images/code2.jpg'];
+//
+// final itemCourseSuggest = getCourseSuggest();
+// final itemCourseContinue = getCourseContinue();
 class HomePage extends StatefulWidget{
   static String tag = 'home-page';
   @override
   _HomePage createState() => new _HomePage();
-}
 
+}
+// List<Course> getListCourseOfUser(){
+//   return myUser.registeredCourse;
+// }
+// List<Course> getListCourseInAuthor(){
+//   List<Course> _listCourse = [];
+//   for (int i = 0;i< listAuthor.length;i++){
+//     for (int j = 0;j<listAuthor[i].listCourse.length;j++){
+//       _listCourse.add(listCourse[j]);
+//     }
+//   }
+//   return _listCourse;
+// }
 
 Widget continueHorizionList = new Container (
-
     child: CarouselSlider(
       options: CarouselOptions(),
-      items: itemCourseContinue.map((item) => Container(
+      items: listCourse.map((itemCourse) => Container(
         height: 180,
         margin: EdgeInsets.all(5.0),
         child: Column(
             children: <Widget>[
-              Image.asset(item.image,fit: BoxFit.cover, width:300.0,height: 160.0),
-              Text(item.name,style: TextStyle(fontSize: 18.0))
+              Image.asset(itemCourse.imageUrl,fit: BoxFit.cover, width:300.0,height: 160.0),
+              Text(itemCourse.title,style: TextStyle(fontSize: 18.0))
             ]
         ),
       )).toList(),
@@ -34,9 +47,13 @@ Widget continueHorizionList = new Container (
 
 
 class _HomePage extends State<HomePage> {
+
+ // var listCourseRegister = getListCourseOfUser();
   @override
   Widget build(BuildContext context) {
-    print(itemCourseSuggest.length);
+    //print(listCourseRegister);
+   // createData();
+   // print("user " + myUser.registeredCourse.length.toString());
     double _width = MediaQuery
         .of(context)
         .size
@@ -46,7 +63,8 @@ class _HomePage extends State<HomePage> {
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
           child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: itemCourseSuggest.length+4,
+           // itemCount: listCourseRegister.length + 4,
+            itemCount: 5,
             itemBuilder: (context, index) {
               if (index == 0)
                 return  Container(
@@ -63,7 +81,7 @@ class _HomePage extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           autoPlay: true,
                         ),
-                        items: itemCourseSuggest.map((item) =>
+                        items: listCourse.map((item) =>
                             Container(
                                 child: Container(
                                   margin: EdgeInsets.all(5.0),
@@ -71,7 +89,7 @@ class _HomePage extends State<HomePage> {
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                       child: Stack(
                                         children: <Widget>[
-                                          Image.asset(item.image,fit: BoxFit.cover, width:300.0),
+                                          Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:300.0),
                                           //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
                                           Positioned(
                                             bottom: 0.0,
@@ -90,7 +108,7 @@ class _HomePage extends State<HomePage> {
                                               ),
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 10.0, horizontal: 20.0),
-                                              child: Text(item.name,
+                                              child: Text(item.title,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20.0,
@@ -113,19 +131,19 @@ class _HomePage extends State<HomePage> {
                 return Container (
                   child: GestureDetector(
                       onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(
-                        //     builder: (context) => DetailCoursePage(dataCourse: itemCourseSuggest[index-4])
-                        // ));
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => DetailCoursePage()
+                        ));
                       },
                       child: CarouselSlider(
                         options: CarouselOptions(),
-                        items: itemCourseContinue.map((item) => Container(
+                        items: listCourse.map((item) => Container(
                           height: 180,
                           margin: EdgeInsets.all(5.0),
                           child: Column(
                               children: <Widget>[
-                                Image.asset(item.image,fit: BoxFit.cover, width:300.0,height: 160.0),
-                                Text(item.name,style: TextStyle(fontSize: 18.0))
+                                Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:300.0,height: 160.0),
+                                Text(item.title,style: TextStyle(fontSize: 18.0))
                               ]
                           ),
                         )).toList(),
@@ -141,14 +159,14 @@ class _HomePage extends State<HomePage> {
                   child: GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => DetailCoursePage(dataCourse: itemCourseSuggest[index-4])
+                          builder: (context) => DetailCoursePage()
                         ));
                       },
                       child: Card(
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Image.asset(itemCourseSuggest[index-4].image),
+                              Image.asset(listCourse[index-4].promoVidUrl),
                               Expanded(
                                   child: Container(
                                       padding: EdgeInsets.all(5),
@@ -156,9 +174,9 @@ class _HomePage extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
-                                          Text(itemCourseSuggest[index-4].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                          Text('Teacher: '+ itemCourseSuggest[index-4].teacher),
-                                          Text('Total clip: '+ itemCourseSuggest[index-4].totalClip.toString()),
+                                          Text(listCourse[index-4].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                          Text('Teacher: '),
+                                          Text('Total clip: '+ listCourse[index-4].videoNumber.toString()),
                                           // RatingBox(),
                                         ],
                                       )
@@ -177,6 +195,4 @@ class _HomePage extends State<HomePage> {
       ),
     );
   }
-
-
 }

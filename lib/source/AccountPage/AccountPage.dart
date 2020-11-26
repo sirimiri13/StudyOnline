@@ -1,16 +1,20 @@
 
+import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
-import '../Struct/User.dart';
+import '../Model/User.dart';
 import '../MainPage/MainPage.dart';
 import '../LoginPage/LoginPage.dart';
+import 'package:provider/provider.dart';
+import '../../main.dart';
 
 
 
 TextEditingController editController = new TextEditingController();
 
-final _user = User('Lam','Huong','lqh@123.com');
 class AccountPage extends StatefulWidget{
   static String tag = 'account-page';
+  User user;
+
   @override
   _AccountPage createState() => new _AccountPage();
 }
@@ -54,7 +58,8 @@ class _AccountPage extends State<AccountPage>{
         body: Container(
             padding: EdgeInsets.only(top: 50.0),
             child: Container(
-                child: Column(
+                child: Consumer<User>(
+                  builder: (context, user, child)=>Column(
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
@@ -70,7 +75,11 @@ class _AccountPage extends State<AccountPage>{
                                 color: Colors.white,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: AssetImage('Assets/images/profile-2.jpg'),
+                                  image: AssetImage(user.avatar),
+                                  // read: lấy dữ liệu 1 lần
+                                  // watch: lấy và luôn lắng nghe sự thay đổi
+                                  // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
+
                                 )
                             )
                         ),
@@ -87,7 +96,8 @@ class _AccountPage extends State<AccountPage>{
                             children:[
                               Text('First Name: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 30.0),
-                              Text(_user.firstName),
+                              //Text(_user.firstName),
+                              Text(user.name),
                               Container(
                              child:  IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
                                 onPressed: (){
@@ -103,7 +113,7 @@ class _AccountPage extends State<AccountPage>{
                                               controller: editController,
                                               autofocus: true,
                                               decoration: new InputDecoration(
-                                                  labelText: 'Edit', hintText: _user.firstName),
+                                                  labelText: 'Edit', hintText:"_user.firstName"),
                                             ),
                                           )
                                         ],
@@ -117,7 +127,7 @@ class _AccountPage extends State<AccountPage>{
                                         new FlatButton(
                                             child: const Text('DONE'),
                                             onPressed: () {
-                                              _user.firstName = editController.text;
+                                              user.editName(editController.text);
                                               Navigator.pop(context);
 
                                               //Navigator.pop(context);
@@ -143,7 +153,8 @@ class _AccountPage extends State<AccountPage>{
                             children:[
                               Text('Last Name: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 30.0),
-                              Text(_user.lastName),
+                             // Text(_user.lastName),
+                              Text('abc'),
                               Container(
                                 //padding: EdgeInsets.only(left: 60),
                               child: IconButton(icon: Icon(Icons.edit,color: Colors.black54,size:20),
@@ -160,7 +171,7 @@ class _AccountPage extends State<AccountPage>{
                                               controller: editController,
                                               autofocus: true,
                                               decoration: new InputDecoration(
-                                                  labelText: 'Edit', hintText: _user.lastName),
+                                                  labelText: 'Edit', hintText:''),
                                             ),
                                           )
                                         ],
@@ -174,7 +185,7 @@ class _AccountPage extends State<AccountPage>{
                                         new FlatButton(
                                             child: const Text('DONE'),
                                             onPressed: () {
-                                              _user.lastName = editController.text;
+                                              // _user.lastName = editController.text;
                                               Navigator.pop(context);
                                             })
                                       ],
@@ -197,7 +208,8 @@ class _AccountPage extends State<AccountPage>{
                             children:[
                               Text('Email: ',style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(width: 65.0),
-                              Text(_user.email),
+                              // Text(_user.email),
+                              Text('email'),
 
                             ]
                         ),
@@ -211,7 +223,7 @@ class _AccountPage extends State<AccountPage>{
                               borderRadius: BorderRadius.circular(50),
                             ),
                             onPressed: () {
-                              Navigator.of(context).popAndPushNamed(MainPage.tag);
+                              //Navigator.of(context).popAndPushNamed(MainPage.tag);
                             },
                             padding: EdgeInsets.all(12),
                             color: Colors.indigo,
@@ -219,7 +231,7 @@ class _AccountPage extends State<AccountPage>{
                           )
                       ),
                     ]
-                )
+                ),)
 
             )
         )

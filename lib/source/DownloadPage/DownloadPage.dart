@@ -1,9 +1,9 @@
 import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import '../SearchPage/SearchPage.dart';
-import '../Struct/Course.dart';
+import '../Model/Course.dart';
 import '../CoursePage/DetailCoursePage.dart';
-final _listDownload = getCourseContinue();
+import '../../main.dart';
 //final  _listDownload = [];
 class DownloadPage extends StatefulWidget{
   static String tag = 'download-page';
@@ -17,15 +17,15 @@ class _DownloadPage extends State<DownloadPage> {
   int _itemCount = 0;
   @override
   Widget build(BuildContext context) {
-    print(_listDownload.length);
-    if (_listDownload.isEmpty){
+    print(listCourse.length);
+    if (listCourse.isEmpty){
       _itemCount = 1;
     }
     return Scaffold(
       body : ListView.builder(
-        itemCount: _listDownload.length + _itemCount,
+        itemCount: listCourse.length + _itemCount,
         itemBuilder: (context,index){
-          if (_listDownload.length != 0)
+          if (listCourse.length != 0)
             return GestureDetector (
           onTap: () {
           Navigator.push(context, MaterialPageRoute(
@@ -39,7 +39,7 @@ class _DownloadPage extends State<DownloadPage> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Image.asset(_listDownload[index].image),
+                          Image.asset(listCourse[index].promoVidUrl),
                           Expanded(
                               child: Container(
                                   padding: EdgeInsets.all(5),
@@ -47,9 +47,9 @@ class _DownloadPage extends State<DownloadPage> {
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(_listDownload[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text('Teacher: '+ _listDownload[index].teacher),
-                                      Text('Total clip: '+ _listDownload[index].totalClip.toString()),
+                                      Text(listCourse[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                      Text('Teacher: '),
+                                      Text('Total clip: '+ '3'),
                                       // RatingBox(),
                                     ],
                                   )

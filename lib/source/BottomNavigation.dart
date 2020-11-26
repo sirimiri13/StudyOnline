@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'HomePage/HomePage.dart';
 import 'DownloadPage/DownloadPage.dart';
 import 'SearchPage/SearchPage.dart';
 import 'AccountPage/AccountPage.dart';
 import 'BrowsePage/BrowsePage.dart';
+import 'Model/User.dart';
 
 class BottomNavigation extends StatefulWidget{
 static String tag = 'bottom-navigation';
@@ -33,7 +35,13 @@ List<Widget> _listPage = <Widget>[
        onWillPop: () async => false,
       child: Scaffold(
         body: Center(
-          child: _listPage[_currentIndex],
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: '1',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
+            ],
+            child: _listPage[_currentIndex],
+          )
+
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

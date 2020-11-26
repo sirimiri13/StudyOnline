@@ -9,12 +9,17 @@ import 'source/DownloadPage/DownloadPage.dart';
 import 'source/SearchPage/SearchPage.dart';
 import 'source/HomePage/HomePage.dart';
 import 'source/CoursePage/DetailCoursePage.dart';
+import 'source/Model/Author.dart';
+import 'source/Model/Clip.dart';
+import 'source/Model/Course.dart';
+import 'source/Model/User.dart';
 
-
+List<Course> listCourse = new List<Course>();
 
 
 
 void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
@@ -30,6 +35,7 @@ class MyApp extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
+    createData(listCourse);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

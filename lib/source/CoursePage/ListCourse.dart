@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../Struct/Course.dart';
+import '../Model/Course.dart';
 import 'DetailCoursePage.dart';
+import '../../main.dart';
 
-final itemCourse = getCourseSuggest();
+//final itemCourse = getCourseSuggest();
 class ListCourse extends StatefulWidget{
   static String tag = 'list-course';
   @override
@@ -19,7 +20,8 @@ class _ListCourse extends State<ListCourse>{
         title: Text('Courses'),
       ),
       body: ListView.builder(
-        itemCount: itemCourse.length,
+        //itemCount: itemCourse.length,
+        itemCount: 1,
         itemBuilder: (context, index){
 
             return  Container(
@@ -35,7 +37,7 @@ class _ListCourse extends State<ListCourse>{
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Image.asset(itemCourse[index].image),
+                          Image.asset(listCourse[index].promoVidUrl),
                           Expanded(
                               child: Container(
                                   padding: EdgeInsets.all(5),
@@ -43,9 +45,9 @@ class _ListCourse extends State<ListCourse>{
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(itemCourse[index].name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text('Teacher: '+ itemCourse[index].teacher),
-                                      Text('Total clip: '+ itemCourse[index].totalClip.toString()),
+                                      Text(listCourse[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                      Text('Teacher: '),
+                                      Text('Total clip: '),
                                     ],
                                   )
                               )
