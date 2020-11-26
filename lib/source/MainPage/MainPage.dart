@@ -14,8 +14,10 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
+    final loginButton = Container(
+        width: 200,
+        padding:EdgeInsets.only(left:10,top: 50,right:10,bottom:10),
+     // padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -28,31 +30,34 @@ class _MainPage extends State<MainPage> {
         child: Text('Sign In', style: TextStyle(color: Colors.white)),
       )
     );
-    final SignUpButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
+    final SignUpButton = Container(
+       width: 200,
+     // padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
+      padding:EdgeInsets.all(10),
       child: OutlineButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: (){
-          //Navigator.of(context).pushNamed(RegisterPage.tag);
+          Navigator.of(context).pushNamed(RegisterPage.tag);
         },
         padding: EdgeInsets.all(20),
         child: Text('Sign Up',style: TextStyle(color: Colors.indigo)),
       )
     );
 
-    final WelcomeLabel = Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 127.0),
-      child: Text(
-        "WELCOME!",
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.indigo,
-          inherit: false,
-        )
+    final WelcomeLabel = Container(
+
+      child:Text(
+          "WELCOME!",
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Colors.indigo,
+            inherit: false,
+          )
       )
-    );
+    ) ;
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -64,7 +69,9 @@ class _MainPage extends State<MainPage> {
       ),
       padding: EdgeInsets.only(top: 250.0),
       child: Center (
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 WelcomeLabel,
                 loginButton,

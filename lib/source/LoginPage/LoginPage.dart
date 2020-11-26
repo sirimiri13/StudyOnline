@@ -50,8 +50,10 @@ class _LoginPage extends State<LoginPage> {
       ),
     );
 
-    final loginButton = Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
+    final loginButton = Container (
+      width: 200,
+
+        padding: EdgeInsets.all(20),
         child: RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -91,8 +93,9 @@ class _LoginPage extends State<LoginPage> {
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         )
     );
-    final ForgotPasswordButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 50.0),
+    final ForgotPasswordButton = Container(
+      width: 200,
+      padding: EdgeInsets.all(20),
       child: OutlineButton(
         onPressed: () {
         showDialog(

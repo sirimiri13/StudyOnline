@@ -47,8 +47,9 @@ class _RegisterPage extends State<RegisterPage>{
        // border: OutlineInputBorder(borderRadius: BorderRadius.circular(0.0)),
       ),
     );
-    final registerButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal:100.0),
+    final registerButton = Container(
+      width: 200.0,
+      padding: EdgeInsets.all(20),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),

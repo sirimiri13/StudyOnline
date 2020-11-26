@@ -1,6 +1,7 @@
 //Main.dart
 import 'package:finalproject_1712061/source/AccountPage/AccountPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'source/LoginPage/LoginPage.dart';
 import 'source/MainPage/MainPage.dart';
 import 'source/RegisterPage/RegisterPage.dart';
@@ -18,7 +19,12 @@ List<Course> listCourse = new List<Course>();
 
 
 
-void main() => runApp(MyApp());
+void main() => runApp(
+    ChangeNotifierProvider(
+        create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm  Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13)),
+        child: MyApp()
+  ),
+);
 
 
 class MyApp extends StatelessWidget {
@@ -32,10 +38,11 @@ class MyApp extends StatelessWidget {
     HomePage.tag: (context) => HomePage(),
     AccountPage.tag: (context) => AccountPage(),
     DetailCoursePage.tag: (context) => DetailCoursePage(),
+
   };
   @override
   Widget build(BuildContext context) {
-    createData(listCourse);
+   createCourse(listCourse);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

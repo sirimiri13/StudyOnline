@@ -118,7 +118,7 @@ class Course {
 
 
 
- void createData(List<Course> listCourse){
+ void createCourse(List<Course> listCourse){
    Course myCourse = new Course(id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
        title: "Lập trình Android toàn tập",
        subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",

@@ -26,7 +26,7 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
 
-class User with ChangeNotifier{
+class User extends ChangeNotifier{
    User({
       this.id,
       this.email,
@@ -86,11 +86,20 @@ class User with ChangeNotifier{
       notifyListeners();
    }
 
-   void editName(String name){
-      this.name = name;
+   void editName(String str){
+      this.name = str;
+      notifyListeners();
+   }
+   void editEmail(String str){
+      this.email = str;
+      notifyListeners();
+   }
+   void editPhone(String str){
+      this.phone = str;
+      notifyListeners();
    }
 }
 
 
 User myUser = new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: '1',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13));
-// User myUser = new User(id: "hghg");
+
