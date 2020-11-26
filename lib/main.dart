@@ -10,7 +10,7 @@ import 'source/DownloadPage/DownloadPage.dart';
 import 'source/SearchPage/SearchPage.dart';
 import 'source/HomePage/HomePage.dart';
 import 'source/CoursePage/DetailCoursePage.dart';
-import 'source/Model/Author.dart';
+import 'source/Model/Instructor.dart';
 import 'source/Model/Clip.dart';
 import 'source/Model/Course.dart';
 import 'source/Model/User.dart';
@@ -18,10 +18,11 @@ import 'source/Model/User.dart';
 List<Course> listCourse = new List<Course>();
 
 
-
 void main() => runApp(
-    ChangeNotifierProvider(
-        create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm  Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13)),
+  MultiProvider(providers: [
+      ChangeNotifierProvider(
+      create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm  Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
+    ],
         child: MyApp()
   ),
 );

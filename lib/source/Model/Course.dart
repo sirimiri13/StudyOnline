@@ -1,6 +1,5 @@
  import 'package:flutter/material.dart';
 
-
 import 'dart:convert';
 
 Course courseFromJson(String str) => Course.fromJson(json.decode(str));

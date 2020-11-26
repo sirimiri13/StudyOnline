@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
 import '../Model/Course.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../Model/Author.dart';
+import '../Model/Instructor.dart';
 import '../CoursePage/ListCourse.dart';
 import '../AccountPage/InformationAuthor.dart';
 import '../../main.dart';
