@@ -48,27 +48,28 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                       onTap: () {
                         print('Tapped Avatar');
                       },
-                      child: Container(
-                          padding: EdgeInsets.all(10.0),
-                          width: MediaQuery.of(context).size.width/2,
-                          height: MediaQuery.of(context).size.width/2,
-                          decoration:BoxDecoration(
-                              border: Border.all(color: Colors.indigo, width: 4),
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: AssetImage('Assets/images/profile-2.jpg'),
-                                // read: lấy dữ liệu 1 lần
-                                // watch: lấy và luôn lắng nghe sự thay đổi
-                                // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
+                    child: Consumer<User>(
+                     builder: (context,user,child)=>Column(
+                       children: [
+                         Container(
+                             padding: EdgeInsets.all(10.0),
+                             width: MediaQuery.of(context).size.width/2,
+                             height: MediaQuery.of(context).size.width/2,
+                             decoration:BoxDecoration(
+                                 border: Border.all(color: Colors.indigo, width: 4),
+                                 shape: BoxShape.circle,
+                                 color: Colors.white,
+                                 image: DecorationImage(
+                                   fit: BoxFit.fitWidth,
+                                   image: AssetImage(user.avatar),
+                                   // read: lấy dữ liệu 1 lần
+                                   // watch: lấy và luôn lắng nghe sự thay đổi
+                                   // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
 
-                              )
-                          )
-                      )
-                  ),
-                  Consumer<User>(
-                    builder: (context,user,child)=> Column(
+                                 )
+                             )
+                         ),
+                    Column(
                         children : [
                           Container(
                             padding: EdgeInsets.only(top: 10,bottom: 10),
@@ -135,9 +136,14 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                           ),
                         ]
                     ),
-                  )
-                ]
+                  ]
             )
+        )
+    )
+                       ],
+                     )
+
+
         )
     );
   }
