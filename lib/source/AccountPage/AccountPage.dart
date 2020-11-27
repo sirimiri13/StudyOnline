@@ -14,8 +14,6 @@ import '../../main.dart';
 
 class AccountPage extends StatefulWidget {
   static String tag = 'account-page';
-
-
   @override
   _AccountPage createState() => new _AccountPage();
 }
@@ -24,62 +22,14 @@ class _AccountPage extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
 
-    final headerBox = Container(
-      height: 120,
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-              bottom: BorderSide(
-                color: Colors.indigo,
-                width: 3,
-              )
-          )
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-              aspectRatio: 1/1,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    border: Border.all(
-                        color: Colors.grey,
-                        width: 1
-                    )
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'Assets/images/profile-2.jpg',
-                  ),
-                ),
-              )
-          ),
-          Consumer<User>(
-              builder: (context,user,child) =>
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      user.name,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-          ),
-      ]
-          ),
-    );
-
 
     final profileRow = GestureDetector(
         onTap: (){
           Navigator.of(context).push(
               MaterialPageRoute(
                   fullscreenDialog: true,
-                   builder: (context) => DetailAccountPage()
+                  builder: (_) => ChangeNotifierProvider.value(value: Provider.of<User>(context,listen: false),
+                      child: DetailAccountPage())
               )
           );
         },
@@ -130,7 +80,10 @@ class _AccountPage extends State<AccountPage> {
           Navigator.of(context).push(
               MaterialPageRoute(
                   fullscreenDialog: true,
-                  builder: (context) => EditAccountPage(),
+                builder: (_) => ChangeNotifierProvider.value(value: Provider.of<User>(context,listen: false),
+                child: EditAccountPage())
+
+                 // builder: (context) => EditAccountPage(),
                   )
               );
         },
@@ -274,7 +227,54 @@ class _AccountPage extends State<AccountPage> {
             width: double.infinity,
             child: ListView(
               children: <Widget>[
-                headerBox,
+                Consumer<User>(
+                    builder: (context,user,child) => Container(
+                      height: 120,
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.indigo,
+                                width: 3,
+                              )
+                          )
+                      ),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            AspectRatio(
+                                aspectRatio: 1/1,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(60),
+                                      border: Border.all(
+                                          color: Colors.grey,
+                                          width: 1
+                                      )
+                                  ),
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      user.avatar,
+                                    ),
+                                  ),
+                                )
+                            ),
+
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                user.name,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ]
+                      ),
+                    )
+                ),
                 profileRow,
                 manageInfo,
                 supportRow,

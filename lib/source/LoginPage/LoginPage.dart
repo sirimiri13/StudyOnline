@@ -15,10 +15,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+
   @override
-
-
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
     final logo = Hero(
       tag: 'computer',
       child: CircleAvatar(
@@ -28,6 +28,8 @@ class _LoginPage extends State<LoginPage> {
       ),
     );
     final emailTextField = TextField(
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => node.nextFocus(),
       controller : emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
@@ -38,6 +40,8 @@ class _LoginPage extends State<LoginPage> {
     );
 
     final passwordTextField = TextField(
+      textInputAction: TextInputAction.done,
+      onEditingComplete: () => node.nextFocus(),
       controller : passwordController,
       keyboardType: TextInputType.visiblePassword,
       obscureText: true,

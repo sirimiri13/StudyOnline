@@ -29,6 +29,7 @@ List<Widget> _listPage = <Widget>[
     });
   }
   Widget build(BuildContext context) {
+
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return WillPopScope(
@@ -37,17 +38,14 @@ List<Widget> _listPage = <Widget>[
         body: Center(
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: '1',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
+
+              ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
             ],
             child: _listPage[_currentIndex],
           )
 
         ),
 
-     // return Scaffold(
-     //    body: Center(
-     //    child: _listPage.elementAt(_currentIndex),
-     //    ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
