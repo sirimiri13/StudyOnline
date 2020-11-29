@@ -62,6 +62,17 @@ flutter:
     -  Assets/images/code6.jpg
     -  Assets/images/code7.jpg
     -  Assets/images/code8.jpg
+    - Assets/images/AI.jpg
+    - Assets/images/C.PNG
+    - Assets/images/data.png
+    - Assets/images/deeplearning.jpg
+    - Assets/images/firebase.png
+    - Assets/images/php.jpg
+    - Assets/images/python.jpg
+    - Assets/images/sql.png
+    - Assets/images/swift.jpg
+    - Assets/images/android.jpg
+    - Assets/images/flutter.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

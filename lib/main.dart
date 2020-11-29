@@ -19,12 +19,7 @@ List<Course> listCourse = new List<Course>();
 
 
 void main() => runApp(
-  // MultiProvider(providers: [
-  //     ChangeNotifierProvider(
-  //     create: (context) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm  Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
-  //   ],
-  //       child: MyApp()
-  // ),
+
   MyApp(),
 );
 

@@ -6,6 +6,7 @@ import 'SearchPage/SearchPage.dart';
 import 'AccountPage/AccountPage.dart';
 import 'BrowsePage/BrowsePage.dart';
 import 'Model/User.dart';
+import 'Model/ListCourses.dart';
 
 class BottomNavigation extends StatefulWidget{
 static String tag = 'bottom-navigation';
@@ -38,8 +39,8 @@ List<Widget> _listPage = <Widget>[
         body: Center(
           child: MultiProvider(
             providers: [
-
               ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
+              ChangeNotifierProvider<ListCourses>(create: (context) => ListCourses())
             ],
             child: _listPage[_currentIndex],
           )

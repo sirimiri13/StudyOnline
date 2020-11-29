@@ -1,7 +1,8 @@
 import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../SearchPage/SearchPage.dart';
-import '../Model/Course.dart';
+import '../Model/ListCourses.dart';
 import '../CoursePage/DetailCoursePage.dart';
 import '../../main.dart';
 //final  _listDownload = [];
@@ -12,67 +13,70 @@ class DownloadPage extends StatefulWidget{
 }
 
 
-
 class _DownloadPage extends State<DownloadPage> {
-  int _itemCount = 0;
+
   @override
   Widget build(BuildContext context) {
-    print(listCourse.length);
-    if (listCourse.isEmpty){
-      _itemCount = 1;
-    }
-    return Scaffold(
-      body : ListView.builder(
-        itemCount: listCourse.length + _itemCount,
-        itemBuilder: (context,index){
-          if (listCourse.length != 0)
-            return GestureDetector (
-          onTap: () {
-          Navigator.push(context, MaterialPageRoute(
-          builder: (context) => DetailCoursePage()
-          ));
-          },
-          child: Container(
-                padding: EdgeInsets.all(2),
-                height: 100,
-                child: Card(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Image.asset(listCourse[index].promoVidUrl),
-                          Expanded(
-                              child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(listCourse[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text('Teacher: '),
-                                      Text('Total clip: '+ '3'),
-                                      // RatingBox(),
-                                    ],
-                                  )
-                              )
-                          )
-                        ]
-                    )
-                )
-
+    return Consumer<ListCourses>(
+        builder: (context,listCourses,child) =>
+            Scaffold(
+              appBar: AppBar(
+                title: Text('DOWNLOADED'),
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.indigo,
               ),
-            );
-          else
-           // return Text('Nothing');
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 30.0),
-                child: Text('No Download',style: TextStyle(color: Colors.indigo, fontSize: 20.0)),
-              )
-            );
-          }
+                body : ListView.builder(
+                    itemCount: listCourses.listCourseDownloaded.length,
+                    itemBuilder: (context,index){
+                      return GestureDetector (
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => DetailCoursePage()
+                          ));
+                        },
+                        onLongPress:(){
 
-      )
-          );
+                        },
+                        child: Container(
+                            padding: EdgeInsets.all(2),
+                            height: 100,
+                            child: Card(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Image.asset(listCourses.listCourseDownloaded[index].imageUrl,width: 125),
+                                      Expanded(
+                                          child: Container(
+                                              padding: EdgeInsets.all(5),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(listCourses.listCourseDownloaded[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                                  Text('Total Hours: '+listCourses.listCourseDownloaded[index].totalHours.toString()),
+                                                  Text('Total clip: '+ listCourses.listCourseDownloaded[index].videoNumber.toString()),
+                                                  // RatingBox(),
+                                                ],
+                                              )
+                                          )
+                                      )
+                                    ]
+                                )
+                            )
+                        ),
+                      );
+                     // else
+                      // return Text('Nothing');
+                      return Center(
+                      child: Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Text('No Download',style: TextStyle(color: Colors.indigo, fontSize: 20.0)),
+                      )
+                      );
+                    }
+                )
+            )
+    );
   }
 
 }
