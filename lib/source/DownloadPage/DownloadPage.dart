@@ -31,7 +31,7 @@ class _DownloadPage extends State<DownloadPage> {
                       return GestureDetector (
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => DetailCoursePage()
+                              builder: (context) => DetailCoursePage(dataCourse: listCourses.listCourse[index])
                           ));
                         },
                         onLongPress:(){

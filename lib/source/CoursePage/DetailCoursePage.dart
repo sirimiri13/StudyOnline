@@ -6,10 +6,12 @@ import '../../main.dart';
 //final itemCourse = getCourseSuggest();
 class DetailCoursePage extends StatefulWidget{
   static String tag = 'detail-course-page';
-  //final Course dataCourse;
-  //DetailCoursePage({Key key, this.dataCourse}) : super(key: key);
+  final Course dataCourse;
 
+  //final Course dataCourse;
+  DetailCoursePage({Key key, this.dataCourse}) : super(key: key);
   _DetailCoursePage createState() => new _DetailCoursePage();
+  Course get getDataCourse => dataCourse;
 }
 
 //Course _dataCourse;
@@ -25,7 +27,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
         body: Container(
             child: ListView.builder(
                 //itemCount: 5 + itemCourse.length,
-              itemCount: 6,
+              itemCount: widget.dataCourse.videoNumber + 7,
                 itemBuilder: (context, index){
                   if (index ==0)
                     return Container(
@@ -38,23 +40,35 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                             color: Colors.white,
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('Assets/images/code4.jpg'),
+                              image: AssetImage(widget.dataCourse.promoVidUrl),
                             )
                         )
                     );
                   else if (index == 1){
                     return Container(
                       padding: EdgeInsets.all(5),
-                      child: Text("Course's Name", style: TextStyle(fontSize: 20.0,color: Colors.indigo, fontWeight: FontWeight.bold)),
+                      child: Text(widget.dataCourse.title, style: TextStyle(fontSize: 20.0,color: Colors.indigo, fontWeight: FontWeight.bold)),
                     );
                   }
                   else if (index ==2){
                     return Container(
                          padding: EdgeInsets.all(5),
-                         child: Text("Teacher's Name"),
+                         child: Text(widget.dataCourse.subtitle,style: TextStyle(fontWeight: FontWeight.bold)),
                         );
                     }
-                  else if (index == 3) {
+                  else if (index == 3){
+                      return Container(
+                      padding: EdgeInsets.all(5),
+                      child: Text(widget.dataCourse.description),
+                      );
+                  }
+                  else if (index == 4){
+                    return Container(
+                      padding: EdgeInsets.all(5),
+                      child: Text("Total Hours: "+ widget.dataCourse.totalHours.toString()),
+                    );
+                  }
+                  else if (index == 5) {
                   return Container(
                     padding: EdgeInsets.only(top: 10),
                     height: 50,
@@ -79,7 +93,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                       ),
                      );
                    }
-                  else if (index==4){
+                  else if (index==6){
                     return Container(
                       padding: EdgeInsets.all(5),
                       child: Text('Video', style: TextStyle(fontSize: 20, color: Colors.indigo,fontWeight: FontWeight.bold)),

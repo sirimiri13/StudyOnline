@@ -53,14 +53,6 @@ class _SearchPage extends State<SearchPage> {
   @override
 
   Widget build(BuildContext context) {
-
-
-
-
-   // List<String> list = Provider.of<ListCourses>(context).getTitle();
-
-
-
     return new Scaffold(
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
@@ -82,7 +74,6 @@ class _SearchPage extends State<SearchPage> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(25.0)))),
                          onChanged: (value) {
-                          print(value);
                             filterData(value);
                           }
                       )
@@ -96,7 +87,7 @@ class _SearchPage extends State<SearchPage> {
                             return GestureDetector (
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) => DetailCoursePage()
+                                    builder: (context) => DetailCoursePage(dataCourse: listCourses[index])
                                 ));
                               },
                               onLongPress:(){
