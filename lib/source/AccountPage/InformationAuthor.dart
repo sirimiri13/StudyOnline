@@ -1,7 +1,7 @@
 import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
 import '../CoursePage/DetailCoursePage.dart';
-import '../CoursePage/ListCourse.dart';
+import '../CoursePage/ListCoursePage.dart';
 import '../../main.dart';
 import '../Model/Course.dart';
 

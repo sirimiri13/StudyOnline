@@ -1,7 +1,7 @@
 import 'package:finalproject_1712061/main.dart';
 import 'package:finalproject_1712061/source/AccountPage/DetailAccountPage.dart';
 import 'package:finalproject_1712061/source/CoursePage/DetailCoursePage.dart';
-import 'package:finalproject_1712061/source/CoursePage/ListCourse.dart';
+import 'package:finalproject_1712061/source/CoursePage/ListCoursePage.dart';
 import 'package:finalproject_1712061/source/Model/Course.dart';
 import 'package:finalproject_1712061/source/Model/ListCourses.dart';
 import 'package:flutter/material.dart';

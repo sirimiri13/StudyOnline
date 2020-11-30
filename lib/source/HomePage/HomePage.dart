@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import '../Model/Course.dart';
 import '../CoursePage/DetailCoursePage.dart';
-import '../CoursePage/ListCourse.dart';
+import '../CoursePage/ListCoursePage.dart';
 import '../../main.dart';
 
 
@@ -56,68 +56,71 @@ class _HomePage extends State<HomePage> {
                   if (index == 0) {
                     List<Course> listRate = listCourses.getListCourseRate();
                     return Container(
-                      child: CarouselSlider(
-                        options: CarouselOptions(
-                          aspectRatio: 2.0,
-                          enlargeCenterPage: true,
-                          scrollDirection: Axis.horizontal,
-                          autoPlay: true,
-                        ),
-                        items: listRate.map((item) =>
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) => DetailCoursePage(dataCourse: item)
-                                  ));
-                                },
-                                child: Container(
-                                    child: Container(
-                                      margin: EdgeInsets.all(5.0),
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0)),
-                                          child: Stack(
-                                            children: <Widget>[
-                                              Image.asset(item.promoVidUrl,
-                                                  fit: BoxFit.cover, width: 350.0,height: 500),
-                                              //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                                              Positioned(
-                                                bottom: 0.0,
-                                                left: 0.0,
-                                                right: 0.0,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        Color.fromARGB(
-                                                            200, 0, 0, 0),
-                                                        Color.fromARGB(0, 0, 0, 0)
-                                                      ],
-                                                      begin: Alignment.bottomCenter,
-                                                      end: Alignment.topCenter,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            aspectRatio: 2.0,
+                            enlargeCenterPage: true,
+                            scrollDirection: Axis.horizontal,
+                            autoPlay: true,
+                          ),
+                          items: listRate.map((item) =>
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (_) =>
+                                          ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                            child: DetailCoursePage(dataCourse: item))
+                                    )
+                                    );
+                                  },
+                                  child: Container(
+                                      child: Container(
+                                        margin: EdgeInsets.all(5.0),
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                            child: Stack(
+                                              children: <Widget>[
+                                                Image.asset(item.promoVidUrl,
+                                                    fit: BoxFit.cover, width: 350.0,height: 500),
+                                                //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                                                Positioned(
+                                                  bottom: 0.0,
+                                                  left: 0.0,
+                                                  right: 0.0,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Color.fromARGB(
+                                                              200, 0, 0, 0),
+                                                          Color.fromARGB(0, 0, 0, 0)
+                                                        ],
+                                                        begin: Alignment.bottomCenter,
+                                                        end: Alignment.topCenter,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 10.0,
-                                                      horizontal: 20.0),
-                                                  child: Text(item.title,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 20.0,
-                                                      fontWeight: FontWeight.bold,
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10.0,
+                                                        horizontal: 20.0),
+                                                    child: Text(item.title,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20.0,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
-                                      ),
-                                    )
-                            )
-                             )
-                        ).toList(),
+                                              ],
+                                            )
+                                        ),
+                                      )
+                                  )
+                              )
+                          ).toList(),
                         )
-                      );
+                    );
                   }
                   else if (index == 1)
                     return Container(
@@ -154,8 +157,11 @@ class _HomePage extends State<HomePage> {
                       child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => DetailCoursePage(dataCourse: listCourses.listCourse[index-4])
-                            ));
+                                builder: (_) =>
+                                    ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                        child: DetailCoursePage(dataCourse: listCourses.listCourse[index-4]))
+                            )
+                            );
                           },
                           child: Card(
                             child: Row(

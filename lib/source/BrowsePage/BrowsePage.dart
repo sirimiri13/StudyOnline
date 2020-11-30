@@ -5,14 +5,15 @@ import 'package:provider/provider.dart';
 import '../Model/Course.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../Model/Instructor.dart';
-import '../CoursePage/ListCourse.dart';
+import '../CoursePage/ListCoursePage.dart';
 import '../AccountPage/InformationAuthor.dart';
 import '../../main.dart';
 
 
 
 //final itemCourseSuggest = getCourseSuggest();
-final _listSkill = ['C++','Swift','Python', 'Flutter', 'ASP.NET Core','TypeScript','Machine Learning','JavaScript'];
+final _listSkill = ['C++','Swift','Machine Learning'];
+final _listTopicPic = ['Assets/images/code7.jpg','Assets/images/code5.jpg''Assets/images/code4.jpg'];
 //final _listAuthor = getListAuthor();
 class BrowsePage extends StatefulWidget{
   static String tag = 'browse-page';
@@ -22,57 +23,6 @@ class BrowsePage extends StatefulWidget{
 
 
 class _BrowsePage extends State<BrowsePage>{
-  // Widget themeCourse = new Container (
-  //   child: CarouselSlider(
-  //       options: CarouselOptions(
-  //         aspectRatio: 2.0,
-  //         enlargeCenterPage: true,
-  //         scrollDirection: Axis.horizontal,
-  //       ),
-  //
-  //       items: listCourse.map((item) =>
-  //           Container(
-  //               child: Container(
-  //                 margin: EdgeInsets.all(2.0),
-  //                 child: ClipRRect(
-  //                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-  //                     child: Stack(
-  //                       children: <Widget>[
-  //                         Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:350.0),
-  //                         //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
-  //                         Positioned(
-  //                           bottom: 0.0,
-  //                           left: 0.0,
-  //                           right: 0.0,
-  //                           child: Container(
-  //                             decoration: BoxDecoration(
-  //                               gradient: LinearGradient(
-  //                                 colors: [
-  //                                   Color.fromARGB(200, 0, 0, 0),
-  //                                   Color.fromARGB(0, 0, 0, 0)
-  //                                 ],
-  //                                 begin: Alignment.bottomCenter,
-  //                                 end: Alignment.topCenter,
-  //                               ),
-  //                             ),
-  //                             padding: EdgeInsets.symmetric(
-  //                                 vertical: 10.0, horizontal: 20.0),
-  //                             child: Text(item.title,
-  //                               style: TextStyle(
-  //                                 color: Colors.white,
-  //                                 fontSize: 20.0,
-  //                                 fontWeight: FontWeight.bold,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     )
-  //                 ),
-  //               )
-  //           )).toList()
-  //   ),
-  // );
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +53,11 @@ class _BrowsePage extends State<BrowsePage>{
                         "Assets/images/code8.jpg",),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => ListCourse()
-                        ));
+                            builder: (_) =>
+                                ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                    child: ListCoursePage(dataCourse: listCourses.listCourse))
+                        )
+                        );
                       },
                     )
                 );
@@ -128,8 +81,11 @@ class _BrowsePage extends State<BrowsePage>{
                       "Assets/images/code3.jpg",),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ListCourse()
-                      ));
+                          builder: (_) =>
+                              ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                  child: ListCoursePage(dataCourse: listCourses.listCourse))
+                      )
+                      );
                     },
                   ),
                 );
@@ -145,29 +101,43 @@ class _BrowsePage extends State<BrowsePage>{
                 );
               }
               else if (index == 3) {
-                return  Container (
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ListCourse()
-                      ));
-                    },
+                return  Container(
                     child: CarouselSlider(
                         options: CarouselOptions(
                           aspectRatio: 2.0,
                           enlargeCenterPage: true,
                           scrollDirection: Axis.horizontal,
                         ),
-
-                        items: listCourse.map((item) =>
-                            Container(
-                                child: Container(
+                        items: _listSkill.map((item) =>
+                            GestureDetector(
+                              onTap: () {
+                                print(index);
+                                List<Course> data;
+                                if (item == 'C++'){
+                                  data = listCourses.listCourseC;
+                                }
+                                else {
+                                  if (item == 'Swift'){
+                                    data = listCourses.listCourseSwift;
+                                  }
+                                  else {
+                                    data = listCourses.listCourseML;
+                                  }
+                                }
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (_) =>
+                                        ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                            child: ListCoursePage(dataCourse: data))
+                                )
+                                );
+                              },
+                            child: Container(
                                   margin: EdgeInsets.all(2.0),
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                       child: Stack(
                                         children: <Widget>[
-                                          Image.asset(item.promoVidUrl,fit: BoxFit.cover, width:350.0),
+                                          Image.asset("Assets/images/code4.jpg",fit: BoxFit.cover, width:350.0),
                                           //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
                                           Positioned(
                                             bottom: 0.0,
@@ -186,7 +156,7 @@ class _BrowsePage extends State<BrowsePage>{
                                               ),
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 10.0, horizontal: 20.0),
-                                              child: Text(item.title,
+                                              child: Text(item,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20.0,
@@ -201,11 +171,10 @@ class _BrowsePage extends State<BrowsePage>{
                                 )
                             )).toList()
                     ),
-                  ),
-                );
+                  );
               }
               else if (index == 4) {
-                return Container(
+                 return Container(
                   padding: EdgeInsets.only(top: 10.0, left: 10.0),
                   child: Text('Skills', style: TextStyle(
                       color: Colors.indigo,
@@ -214,7 +183,7 @@ class _BrowsePage extends State<BrowsePage>{
                 );
               }
               else {
-                  return Container(
+                 return Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: 9.0, vertical: 7.0),
                     height: MediaQuery
@@ -225,7 +194,28 @@ class _BrowsePage extends State<BrowsePage>{
                         scrollDirection: Axis.horizontal,
                         itemCount: _listSkill.length,
                         itemBuilder: (context, index) {
-                          return Container(
+                          return GestureDetector(
+                              onTap: () {print(index);
+                              List<Course> data;
+                              if (index == 0){
+                                data = listCourses.listCourseC;
+                              }
+                              else {
+                                if (index  == 1){
+                                  data = listCourses.listCourseSwift;
+                                }
+                                else {
+                                  data = listCourses.listCourseML;
+                                }
+                              }
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (_) =>
+                                      ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                          child: ListCoursePage(dataCourse: data))
+                              )
+                              );
+                              },
+                          child: Container(
                             width: MediaQuery
                                 .of(context)
                                 .size
@@ -233,12 +223,7 @@ class _BrowsePage extends State<BrowsePage>{
                             child: Card(
                               color: Colors.black12,
                               child: Container(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) => ListCourse()
-                                    ));
-                                  },
+
                                   child: Center(
                                       child: Text(_listSkill[index],
                                         style: TextStyle(
@@ -246,10 +231,10 @@ class _BrowsePage extends State<BrowsePage>{
                                             fontSize: 15.0),)),
                                 ),
                               ),
-                            ),
+                            )
                           );
                         }
-                    ),
+                    )
                   );
                 }
     //             else {

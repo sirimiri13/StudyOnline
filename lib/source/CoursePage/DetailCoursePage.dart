@@ -1,4 +1,7 @@
+import 'package:finalproject_1712061/source/Model/ListClip.dart';
+import 'package:finalproject_1712061/source/Model/ListCourses.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../Model/Course.dart';
 import '../../main.dart';
 
@@ -69,7 +72,9 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                     );
                   }
                   else if (index == 5) {
-                  return Container(
+                  return Consumer<ListCourses>(
+                    builder: (context,listCourses,child) =>
+                    Container(
                     padding: EdgeInsets.only(top: 10),
                     height: 50,
                     width: double.infinity,
@@ -85,12 +90,18 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                             ),
                             ),
                             Container(
-                            child:  IconButton(icon: Icon(Icons.arrow_circle_down_rounded,color: Colors.black54,size:30),
-                            onPressed: (){},
+                            child:  IconButton(
+                              icon: (listCourses.listCourseDownloaded.singleWhere((element) => element.id == widget.dataCourse.id)) != null?Icon(
+                              Icons.delete_outline, color: Colors.red):Icon(Icons.arrow_circle_down_rounded),
+                            onPressed: (){
+                              listCourses.listCourseDownloaded.singleWhere((element) => element.id == widget.dataCourse.id) != null? listCourses.listCourseDownloaded.removeWhere((element) => element.id == widget.dataCourse.id):
+                              listCourses.listCourseDownloaded.add(widget.dataCourse);
+                            },
                             ),
                             ),
                       ]
                       ),
+                    )
                      );
                    }
                   else if (index==6){
@@ -100,7 +111,8 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                     );
                   }
                   else {
-                    return Container(
+                    return
+                    Container(
                       padding: EdgeInsets.all(2),
                       height: 100,
                       child: GestureDetector(
@@ -111,7 +123,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  Image.asset(listCourse[index-5].promoVidUrl),
+                                  Image.asset(widget.dataCourse.promoVidUrl),
                                   Expanded(
                                       child: Container(
                                           padding: EdgeInsets.all(5),
@@ -119,7 +131,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text(listCourse[index-5].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                              Text("Chapter ${index-6}",style: TextStyle(fontWeight: FontWeight.bold)),
                                               //Text('Teacher: '+ itemCourse[index-6].teacher),
                                               //Text('Total clip: '+ itemCourse[index-6].totalClip.toString()),
                                               // RatingBox(),

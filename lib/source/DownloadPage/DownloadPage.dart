@@ -14,18 +14,27 @@ class DownloadPage extends StatefulWidget{
 
 
 class _DownloadPage extends State<DownloadPage> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ListCourses>(
         builder: (context,listCourses,child) =>
-            Scaffold(
+
+        Scaffold(
               appBar: AppBar(
                 title: Text('DOWNLOADED'),
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.indigo,
               ),
-                body : ListView.builder(
+                body : (listCourses.listCourseDownloaded.length == 0)?Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'There are no downloaded courses!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ):ListView.builder(
                     itemCount: listCourses.listCourseDownloaded.length,
                     itemBuilder: (context,index){
                       return GestureDetector (

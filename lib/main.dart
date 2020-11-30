@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
-   createCourse(listCourse);
+   //createCourse(listCourse);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

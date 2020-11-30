@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'ListClip.dart';
+
 Course courseFromJson(String str) => Course.fromJson(json.decode(str));
 
 String courseToJson(Course data) => json.encode(data.toJson());
@@ -31,6 +33,7 @@ class Course {
     this.updatedAt,
     this.instructorId,
     this.categoryIds,
+    this.listClip,
   });
 
   String id;
@@ -56,6 +59,7 @@ class Course {
   DateTime updatedAt;
   String instructorId;
   List<String> categoryIds;
+  List<Clip> listClip;
 
   void addCourse(List<Course> listCourse, Course newCourse){
     listCourse.add(newCourse);
@@ -117,40 +121,40 @@ class Course {
 
 
 
- void createCourse(List<Course> listCourse){
-   Course myCourse = new Course(id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-       title: "Lập trình Android toàn tập",
-       subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",
-       price: 249000,
-       description: "Lập trình Android không khó, vì khóa học này sẽ hướng dẫn bạn chi tiết về lập trình Android, cung cấp thủ thuật về ASO giúp bạn tăng thu nhập với lập trình Android.",
-       requirement: [
-         "thông minh",
-         "đã biết lập trình cơ bản"
-       ],
-       learnWhat: [
-         "Tự tin phát triển những ứng dụng Android, game Android",
-         "Biết cách upload ứng dụng Android lên Google Play",
-         "Kiếm tiền từ các ứng dụng trên Google Play",
-         "ASO - tối ưu ứng dụng lên TOP tìm kiếm từ khoá"
-       ],
-       soldNumber: 5,
-       ratedNumber: 5,
-       videoNumber: 5,
-       totalHours: 5,
-       formalityPoint: 5,
-       contentPoint: 5,
-       presentationPoint: 5,
-       imageUrl: "Assets/images/code2.jpg",
-       promoVidUrl: "Assets/images/code2.jpg",
-       status: "PENDING",
-       isDeleted: true,
-       isHidden: true,
-       createdAt: new DateTime(2020,04,21),
-       updatedAt: new DateTime(2020,04,21),
-       instructorId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-       categoryIds: [
-         "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-       ]);
-
-   listCourse.add(myCourse);
- }
+ // void createCourse(List<Course> listCourse){
+ //   Course myCourse = new Course(id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+ //       title: "Lập trình Android toàn tập",
+ //       subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",
+ //       price: 249000,
+ //       description: "Lập trình Android không khó, vì khóa học này sẽ hướng dẫn bạn chi tiết về lập trình Android, cung cấp thủ thuật về ASO giúp bạn tăng thu nhập với lập trình Android.",
+ //       requirement: [
+ //         "thông minh",
+ //         "đã biết lập trình cơ bản"
+ //       ],
+ //       learnWhat: [
+ //         "Tự tin phát triển những ứng dụng Android, game Android",
+ //         "Biết cách upload ứng dụng Android lên Google Play",
+ //         "Kiếm tiền từ các ứng dụng trên Google Play",
+ //         "ASO - tối ưu ứng dụng lên TOP tìm kiếm từ khoá"
+ //       ],
+ //       soldNumber: 5,
+ //       ratedNumber: 5,
+ //       videoNumber: 5,
+ //       totalHours: 5,
+ //       formalityPoint: 5,
+ //       contentPoint: 5,
+ //       presentationPoint: 5,
+ //       imageUrl: "Assets/images/code2.jpg",
+ //       promoVidUrl: "Assets/images/code2.jpg",
+ //       status: "PENDING",
+ //       isDeleted: true,
+ //       isHidden: true,
+ //       createdAt: new DateTime(2020,04,21),
+ //       updatedAt: new DateTime(2020,04,21),
+ //       instructorId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+ //       categoryIds: [
+ //         "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+ //       ]);
+ //
+ //   listCourse.add(myCourse);
+ // }

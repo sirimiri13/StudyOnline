@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Course.dart';
-
+import 'ListClip.dart';
 
 class ListCourses extends ChangeNotifier{
   final List<Course> _listCourses = [
@@ -36,7 +36,11 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0001",
         categoryIds: [
           "C0001"
-        ]),
+        ],
+        listClip: [
+
+        ]
+    ),
     Course(id: "C0002",
         title: "Swift",
         subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
@@ -190,40 +194,104 @@ class ListCourses extends ChangeNotifier{
         ]),
   ];
 
-  final List<Course> listCourseDownloaded = [
-    Course(id: "C0001",
-        title: "Lập trình Android toàn tập",
-        subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",
-        price: 249000,
-        description: "Lập trình Android không khó, vì khóa học này sẽ hướng dẫn bạn chi tiết về lập trình Android, cung cấp thủ thuật về ASO giúp bạn tăng thu nhập với lập trình Android.",
+
+  final List<Course> listCourseML = [
+    Course(id: "C0004",
+        title: "DeepLearning ",
+        subtitle: "DeepLearning",
+        price: 1000000,
+        description: "Lập trình Deep Learning không khó",
         requirement: [
           "thông minh",
           "đã biết lập trình cơ bản"
         ],
         learnWhat: [
-          "Tự tin phát triển những ứng dụng Android, game Android",
-          "Biết cách upload ứng dụng Android lên Google Play",
-          "Kiếm tiền từ các ứng dụng trên Google Play",
-          "ASO - tối ưu ứng dụng lên TOP tìm kiếm từ khoá"
+          "Khái niệm cơ bản về DeepLearning",
+          "Ứng dụng DeepLearning vào thực tế"
         ],
         soldNumber: 5,
-        ratedNumber: 5,
+        ratedNumber: 8,
         videoNumber: 5,
         totalHours: 5,
         formalityPoint: 5,
         contentPoint: 5,
         presentationPoint: 5,
-        imageUrl: "Assets/images/android.jpg",
-        promoVidUrl: "Assets/images/android.jpg",
+        imageUrl: "Assets/images/deeplearning.jpg",
+        promoVidUrl: "Assets/images/deeplearning.jpg",
         status: "PENDING",
         isDeleted: true,
         isHidden: true,
-        createdAt: new DateTime(2020,04,21),
+        createdAt: new DateTime(2020,06,21),
         updatedAt: new DateTime(2020,04,21),
-        instructorId: "C0001",
+        instructorId: "C0004",
         categoryIds: [
-          "C0001"
+          "C0004"
         ]),
+    Course(id: "C0007",
+        title: "DeepLearning Tutorial ",
+        subtitle: "DeepLearning",
+        price: 1000000,
+        description: "Lập trình Deep Learning không khó",
+        requirement: [
+          "thông minh",
+          "đã biết lập trình cơ bản"
+        ],
+        learnWhat: [
+          "Khái niệm cơ bản về DeepLearning",
+          "Ứng dụng DeepLearning vào thực tế"
+        ],
+        soldNumber: 5,
+        ratedNumber: 8,
+        videoNumber: 5,
+        totalHours: 5,
+        formalityPoint: 5,
+        contentPoint: 5,
+        presentationPoint: 5,
+        imageUrl: "Assets/images/deeplearning.jpg",
+        promoVidUrl: "Assets/images/deeplearning.jpg",
+        status: "PENDING",
+        isDeleted: true,
+        isHidden: true,
+        createdAt: new DateTime(2020,06,21),
+        updatedAt: new DateTime(2020,04,21),
+        instructorId: "C0004",
+        categoryIds: [
+          "C0004"
+        ]),
+    Course(id: "C0008",
+        title: "MachineLearning ",
+        subtitle: "DeepLearning",
+        price: 1000000,
+        description: "Lập trình Machine Learning không khó",
+        requirement: [
+          "thông minh",
+          "đã biết lập trình cơ bản"
+        ],
+        learnWhat: [
+          "Khái niệm cơ bản về DeepLearning",
+          "Ứng dụng DeepLearning vào thực tế"
+        ],
+        soldNumber: 5,
+        ratedNumber: 8,
+        videoNumber: 5,
+        totalHours: 5,
+        formalityPoint: 5,
+        contentPoint: 5,
+        presentationPoint: 5,
+        imageUrl: "Assets/images/deeplearning.jpg",
+        promoVidUrl: "Assets/images/deeplearning.jpg",
+        status: "PENDING",
+        isDeleted: true,
+        isHidden: true,
+        createdAt: new DateTime(2020,06,21),
+        updatedAt: new DateTime(2020,04,21),
+        instructorId: "C0004",
+        categoryIds: [
+          "C0004"
+        ]),
+  ];
+
+  List<Course> listCourseSwift =[
     Course(id: "C0002",
         title: "Swift",
         subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
@@ -254,8 +322,100 @@ class ListCourses extends ChangeNotifier{
         categoryIds: [
           "C0002"
         ]),
+    Course(id: "C0009",
+        title: "Swift 5.0",
+        subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
+        price: 249000,
+        description: "Lập trình iOS không khó.",
+        requirement: [
+          "thông minh",
+          "đã biết lập trình cơ bản"
+        ],
+        learnWhat: [
+          "Tự tin phát triển những ứng dụng iOS , game iOS ",
+        ],
+        soldNumber: 5,
+        ratedNumber: 6,
+        videoNumber: 5,
+        totalHours: 5,
+        formalityPoint: 5,
+        contentPoint: 5,
+        presentationPoint: 5,
+        imageUrl: "Assets/images/swift.jpg",
+        promoVidUrl: "Assets/images/swift.jpg",
+        status: "PENDING",
+        isDeleted: true,
+        isHidden: true,
+        createdAt: new DateTime(2020,01,21),
+        updatedAt: new DateTime(2020,04,21),
+        instructorId: "C0002",
+        categoryIds: [
+          "C0002"
+        ]),
   ];
+  List<Course> listCourseC = [
+    Course(id: "C00010",
+        title: "C++ Tutorial ",
+        subtitle: "Giới thiệu tổng quan về ngôn ngữ C++",
+        price: 249000,
+        description: "Lập trình iOS không khó.",
+        requirement: [
+          "thông minh",
+          "đã biết lập trình cơ bản"
+        ],
+        learnWhat: [
+          "Tự tin phát triển những ứng dụng iOS , game iOS ",
+        ],
+        soldNumber: 5,
+        ratedNumber: 6,
+        videoNumber: 5,
+        totalHours: 5,
+        formalityPoint: 5,
+        contentPoint: 5,
+        presentationPoint: 5,
+        imageUrl: "Assets/images/C.PNG",
+        promoVidUrl: "Assets/images/C.PNG",
+        status: "PENDING",
+        isDeleted: true,
+        isHidden: true,
+        createdAt: new DateTime(2020,01,21),
+        updatedAt: new DateTime(2020,04,21),
+        instructorId: "C0002",
+        categoryIds: [
+          "C0002"
+        ]),
+    Course(id: "C00011",
+        title: "C++ Tutorial 2020 ",
+        subtitle: "Giới thiệu tổng quan về ngôn ngữ C++",
+        price: 249000,
+        description: "Lập trình iOS không khó.",
+        requirement: [
+          "thông minh",
+          "đã biết lập trình cơ bản"
+        ],
+        learnWhat: [
+          "Tự tin phát triển những ứng dụng iOS , game iOS ",
+        ],
+        soldNumber: 5,
+        ratedNumber: 6,
+        videoNumber: 5,
+        totalHours: 5,
+        formalityPoint: 5,
+        contentPoint: 5,
+        presentationPoint: 5,
+        imageUrl: "Assets/images/C.PNG",
+        promoVidUrl: "Assets/images/C.PNG",
+        status: "PENDING",
+        isDeleted: true,
+        isHidden: true,
+        createdAt: new DateTime(2020,01,21),
+        updatedAt: new DateTime(2020,04,21),
+        instructorId: "C0002",
+        categoryIds: [
+          "C0002"
+        ]),
 
+  ];
   List<Course> get listCourse => _listCourses;
 
   List<Course> getListCourseRate(){
@@ -267,6 +427,8 @@ class ListCourses extends ChangeNotifier{
     }
     return listCourseRate;
   }
+  final List<Course> listCourseDownloaded = [];
+
   List<String> getTitle(){
     List<String> listTitle = [];
     for (int i = 0;i<listCourse.length;i++){
@@ -278,5 +440,6 @@ class ListCourses extends ChangeNotifier{
     listCourse.add(newCourse);
     notifyListeners();
   }
+
 }
 
