@@ -85,17 +85,21 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                         children:[
                             Container(
                             child:  IconButton(
-                              icon: Icon(Icons.assignment_turned_in_outlined,color: Colors.black54,size:30),
-                            onPressed: (){},
+                              icon: listCourses.myCourses.contains(widget.dataCourse)?Icon(Icons.arrow_circle_down,color: Colors.blue):Icon(Icons.assignment_turned_in_outlined,color: Colors.black54,size:30),
+                            onPressed: (){
+                              listCourses.myCourses.contains(widget.dataCourse)? listCourses.removeCourse(listCourses.myCourses, widget.dataCourse):
+                              listCourses.addCourse(listCourses.myCourses, widget.dataCourse);
+                            },
                             ),
                             ),
                             Container(
                             child:  IconButton(
-                              icon: (listCourses.listCourseDownloaded.singleWhere((element) => element.id == widget.dataCourse.id)) != null?Icon(
-                              Icons.delete_outline, color: Colors.red):Icon(Icons.arrow_circle_down_rounded),
+                              icon:listCourses.listCourseDownloaded.contains(widget.dataCourse)?
+                              Icon(Icons.delete_outline, color: Colors.red,) :
+                              Icon(Icons.arrow_circle_down_rounded),
                             onPressed: (){
-                              listCourses.listCourseDownloaded.singleWhere((element) => element.id == widget.dataCourse.id) != null? listCourses.listCourseDownloaded.removeWhere((element) => element.id == widget.dataCourse.id):
-                              listCourses.listCourseDownloaded.add(widget.dataCourse);
+                              listCourses.listCourseDownloaded.contains(widget.dataCourse)? listCourses.removeCourse(listCourses.listCourseDownloaded, widget.dataCourse):
+                              listCourses.addCourse(listCourses.listCourseDownloaded, widget.dataCourse);
                             },
                             ),
                             ),

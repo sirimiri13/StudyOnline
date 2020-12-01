@@ -18,7 +18,6 @@ class _DownloadPage extends State<DownloadPage> {
   Widget build(BuildContext context) {
     return Consumer<ListCourses>(
         builder: (context,listCourses,child) =>
-
         Scaffold(
               appBar: AppBar(
                 title: Text('DOWNLOADED'),
@@ -39,12 +38,15 @@ class _DownloadPage extends State<DownloadPage> {
                     itemBuilder: (context,index){
                       return GestureDetector (
                         onTap: () {
+                          print(index);
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => DetailCoursePage(dataCourse: listCourses.listCourse[index])
-                          ));
+                              builder: (_) =>
+                                  ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                      child: DetailCoursePage(dataCourse: listCourses.listCourseDownloaded[index]))
+                          )
+                          );
                         },
                         onLongPress:(){
-
                         },
                         child: Container(
                             padding: EdgeInsets.all(2),

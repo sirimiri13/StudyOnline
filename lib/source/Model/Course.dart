@@ -33,7 +33,7 @@ class Course {
     this.updatedAt,
     this.instructorId,
     this.categoryIds,
-    this.listClip,
+    this.downloaded,
   });
 
   String id;
@@ -59,7 +59,7 @@ class Course {
   DateTime updatedAt;
   String instructorId;
   List<String> categoryIds;
-  List<Clip> listClip;
+  bool downloaded;
 
   void addCourse(List<Course> listCourse, Course newCourse){
     listCourse.add(newCourse);
@@ -115,6 +115,7 @@ class Course {
     "updatedAt": updatedAt.toIso8601String(),
     "instructorId": instructorId,
     "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
+
   };
 }
 

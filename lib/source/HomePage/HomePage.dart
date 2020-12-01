@@ -51,7 +51,7 @@ class _HomePage extends State<HomePage> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 // itemCount: listCourseRegister.length + 4,
-                itemCount: listCourses.listCourse.length + 4,
+                itemCount: listCourses.myCourses.length + 4,
                 itemBuilder: (context, index) {
                   if (index == 0) {
                     List<Course> listRate = listCourses.getListCourseRate();
@@ -68,8 +68,8 @@ class _HomePage extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (_) =>
-                                          ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                            child: DetailCoursePage(dataCourse: item))
+                                            ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                                child: DetailCoursePage(dataCourse: item))
                                     )
                                     );
                                   },
@@ -151,46 +151,52 @@ class _HomePage extends State<HomePage> {
                   else if (index == 3)
                     return Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold));
                   else
-                    return Container(
-                      padding: EdgeInsets.all(2),
-                      height: 100,
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (_) =>
-                                    ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                        child: DetailCoursePage(dataCourse: listCourses.listCourse[index-4]))
-                            )
-                            );
-                          },
-                          child: Card(
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Image.asset(listCourses.listCourse[index-4].promoVidUrl,width: 125),
-                                  Expanded(
-                                      child: Container(
-                                          padding: EdgeInsets.all(5),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(listCourses.listCourse[index-4].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                                              Text('Total Hours: ' + listCourses.listCourse[index-4].totalHours.toString()),
-                                              Text('Total clip: '+ listCourses.listCourse[index-4].videoNumber.toString()),
-                                              // RatingBox(),
-                                            ],
-                                          )
-                                      )
-                                  )
-                                ]
+                    return Container(padding: EdgeInsets.all(2),
+                        height: 100,
+                        child: (listCourses.myCourses.length == 0)? Container (
+                          alignment: Alignment.center,
+                          child: Text(
+                            'There are no downloaded courses!',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
                             ),
-                          )
-                      ),
+                          ),):
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (_) =>
+                                      ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                          child: DetailCoursePage(dataCourse: listCourses.myCourses[index-4]))
+                              )
+                              );
+                            },
+                            child: Card(
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Image.asset(listCourses.myCourses[index-4].promoVidUrl,width: 125),
+                                    Expanded(
+                                        child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(listCourses.myCourses[index-4].title, style: TextStyle(fontWeight: FontWeight.bold)),
+                                                Text('Total Hours: ' + listCourses.myCourses[index-4].totalHours.toString()),
+                                                Text('Total clip: '+ listCourses.myCourses[index-4].videoNumber.toString()),
+                                                // RatingBox(),
+                                              ],
+                                            )
+                                        )
+                                    )
+                                  ]
+                              ),
+                            )
+                        )
                     );
                 },
-
-
               )
 
           ),

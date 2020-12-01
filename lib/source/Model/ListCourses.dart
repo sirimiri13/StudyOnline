@@ -37,9 +37,7 @@ class ListCourses extends ChangeNotifier{
         categoryIds: [
           "C0001"
         ],
-        listClip: [
-
-        ]
+        downloaded: false,
     ),
     Course(id: "C0002",
         title: "Swift",
@@ -70,7 +68,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0002",
         categoryIds: [
           "C0002"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0003",
         title: "SQL Toturial",
         subtitle: "Giới thiệu tổng quan về SQL ",
@@ -100,7 +99,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0003",
         categoryIds: [
           "C0003"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0004",
         title: "DeepLearning ",
         subtitle: "DeepLearning",
@@ -131,7 +131,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0004",
         categoryIds: [
           "C0004"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0005",
         title: "PHP Basic ",
         subtitle: "Giới thiệu tổng quát PHP",
@@ -160,7 +161,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0005",
         categoryIds: [
           "C0005"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0006",
         title: "Lập trình Python toàn tập",
         subtitle: "Hướng dẫn các syntax Python cơ bản và nhiều hơn nữa!",
@@ -191,7 +193,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0006",
         categoryIds: [
           "C0006"
-        ]),
+        ],
+      downloaded: false,),
   ];
 
 
@@ -226,7 +229,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0004",
         categoryIds: [
           "C0004"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0007",
         title: "DeepLearning Tutorial ",
         subtitle: "DeepLearning",
@@ -257,7 +261,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0004",
         categoryIds: [
           "C0004"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0008",
         title: "MachineLearning ",
         subtitle: "DeepLearning",
@@ -288,7 +293,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0004",
         categoryIds: [
           "C0004"
-        ]),
+        ],
+      downloaded: false,),
   ];
 
   List<Course> listCourseSwift =[
@@ -321,7 +327,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0002",
         categoryIds: [
           "C0002"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C0009",
         title: "Swift 5.0",
         subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
@@ -351,7 +358,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0002",
         categoryIds: [
           "C0002"
-        ]),
+        ],
+      downloaded: false,),
   ];
   List<Course> listCourseC = [
     Course(id: "C00010",
@@ -383,7 +391,8 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0002",
         categoryIds: [
           "C0002"
-        ]),
+        ],
+      downloaded: false,),
     Course(id: "C00011",
         title: "C++ Tutorial 2020 ",
         subtitle: "Giới thiệu tổng quan về ngôn ngữ C++",
@@ -413,7 +422,78 @@ class ListCourses extends ChangeNotifier{
         instructorId: "C0002",
         categoryIds: [
           "C0002"
-        ]),
+        ],
+      downloaded: false,),
+
+  ];
+
+  final List<Course> myCourses = [
+    Course(id: "C0001",
+      title: "Lập trình Android toàn tập",
+      subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",
+      price: 249000,
+      description: "Lập trình Android không khó, vì khóa học này sẽ hướng dẫn bạn chi tiết về lập trình Android, cung cấp thủ thuật về ASO giúp bạn tăng thu nhập với lập trình Android.",
+      requirement: [
+        "thông minh",
+        "đã biết lập trình cơ bản"
+      ],
+      learnWhat: [
+        "Tự tin phát triển những ứng dụng Android, game Android",
+        "Biết cách upload ứng dụng Android lên Google Play",
+        "Kiếm tiền từ các ứng dụng trên Google Play",
+        "ASO - tối ưu ứng dụng lên TOP tìm kiếm từ khoá"
+      ],
+      soldNumber: 5,
+      ratedNumber: 5,
+      videoNumber: 5,
+      totalHours: 5,
+      formalityPoint: 5,
+      contentPoint: 5,
+      presentationPoint: 5,
+      imageUrl: "Assets/images/android.jpg",
+      promoVidUrl: "Assets/images/android.jpg",
+      status: "PENDING",
+      isDeleted: true,
+      isHidden: true,
+      createdAt: new DateTime(2020,04,21),
+      updatedAt: new DateTime(2020,04,21),
+      instructorId: "C0001",
+      categoryIds: [
+        "C0001"
+      ],
+      downloaded: false,
+    ),
+    Course(id: "C0002",
+      title: "Swift",
+      subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
+      price: 249000,
+      description: "Lập trình iOS không khó.",
+      requirement: [
+        "thông minh",
+        "đã biết lập trình cơ bản"
+      ],
+      learnWhat: [
+        "Tự tin phát triển những ứng dụng iOS , game iOS ",
+      ],
+      soldNumber: 5,
+      ratedNumber: 6,
+      videoNumber: 5,
+      totalHours: 5,
+      formalityPoint: 5,
+      contentPoint: 5,
+      presentationPoint: 5,
+      imageUrl: "Assets/images/swift.jpg",
+      promoVidUrl: "Assets/images/swift.jpg",
+      status: "PENDING",
+      isDeleted: true,
+      isHidden: true,
+      createdAt: new DateTime(2020,01,21),
+      updatedAt: new DateTime(2020,04,21),
+      instructorId: "C0002",
+      categoryIds: [
+        "C0002"
+      ],
+      downloaded: false,),
 
   ];
   List<Course> get listCourse => _listCourses;
@@ -436,8 +516,12 @@ class ListCourses extends ChangeNotifier{
     }
     return listTitle;
   }
-  void addCourse(Course newCourse){
-    listCourse.add(newCourse);
+  void addCourse(List<Course>lCourse,Course newCourse){
+    lCourse.add(newCourse);
+    notifyListeners();
+  }
+  void removeCourse(List<Course> lCourse, Course course){
+    lCourse.remove(course);
     notifyListeners();
   }
 
