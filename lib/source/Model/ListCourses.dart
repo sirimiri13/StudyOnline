@@ -428,20 +428,17 @@ class ListCourses extends ChangeNotifier{
   ];
 
   final List<Course> myCourses = [
-    Course(id: "C0001",
-      title: "Lập trình Android toàn tập",
-      subtitle: "Hướng dẫn Reactjs, React Router 4, Animations, Authentication, BDD và nhiều hơn nữa!",
+    Course(id: "C0012",
+      title: "Tìm hiểu về Firebase",
+      subtitle: "Firebase",
       price: 249000,
-      description: "Lập trình Android không khó, vì khóa học này sẽ hướng dẫn bạn chi tiết về lập trình Android, cung cấp thủ thuật về ASO giúp bạn tăng thu nhập với lập trình Android.",
+      description: "Tìm hiểu về Firebase",
       requirement: [
         "thông minh",
         "đã biết lập trình cơ bản"
       ],
       learnWhat: [
-        "Tự tin phát triển những ứng dụng Android, game Android",
-        "Biết cách upload ứng dụng Android lên Google Play",
-        "Kiếm tiền từ các ứng dụng trên Google Play",
-        "ASO - tối ưu ứng dụng lên TOP tìm kiếm từ khoá"
+       "Các thao tác cơ bản trên Firebase"
       ],
       soldNumber: 5,
       ratedNumber: 5,
@@ -450,30 +447,30 @@ class ListCourses extends ChangeNotifier{
       formalityPoint: 5,
       contentPoint: 5,
       presentationPoint: 5,
-      imageUrl: "Assets/images/android.jpg",
-      promoVidUrl: "Assets/images/android.jpg",
+      imageUrl: "Assets/images/firebase.png",
+      promoVidUrl: "Assets/images/firebase.png",
       status: "PENDING",
       isDeleted: true,
       isHidden: true,
       createdAt: new DateTime(2020,04,21),
       updatedAt: new DateTime(2020,04,21),
-      instructorId: "C0001",
+      instructorId: "C0012",
       categoryIds: [
-        "C0001"
+        "C0012"
       ],
       downloaded: false,
     ),
-    Course(id: "C0002",
-      title: "Swift",
-      subtitle: "Giới thiệu tổng quan về ngôn ngữ Swift",
+    Course(id: "C0013",
+      title: "Flutter Tutorial",
+      subtitle: "Giới thiệu tổng quan FLutter",
       price: 249000,
-      description: "Lập trình iOS không khó.",
+      description: "Lập trình Flutter không khó.",
       requirement: [
         "thông minh",
         "đã biết lập trình cơ bản"
       ],
       learnWhat: [
-        "Tự tin phát triển những ứng dụng iOS , game iOS ",
+        "Tự tin phát triển những ứng dụng trên cả andoroid và iOS ",
       ],
       soldNumber: 5,
       ratedNumber: 6,
@@ -482,8 +479,8 @@ class ListCourses extends ChangeNotifier{
       formalityPoint: 5,
       contentPoint: 5,
       presentationPoint: 5,
-      imageUrl: "Assets/images/swift.jpg",
-      promoVidUrl: "Assets/images/swift.jpg",
+      imageUrl: "Assets/images/flutter.jpg",
+      promoVidUrl: "Assets/images/flutter.jpg",
       status: "PENDING",
       isDeleted: true,
       isHidden: true,
