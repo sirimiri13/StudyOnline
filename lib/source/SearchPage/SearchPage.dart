@@ -94,7 +94,6 @@ class _SearchPage extends State<SearchPage> {
                                 );
                               },
                               onLongPress:(){
-
                               },
                               child: Container(
                                   padding: EdgeInsets.all(2),
