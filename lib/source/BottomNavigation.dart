@@ -1,4 +1,5 @@
 import 'package:finalproject_1712061/source/Model/ListClip.dart';
+import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'HomePage/HomePage.dart';
@@ -44,6 +45,7 @@ List<Widget> _listPage = <Widget>[
               ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
               ChangeNotifierProvider<ListCourses>(create: (context) => ListCourses()),
               ChangeNotifierProvider<ListClip>(create: (context)=> ListClip()),
+              ChangeNotifierProvider<ListInstructor>(create: (context) => ListInstructor())
             ],
             child: _listPage[_currentIndex],
           )

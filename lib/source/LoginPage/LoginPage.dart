@@ -82,7 +82,7 @@ class _LoginPage extends State<LoginPage> {
                           child: new Text("Try again", style: TextStyle(
                               color: Colors.indigo, fontSize: 16.0)),
                           onPressed: () {
-                            //Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                           },
                         ),
                       ],
