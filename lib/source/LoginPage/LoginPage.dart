@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+
+import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../BottomNavigation.dart';
 
 
-TextEditingController emailController = new TextEditingController();
-TextEditingController passwordController = new TextEditingController();
+
 
 bool userNameValidate = false;
 bool passWordValidate = false;
@@ -15,7 +20,29 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController emailForgetPassController = new TextEditingController();
 
+
+
+  read() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.get(key ) ?? 0;
+    if(value != '0'){
+      Navigator.of(context).push(
+          new MaterialPageRoute(
+            builder: (BuildContext context) => new BottomNavigation(),
+          )
+      );
+    }
+  }
+
+  @override
+  initState(){
+    read();
+  }
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -62,8 +89,12 @@ class _LoginPage extends State<LoginPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
           ),
-          onPressed: () {
-              if (passwordController.text == "password" && emailController.text == "username") {
+          onPressed: () async{
+            var email = emailController.text;
+            var pw = passwordController.text;
+            http.Response response = await APIServer().login(email, pw);
+              print(response.body);
+              if (response.statusCode == 200) {
                 Navigator.of(context).pushNamed(BottomNavigation.tag);
               }
               else {
@@ -75,8 +106,9 @@ class _LoginPage extends State<LoginPage> {
                       title: new Text("Login Failed", style: TextStyle(
                           color: Colors.indigo, fontSize: 18.0)),
                       content: new Text(
-                          "email : 'username' \npassword : 'password'"),
-                      actions: <Widget>[
+                        "Username or Password is wrong!"
+                      ),
+                    actions: <Widget>[
                         // usually buttons at the bottom of the dialog
                         new FlatButton(
                           child: new Text("Try again", style: TextStyle(
@@ -112,11 +144,11 @@ class _LoginPage extends State<LoginPage> {
               children: <Widget>[
                 new Expanded(
                   child: new TextField(
-                    controller: emailController,
+                    controller: emailForgetPassController,
                     autofocus: true,
                     decoration: new InputDecoration(
-                        labelText: 'Edit',
-                        hintText: 'username',
+                        labelText: 'Forget Password',
+                        hintText: 'email',
                         labelStyle: TextStyle(color: Colors.indigo)
                   ),
                 )
@@ -131,27 +163,54 @@ class _LoginPage extends State<LoginPage> {
                   }),
               new FlatButton(
                   child: const Text('DONE',style: TextStyle(color: Colors.indigo)),
-                  onPressed: () {
-                    showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: new Text("Confirm", style: TextStyle(
-                          color: Colors.indigo, fontSize: 18.0)),
-                      content: new Text("Please check your email"),
-                      actions: <Widget>[
-                        // usually buttons at the bottom of the dialog
-                        new FlatButton(
-                          child: new Text("OK", style: TextStyle(
-                              color: Colors.indigo, fontSize: 16.0)),
-                             onPressed: () {
-                            //Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
+                  onPressed: () async {
+                    var email = emailForgetPassController.text;
+                    http.Response response = await APIServer().forgetPassword(email);
+                    if (response.statusCode == 200){
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: new Text("Confirm", style: TextStyle(
+                                  color: Colors.indigo, fontSize: 18.0)),
+                              content: new Text("Please check your email"),
+                              actions: <Widget>[
+                                // usually buttons at the bottom of the dialog
+                                new FlatButton(
+                                  child: new Text("OK", style: TextStyle(
+                                      color: Colors.indigo, fontSize: 16.0)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                      );
                     }
-                 );
+                    else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: new Text("Failed", style: TextStyle(
+                                  color: Colors.indigo, fontSize: 18.0)),
+                              content: new Text("Email is not existed"),
+                              actions: <Widget>[
+                                // usually buttons at the bottom of the dialog
+                                new FlatButton(
+                                  child: new Text("Try Again", style: TextStyle(
+                                      color: Colors.indigo, fontSize: 16.0)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                      );
+                    }
                //     Navigator.pop(context);
                   },
                   )

@@ -2,6 +2,7 @@ import 'package:finalproject_1712061/source/Model/ListClip.dart';
 import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'HomePage/HomePage.dart';
 import 'DownloadPage/DownloadPage.dart';
 import 'SearchPage/SearchPage.dart';
@@ -13,11 +14,21 @@ import 'Model/Clip.dart';
 
 class BottomNavigation extends StatefulWidget{
 static String tag = 'bottom-navigation';
+static String token;
 @override
 _BottomNavigation createState() => new _BottomNavigation();
 }
 
 class _BottomNavigation extends State<BottomNavigation>{
+
+
+  _save(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = token;
+    prefs.setString(key, value);
+  }
+
   int _currentIndex = 0;
 List<Widget> _listPage = <Widget>[
   HomePage(),

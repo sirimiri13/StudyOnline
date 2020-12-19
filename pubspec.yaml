@@ -28,19 +28,21 @@ dependencies:
     sdk: flutter
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   provider: ^4.3.2
-
+  carousel_slider: ^2.3.1
+  imagebutton: ^0.0.6
+  http: ^0.12.0+4
+  shared_preferences: ^0.5.2+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  dio: 1.0.0
-  carousel_slider: ^2.3.1
+  dio: ^1.0.0
 
-  imagebutton: ^0.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -48,31 +50,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - Assets/images/computer.jpg
-    - Assets/images/study.jpg
-    - Assets/images/background.jpg
-    - Assets/images/profile-2.jpg
-    - Assets/images/profile-3.jpg
-    - Assets/images/profile.jpg
-    - Assets/images/code1.jpg
-    - Assets/images/code2.jpg
-    - Assets/images/code3.jpg
-    - Assets/images/code4.jpg
-    - Assets/images/code5.jpg
-    -  Assets/images/code6.jpg
-    -  Assets/images/code7.jpg
-    -  Assets/images/code8.jpg
-    - Assets/images/AI.jpg
-    - Assets/images/C.PNG
-    - Assets/images/data.png
-    - Assets/images/deeplearning.jpg
-    - Assets/images/firebase.png
-    - Assets/images/php.jpg
-    - Assets/images/python.jpg
-    - Assets/images/sql.png
-    - Assets/images/swift.jpg
-    - Assets/images/android.jpg
-    - Assets/images/flutter.jpg
+    - Assets/images/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

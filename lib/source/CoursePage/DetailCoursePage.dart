@@ -85,7 +85,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                         children:[
                             Container(
                             child:  IconButton(
-                              icon: listCourses.myCourses.contains(widget.dataCourse)?Icon(Icons.arrow_circle_down,color: Colors.blue):Icon(Icons.assignment_turned_in_outlined,color: Colors.black54,size:30),
+                              icon: listCourses.myCourses.contains(widget.dataCourse)?Icon(Icons.assignment_turned_in,color: Colors.blue):Icon(Icons.add_to_photos,color: Colors.black54,size:30),
                             onPressed: (){
                               listCourses.myCourses.contains(widget.dataCourse)? listCourses.removeCourse(listCourses.myCourses, widget.dataCourse):
                               listCourses.addCourse(listCourses.myCourses, widget.dataCourse);

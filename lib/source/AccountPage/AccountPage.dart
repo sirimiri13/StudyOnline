@@ -1,8 +1,10 @@
 
+import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'DetailAccountPage.dart';
 import 'EditAccountPage.dart';
 import '../Model/User.dart';
@@ -19,6 +21,15 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPage extends State<AccountPage> {
+
+  _save(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = token;
+    prefs.setString(key, value);
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -176,6 +187,7 @@ class _AccountPage extends State<AccountPage> {
 
     final logoutRow = GestureDetector(
         onTap: (){
+          _save('0');
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
         child: Container(
