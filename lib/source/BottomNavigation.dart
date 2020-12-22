@@ -1,3 +1,5 @@
+import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:finalproject_1712061/source/Model/ListClip.dart';
 import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
@@ -12,22 +14,14 @@ import 'Model/User.dart';
 import 'Model/ListCourses.dart';
 import 'Model/Clip.dart';
 
+UserMe user = UserMe();
 class BottomNavigation extends StatefulWidget{
-static String tag = 'bottom-navigation';
-static String token;
-@override
-_BottomNavigation createState() => new _BottomNavigation();
+  static String tag = 'bottom-navigation';
+  @override
+  _BottomNavigation createState() => new _BottomNavigation();
 }
 
 class _BottomNavigation extends State<BottomNavigation>{
-
-
-  _save(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = token;
-    prefs.setString(key, value);
-  }
 
   int _currentIndex = 0;
 List<Widget> _listPage = <Widget>[
@@ -38,12 +32,21 @@ List<Widget> _listPage = <Widget>[
   AccountPage(),
 ];
 
-  void _onItemTapped(int index) {
+  fetchData() async {
+    UserMe userRes;
+    userRes = await APIServer().fetchUserInfo();
     setState(() {
-      _currentIndex = index;
+      user = userRes;
     });
+    return userRes;
+  }
+
+  @override initState(){
+    super.initState();
+    fetchData();
   }
   Widget build(BuildContext context) {
+
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
@@ -53,7 +56,7 @@ List<Widget> _listPage = <Widget>[
         body: Center(
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider<User>(create: (_) => new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: 'Student',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13))),
+              ChangeNotifierProvider<UserMe>(create: (context) => user),
               ChangeNotifierProvider<ListCourses>(create: (context) => ListCourses()),
               ChangeNotifierProvider<ListClip>(create: (context)=> ListClip()),
               ChangeNotifierProvider<ListInstructor>(create: (context) => ListInstructor())
@@ -73,7 +76,8 @@ List<Widget> _listPage = <Widget>[
           unselectedLabelStyle: textTheme.caption,
           onTap: (value) {
             setState(() => _currentIndex = value);
-            print(value);
+           // fetchData();
+            //print(value);
           },
           items: [
             BottomNavigationBarItem(

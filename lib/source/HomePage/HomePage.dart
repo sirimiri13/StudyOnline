@@ -1,4 +1,6 @@
+import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/Model/ListCourses.dart';
+import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +8,7 @@ import '../Model/Course.dart';
 import '../CoursePage/DetailCoursePage.dart';
 import '../CoursePage/ListCoursePage.dart';
 import '../../main.dart';
-
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget{
   static String tag = 'home-page';
@@ -33,10 +35,13 @@ Widget continueHorizionList = new Container (
 
 
 class _HomePage extends State<HomePage> {
+ //http.Response responseRecommendCourse = APIServer().getRecommendCourse();
 
   // var listCourseRegister = getListCourseOfUser();
   @override
   Widget build(BuildContext context) {
+    var _user = Provider.of<UserMe>(context);
+    print(_user);
     //print(listCourseRegister);
     // createData();
     // print("user " + myUser.registeredCourse.length.toString());

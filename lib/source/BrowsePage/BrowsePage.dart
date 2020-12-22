@@ -1,3 +1,5 @@
+import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/ListCourses.dart';
 import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
@@ -5,17 +7,15 @@ import 'package:imagebutton/imagebutton.dart';
 import 'package:provider/provider.dart';
 import '../Model/Course.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../Model/Instructor.dart';
 import '../CoursePage/ListCoursePage.dart';
 import '../AccountPage/InformationAuthor.dart';
-import '../../main.dart';
+
 
 
 
 //final itemCourseSuggest = getCourseSuggest();
 final _listSkill = ['C++','Swift','Machine Learning'];
 final _listTopicPic = ['Assets/images/code7.jpg','Assets/images/code5.jpg''Assets/images/code4.jpg'];
-//final _listAuthor = getListAuthor();
 class BrowsePage extends StatefulWidget{
   static String tag = 'browse-page';
   @override _BrowsePage createState() => new _BrowsePage();
@@ -24,6 +24,14 @@ class BrowsePage extends StatefulWidget{
 
 
 class _BrowsePage extends State<BrowsePage>{
+
+  Future<Instructor> futureInstructor;
+
+  @override
+  void initState(){
+    super.initState();
+    futureInstructor = APIServer().getInstructor();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -271,46 +279,60 @@ class _BrowsePage extends State<BrowsePage>{
                                     .of(context)
                                     .size
                                     .height * 0.25,
-                                child: Consumer<ListInstructor> (
-                                  builder: (context, listInstructor,child) =>
-                                  ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: listInstructor.listInstructor.length,
-                                    itemBuilder: (context, indexAuthor) {
-                                      return Container(
-                                        padding: EdgeInsets.only(right: 15.0),
-                                        child: Card(
-                                          // color: Colors.transparent
-                                          //color: Colors.black12,
-                                            child: Container(
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context, MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                                              child: InformationAuthor(dataInstructor: listInstructor.listInstructor[indexAuthor],dataCourse: listCourses.listCourse))
-                                                  )
-                                                  );
-                                                },
-                                                child: Center(
-                                                    child: Column(
-                                                        children: <Widget>[
-                                                          CircleAvatar(
-                                                            radius: 50,
-                                                            backgroundImage: AssetImage(listInstructor.listInstructor[indexAuthor].avatar),
-                                                          ),
-                                                          Text(listInstructor.listInstructor[indexAuthor].name, style: TextStyle(
-                                                              fontSize: 11.0)),
-                                                        ]
-                                                    )
-                                                ),
-                                              ),
-                                            )
-                                        ),
-                                      );
-                                    }
-                                )
-                                )
+                              child: FutureBuilder<Instructor> (
+                                future: futureInstructor,
+                                builder: (context, snapshot){
+                                  if (snapshot.hasData){
+                                    return Text(snapshot.data.id);
+                                    // return Consumer<ListInstructor> (
+                                    //     builder: (context, listInstructor,child) =>
+                                    //         ListView.builder(
+                                    //             scrollDirection: Axis.horizontal,
+                                    //             itemCount: listInstructor.listInstructor.length,
+                                    //             itemBuilder: (context, indexAuthor) {
+                                    //               return Container(
+                                    //                 padding: EdgeInsets.only(right: 15.0),
+                                    //                 child: Card(
+                                    //                   // color: Colors.transparent
+                                    //                   //color: Colors.black12,
+                                    //                     child: Container(
+                                    //                       child: GestureDetector(
+                                    //                         onTap: () {
+                                    //                           Navigator.push(context, MaterialPageRoute(
+                                    //                               builder: (_) =>
+                                    //                                   ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                    //                                       child: InformationAuthor(dataInstructor: listInstructor.listInstructor[indexAuthor],dataCourse: listCourses.listCourse))
+                                    //                           )
+                                    //                           );
+                                    //                         },
+                                    //                         child: Center(
+                                    //                             child: Column(
+                                    //                                 children: <Widget>[
+                                    //                                   CircleAvatar(
+                                    //                                     radius: 50,
+                                    //                                     backgroundImage: AssetImage(listInstructor.listInstructor[indexAuthor].avatar),
+                                    //                                   ),
+                                    //                                   Text(listInstructor.listInstructor[indexAuthor].name, style: TextStyle(
+                                    //                                       fontSize: 11.0)),
+                                    //                                 ]
+                                    //                             )
+                                    //                         ),
+                                    //                       ),
+                                    //                     )
+                                    //                 ),
+                                    //               );
+                                    //             }
+                                    //
+                                    //         )
+                                    // );
+                                  }
+                                  else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
+                            return CircularProgressIndicator();
+                                },
+                              )
+
                             );
                           }
                         })

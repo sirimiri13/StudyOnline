@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
     DetailCoursePage.tag: (context) => DetailCoursePage(),
 
   };
+
   @override
   Widget build(BuildContext context) {
    //createCourse(listCourse);

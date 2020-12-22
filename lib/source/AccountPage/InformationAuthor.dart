@@ -51,7 +51,7 @@ class _InformationAuthor extends State<InformationAuthor>{
                      color: Colors.white,
                      image: DecorationImage(
                        fit: BoxFit.cover,
-                       image: AssetImage(widget.dataInstructor.avatar),
+                       image: AssetImage(""),
                      )
                  )
              );
@@ -61,7 +61,7 @@ class _InformationAuthor extends State<InformationAuthor>{
                return Container(
                  padding: EdgeInsets.all(10),
                  child: Center(
-                   child: Text(widget.dataInstructor.name, style: TextStyle(
+                   child: Text(widget.dataInstructor.major, style: TextStyle(
                        color: Colors.indigo,
                        fontSize: 20,
                        fontWeight: FontWeight.bold)),
@@ -77,8 +77,8 @@ class _InformationAuthor extends State<InformationAuthor>{
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        Text("Teacher's Information",style: TextStyle(fontWeight: FontWeight.bold),),
-                       Text('- Email: '+widget.dataInstructor.email),
-                       Text('- Phone: '+widget.dataInstructor.phone)
+                       Text('- Email: '+widget.dataInstructor.id),
+                       Text('- Phone: '+widget.dataInstructor.userId)
                      ],
                      )
                  );

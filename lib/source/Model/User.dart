@@ -101,5 +101,96 @@ class User extends ChangeNotifier{
 }
 
 
-//User myUser = new User(id: '0001',email:'lqh@123.com',avatar: 'Assets/images/profile.jpg',name: 'Lâm Quỳnh Hương',favoriteCategories:[''],phone:'11111',type: '1',isDeleted: false,isActivated:true,createdAt: new DateTime(2020,04, 13) ,updatedAt: new DateTime(2020,04,13));
+// userme
 
+UserMe userMeFromJson(String str) => UserMe.fromJson(json.decode(str));
+
+String userMeToJson(UserMe data) => json.encode(data.toJson());
+
+class UserMe extends ChangeNotifier{
+   UserMe({
+      this.message,
+      this.payload,
+   });
+
+   String message;
+   Payload payload;
+
+   factory UserMe.fromJson(Map<String, dynamic> json) => UserMe(
+      message: json["message"],
+      payload: Payload.fromJson(json["payload"]),
+   );
+
+   Map<String, dynamic> toJson() => {
+      "message": message,
+      "payload": payload.toJson(),
+   };
+}
+
+class Payload {
+   Payload({
+      this.id,
+      this.email,
+      this.avatar,
+      this.name,
+      this.favoriteCategories,
+      this.point,
+      this.phone,
+      this.type,
+      this.facebookId,
+      this.googleId,
+      this.isDeleted,
+      this.isActivated,
+      this.createdAt,
+      this.updatedAt,
+   });
+
+   String id;
+   String email;
+   String avatar;
+   dynamic name;
+   List<dynamic> favoriteCategories;
+   int point;
+   String phone;
+   String type;
+   dynamic facebookId;
+   dynamic googleId;
+   bool isDeleted;
+   bool isActivated;
+   DateTime createdAt;
+   DateTime updatedAt;
+
+   factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+      id: json["id"],
+      email: json["email"],
+      avatar: json["avatar"],
+      name: json["name"],
+      favoriteCategories: List<dynamic>.from(json["favoriteCategories"].map((x) => x)),
+      point: json["point"],
+      phone: json["phone"],
+      type: json["type"],
+      facebookId: json["facebookId"],
+      googleId: json["googleId"],
+      isDeleted: json["isDeleted"],
+      isActivated: json["isActivated"],
+      createdAt: DateTime.parse(json["createdAt"]),
+      updatedAt: DateTime.parse(json["updatedAt"]),
+   );
+
+   Map<String, dynamic> toJson() => {
+      "id": id,
+      "email": email,
+      "avatar": avatar,
+      "name": name,
+      "favoriteCategories": List<dynamic>.from(favoriteCategories.map((x) => x)),
+      "point": point,
+      "phone": phone,
+      "type": type,
+      "facebookId": facebookId,
+      "googleId": googleId,
+      "isDeleted": isDeleted,
+      "isActivated": isActivated,
+      "createdAt": createdAt.toIso8601String(),
+      "updatedAt": updatedAt.toIso8601String(),
+   };
+}
