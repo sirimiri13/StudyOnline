@@ -3,7 +3,6 @@ import 'package:finalproject_1712061/source/Model/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'DetailAccountPage.dart';
 import 'EditAccountPage.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +17,9 @@ class AccountPage extends StatefulWidget {
 
 
 class _AccountPage extends State<AccountPage> {
-
+  var futureUserMe = APIServer().fetchUserInfo();
   @override
   Widget build(BuildContext context) {
-    var User = Provider.of<UserMe>(context);
-    print(User);
     final profileRow = GestureDetector(
         onTap: () {
           Navigator.of(context).push(
@@ -30,7 +27,6 @@ class _AccountPage extends State<AccountPage> {
                   fullscreenDialog: true,
                   builder: (_) =>
                       ChangeNotifierProvider.value(
-                          value: Provider.of<UserMe>(context, listen: false),
                           child: DetailAccountPage())
               )
           );
@@ -81,12 +77,7 @@ class _AccountPage extends State<AccountPage> {
         onTap: () {
           Navigator.of(context).push(
               MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (_) =>
-                      ChangeNotifierProvider.value(
-                          value: Provider.of<UserMe>(context, listen: false),
-                          child: EditAccountPage())
-
+                    builder: (context) => EditAccountPage(futureUserMe)
                 // builder: (context) => EditAccountPage(),
               )
           );
@@ -180,7 +171,7 @@ class _AccountPage extends State<AccountPage> {
 
     final logoutRow = GestureDetector(
         onTap: () {
-         APIServer().save('0');
+          APIServer().save('0');
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
         child: Container(
@@ -227,67 +218,78 @@ class _AccountPage extends State<AccountPage> {
     return Scaffold(
       body: SafeArea(
           child: Container(
-            color: Colors.indigo,
-            height: double.infinity,
-            width: double.infinity,
-            child: ListView(
-              children: <Widget>[
-                Consumer<UserMe>(
-                    builder: (context, userMe, child) =>
-                        Container(
-                          height: 120,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.indigo,
-                                    width: 3,
+              color: Colors.indigo,
+              height: double.infinity,
+              width: double.infinity,
+              child: FutureBuilder<UserMe>(
+                  future: futureUserMe,
+                  builder: (context,snap) {
+                    if (snap.hasData) {
+                      return ListView(
+                        children: <Widget>[
+                          Container(
+                              height: 120,
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.indigo,
+                                        width: 3,
+                                      )
                                   )
+                              ),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .stretch,
+                                  children: [
+                                    AspectRatio(
+                                        aspectRatio: 1 / 1,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius
+                                                  .circular(
+                                                  60),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1
+                                              )
+                                          ),
+                                          child: ClipOval(
+                                            child: Image.network(
+                                              snap.data.payload.avatar,
+                                            ),
+                                          ),
+                                        )
+                                    ),
+
+                                    Container(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text(
+                                        snap.data.payload.name.toString(),
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ]
                               )
                           ),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                AspectRatio(
-                                    aspectRatio: 1 / 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              60),
-                                          border: Border.all(
-                                              color: Colors.grey,
-                                              width: 1
-                                          )
-                                      ),
-                                      child: ClipOval(
-                                        // child: Image.asset(
-                                        //   user.payload.avatar,
-                                        // ),
-                                      ),
-                                    )
-                                ),
+                          profileRow,
+                          manageInfo,
+                          supportRow,
+                          logoutRow,
+                        ],
+                      );
+                    }
+                    else if (snap.hasError){
+                          print(snap.error);
+                    }
+                    return CircularProgressIndicator();
+                  }
 
-                                Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: Text(
-                                    userMe.payload.name.toString(),
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ]
-                          ),
-                        )
-                ),
-                profileRow,
-                manageInfo,
-                supportRow,
-                logoutRow,
-              ],
-            ),
+              )
           )
       ),
     );

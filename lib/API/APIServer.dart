@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Constant-server.dart';
 
 class APIServer{
-
   Future login (String email, String password) async{
     Map data = {
       'email': email,
@@ -89,7 +88,13 @@ class APIServer{
     var response = await http.get(api_server + "/instructor");
     return Instructor.fromJson(jsonDecode(response.body));
   }
-  
+
+
+  Future<InstructorDetail> getInstructorDetail(String id) async {
+    var  response = await http.get(api_server + "/instructor/detail/${id}");
+    return InstructorDetail.fromJson(jsonDecode(response.body));
+  }
+
   read() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';

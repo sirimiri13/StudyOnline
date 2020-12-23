@@ -15,7 +15,6 @@ import 'source/Model/Clip.dart';
 import 'source/Model/Course.dart';
 import 'source/Model/User.dart';
 
-List<Course> listCourse = new List<Course>();
 
 
 void main() => runApp(

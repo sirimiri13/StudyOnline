@@ -17,21 +17,22 @@ class HomePage extends StatefulWidget{
 
 }
 
-Widget continueHorizionList = new Container (
-    child: CarouselSlider(
-      options: CarouselOptions(),
-      items: listCourse.map((itemCourse) => Container(
-        height: 180,
-        margin: EdgeInsets.all(5.0),
-        child: Column(
-            children: <Widget>[
-              Image.asset(itemCourse.imageUrl,fit: BoxFit.cover, width:300.0,height: 160.0),
-              Text(itemCourse.title,style: TextStyle(fontSize: 18.0))
-            ]
-        ),
-      )).toList(),
-    )
-);
+//
+// Widget continueHorizionList = new Container (
+//     child: CarouselSlider(
+//       options: CarouselOptions(),
+//       items: listCourse.map((itemCourse) => Container(
+//         height: 180,
+//         margin: EdgeInsets.all(5.0),
+//         child: Column(
+//             children: <Widget>[
+//               Image.asset(itemCourse.imageUrl,fit: BoxFit.cover, width:300.0,height: 160.0),
+//               Text(itemCourse.title,style: TextStyle(fontSize: 18.0))
+//             ]
+//         ),
+//       )).toList(),
+//     )
+// );
 
 
 class _HomePage extends State<HomePage> {
@@ -40,8 +41,7 @@ class _HomePage extends State<HomePage> {
   // var listCourseRegister = getListCourseOfUser();
   @override
   Widget build(BuildContext context) {
-    var _user = Provider.of<UserMe>(context);
-    print(_user);
+
     //print(listCourseRegister);
     // createData();
     // print("user " + myUser.registeredCourse.length.toString());
@@ -161,7 +161,7 @@ class _HomePage extends State<HomePage> {
                         child: (listCourses.myCourses.length == 0)? Container (
                           alignment: Alignment.center,
                           child: Text(
-                            'There are no downloaded courses!',
+                            'There are no  courses!',
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey,

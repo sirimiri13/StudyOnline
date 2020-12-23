@@ -1,3 +1,4 @@
+import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/ListCourses.dart';
 import 'package:finalproject_1712061/source/Model/User.dart';
@@ -10,12 +11,13 @@ import '../../main.dart';
 import '../Model/Course.dart';
 
 
+InstructorDetail instructorDetail = InstructorDetail();
 class InformationAuthor extends StatefulWidget{
   static String tag = 'information-author';
   final Instructor dataInstructor;
-  final List<Course> dataCourse;
+  //final List<Course> dataCourse;
 
-  const InformationAuthor({Key key, this.dataInstructor, this.dataCourse}) : super(key: key);
+  const InformationAuthor({Key key, this.dataInstructor}) : super(key: key);
 
   @override
   _InformationAuthor createState() => new _InformationAuthor();
@@ -23,6 +25,17 @@ class InformationAuthor extends StatefulWidget{
 
 
 class _InformationAuthor extends State<InformationAuthor>{
+
+  getInstructorDetail() async{
+    var idInstructor =  widget.dataInstructor.payload[0].id;
+    instructorDetail = await APIServer().getInstructorDetail(idInstructor);
+  }
+
+  @override initState()  {
+    super.initState();
+    getInstructorDetail();
+    print(instructorDetail.payloadDetail);
+  }
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -32,7 +45,7 @@ class _InformationAuthor extends State<InformationAuthor>{
       ),
      body: Container(
        child: ListView.builder(
-          itemCount: 3 + widget.dataCourse.length,
+          itemCount: 3 + 5,
          itemBuilder: (context, index){
            if (index ==0 ) {
              return Container(
@@ -61,7 +74,7 @@ class _InformationAuthor extends State<InformationAuthor>{
                return Container(
                  padding: EdgeInsets.all(10),
                  child: Center(
-                   child: Text(widget.dataInstructor.major, style: TextStyle(
+                   child: Text(widget.dataInstructor.payload[0].major, style: TextStyle(
                        color: Colors.indigo,
                        fontSize: 20,
                        fontWeight: FontWeight.bold)),
@@ -77,8 +90,8 @@ class _InformationAuthor extends State<InformationAuthor>{
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        Text("Teacher's Information",style: TextStyle(fontWeight: FontWeight.bold),),
-                       Text('- Email: '+widget.dataInstructor.id),
-                       Text('- Phone: '+widget.dataInstructor.userId)
+                       Text('- Email: '+ instructorDetail.payloadDetail.email),
+                       Text('- Phone: '+instructorDetail.payloadDetail.phone)
                      ],
                      )
                  );
@@ -95,18 +108,18 @@ class _InformationAuthor extends State<InformationAuthor>{
                      height: 100,
                      child: GestureDetector(
                          onTap: () {
-                           Navigator.push(context, MaterialPageRoute(
-                               builder: (_) =>
-                                   ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                       child: DetailCoursePage(dataCourse: widget.dataCourse[index-4]))
-                           )
-                           );
+                           // Navigator.push(context, MaterialPageRoute(
+                           //     builder: (_) =>
+                           //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                           //             child: DetailCoursePage(dataCourse: instructorDetail.payloadDetail.courses))
+                           // )
+                           // );
                          },
                          child: Card(
                            child: Row(
                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                children: <Widget>[
-                                 Image.asset(widget.dataCourse[index-4].imageUrl,width: 125,),
+                                 Image.network(instructorDetail.payloadDetail.avatar,width: 125,),
                                  Expanded(
                                      child: Container(
                                          padding: EdgeInsets.all(5),
@@ -114,9 +127,9 @@ class _InformationAuthor extends State<InformationAuthor>{
                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: <Widget>[
-                                             Text(widget.dataCourse[index-4].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                                             Text('Total hours: '+widget.dataCourse[index-4].totalHours.toString()),
-                                             Text('Total clips: '+widget.dataCourse[index-4].videoNumber.toString()),
+                                             Text(instructorDetail.payloadDetail.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                             Text('Total hours: '+instructorDetail.payloadDetail.countRating.toString()),
+                                             Text('Total clips: '+instructorDetail.payloadDetail.countRating.toString()),
                                              // RatingBox(),
                                            ],
                                          )

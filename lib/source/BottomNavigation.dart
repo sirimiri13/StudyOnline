@@ -46,8 +46,6 @@ List<Widget> _listPage = <Widget>[
     fetchData();
   }
   Widget build(BuildContext context) {
-
-
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return WillPopScope(
@@ -56,7 +54,7 @@ List<Widget> _listPage = <Widget>[
         body: Center(
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider<UserMe>(create: (context) => user),
+             // ChangeNotifierProvider<UserMe>(create: (context) => user),
               ChangeNotifierProvider<ListCourses>(create: (context) => ListCourses()),
               ChangeNotifierProvider<ListClip>(create: (context)=> ListClip()),
               ChangeNotifierProvider<ListInstructor>(create: (context) => ListInstructor())
@@ -76,8 +74,6 @@ List<Widget> _listPage = <Widget>[
           unselectedLabelStyle: textTheme.caption,
           onTap: (value) {
             setState(() => _currentIndex = value);
-           // fetchData();
-            //print(value);
           },
           items: [
             BottomNavigationBarItem(

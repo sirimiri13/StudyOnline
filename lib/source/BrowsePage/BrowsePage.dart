@@ -26,6 +26,9 @@ class BrowsePage extends StatefulWidget{
 class _BrowsePage extends State<BrowsePage>{
 
   Future<Instructor> futureInstructor;
+  Future<InstructorDetail> futureInstructorDetail;
+
+
 
   @override
   void initState(){
@@ -92,15 +95,16 @@ class _BrowsePage extends State<BrowsePage>{
                                 unpressedImage: Image.asset(
                                   "Assets/images/code3.jpg",),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (_) =>
-                                          ChangeNotifierProvider.value(
-                                              value: Provider.of<ListCourses>(
-                                                  context, listen: false),
-                                              child: ListCoursePage(
-                                                  dataCourse: listCourses.listCourse))
-                                  )
-                                  );
+
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //     builder: (_) =>
+                                  //         ChangeNotifierProvider.value(
+                                  //             value: Provider.of<ListCourses>(
+                                  //                 context, listen: false),
+                                  //             child: ListCoursePage(
+                                  //                 dataCourse: listCourses.listCourse))
+                                  // )
+                                  // );
                                 },
                               ),
                             );
@@ -126,28 +130,28 @@ class _BrowsePage extends State<BrowsePage>{
                                   items: _listSkill.map((item) =>
                                       GestureDetector(
                                           onTap: () {
-                                            print(index);
-                                            List<Course> data;
-                                            if (item == 'C++') {
-                                              data = listCourses.listCourseC;
-                                            }
-                                            else {
-                                              if (item == 'Swift') {
-                                                data = listCourses.listCourseSwift;
-                                              }
-                                              else {
-                                                data = listCourses.listCourseML;
-                                              }
-                                            }
-                                            Navigator.push(context, MaterialPageRoute(
-                                                builder: (_) =>
-                                                    ChangeNotifierProvider.value(
-                                                        value: Provider.of<ListCourses>(
-                                                            context, listen: false),
-                                                        child: ListCoursePage(
-                                                            dataCourse: data))
-                                            )
-                                            );
+                                            // print(index);
+                                            // List<Course> data;
+                                            // if (item == 'C++') {
+                                            //   data = listCourses.listCourseC;
+                                            // }
+                                            // else {
+                                            //   if (item == 'Swift') {
+                                            //     data = listCourses.listCourseSwift;
+                                            //   }
+                                            //   else {
+                                            //     data = listCourses.listCourseML;
+                                            //   }
+                                            // }
+                                            // Navigator.push(context, MaterialPageRoute(
+                                            //     builder: (_) =>
+                                            //         ChangeNotifierProvider.value(
+                                            //             value: Provider.of<ListCourses>(
+                                            //                 context, listen: false),
+                                            //             child: ListCoursePage(
+                                            //                 dataCourse: data))
+                                            // )
+                                            // );
                                           },
                                           child: Container(
                                             margin: EdgeInsets.all(2.0),
@@ -217,28 +221,28 @@ class _BrowsePage extends State<BrowsePage>{
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
                                           onTap: () {
-                                            print(index);
-                                            List<Course> data;
-                                            if (index == 0) {
-                                              data = listCourses.listCourseC;
-                                            }
-                                            else {
-                                              if (index == 1) {
-                                                data = listCourses.listCourseSwift;
-                                              }
-                                              else {
-                                                data = listCourses.listCourseML;
-                                              }
-                                            }
-                                            Navigator.push(context, MaterialPageRoute(
-                                                builder: (_) =>
-                                                    ChangeNotifierProvider.value(
-                                                        value: Provider.of<ListCourses>(
-                                                            context, listen: false),
-                                                        child: ListCoursePage(
-                                                            dataCourse: data))
-                                            )
-                                            );
+                                            // print(index);
+                                            // List<Course> data;
+                                            // if (index == 0) {
+                                            //   data = listCourses.listCourseC;
+                                            // }
+                                            // else {
+                                            //   if (index == 1) {
+                                            //     data = listCourses.listCourseSwift;
+                                            //   }
+                                            //   else {
+                                            //     data = listCourses.listCourseML;
+                                            //   }
+                                            // }
+                                            // Navigator.push(context, MaterialPageRoute(
+                                            //     builder: (_) =>
+                                            //         ChangeNotifierProvider.value(
+                                            //             value: Provider.of<ListCourses>(
+                                            //                 context, listen: false),
+                                            //             child: ListCoursePage(
+                                            //                 dataCourse: data))
+                                            // )
+                                            // );
                                           },
                                           child: Container(
                                             width: MediaQuery
@@ -283,48 +287,42 @@ class _BrowsePage extends State<BrowsePage>{
                                 future: futureInstructor,
                                 builder: (context, snapshot){
                                   if (snapshot.hasData){
-                                    return Text(snapshot.data.id);
-                                    // return Consumer<ListInstructor> (
-                                    //     builder: (context, listInstructor,child) =>
-                                    //         ListView.builder(
-                                    //             scrollDirection: Axis.horizontal,
-                                    //             itemCount: listInstructor.listInstructor.length,
-                                    //             itemBuilder: (context, indexAuthor) {
-                                    //               return Container(
-                                    //                 padding: EdgeInsets.only(right: 15.0),
-                                    //                 child: Card(
-                                    //                   // color: Colors.transparent
-                                    //                   //color: Colors.black12,
-                                    //                     child: Container(
-                                    //                       child: GestureDetector(
-                                    //                         onTap: () {
-                                    //                           Navigator.push(context, MaterialPageRoute(
-                                    //                               builder: (_) =>
-                                    //                                   ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                    //                                       child: InformationAuthor(dataInstructor: listInstructor.listInstructor[indexAuthor],dataCourse: listCourses.listCourse))
-                                    //                           )
-                                    //                           );
-                                    //                         },
-                                    //                         child: Center(
-                                    //                             child: Column(
-                                    //                                 children: <Widget>[
-                                    //                                   CircleAvatar(
-                                    //                                     radius: 50,
-                                    //                                     backgroundImage: AssetImage(listInstructor.listInstructor[indexAuthor].avatar),
-                                    //                                   ),
-                                    //                                   Text(listInstructor.listInstructor[indexAuthor].name, style: TextStyle(
-                                    //                                       fontSize: 11.0)),
-                                    //                                 ]
-                                    //                             )
-                                    //                         ),
-                                    //                       ),
-                                    //                     )
-                                    //                 ),
-                                    //               );
-                                    //             }
-                                    //
-                                    //         )
-                                    // );
+                                    return
+                                            ListView.builder(
+                                                scrollDirection: Axis.horizontal,
+                                                itemCount: snapshot.data.payload.length,
+                                                itemBuilder: (context, indexAuthor) {
+                                                  return Container(
+                                                    padding: EdgeInsets.only(right: 15.0),
+                                                    child: Card(
+                                                      // color: Colors.transparent
+                                                      //color: Colors.black12,
+                                                        child: Container(
+                                                          child: GestureDetector(
+                                                            onTap: () {
+                                                              // Navigator.push(context, MaterialPageRoute(
+                                                              //     builder: (_) =>
+                                                              //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                                              //             child: InformationAuthor(dataInstructor:snapshot.data))
+                                                              // )
+                                                              // );
+                                                              // Navigator.push(
+                                                              //   context,
+                                                              //   MaterialPageRoute(builder: (context) => InformationAuthor(dataInstructor: snapshot.data,)),
+                                                              // );
+                                                            },
+                                                            child: Center(
+
+                                                                      child: Text(snapshot.data.payload[indexAuthor].userId, style: TextStyle(fontSize: 11.0)),
+                                                            ),
+                                                          ),
+                                                        )
+                                                    ),
+                                                  );
+                                                }
+
+                                            );
+                                //    );
                                   }
                                   else if (snapshot.hasError) {
                                     return Text("${snapshot.error}");

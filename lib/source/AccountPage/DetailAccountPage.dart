@@ -16,18 +16,6 @@ class _DetailAccountPage extends State<DetailAccountPage> {
   @override
   Widget build(BuildContext context) {
 
-    final avatarImage = AspectRatio(
-      aspectRatio: 1/1,
-      child: ClipOval(
-          child: Container(
-            color: Colors.indigo,
-            child: Image.asset(
-              'Assets/images/profile-2.jpg',
-            ),
-          )
-      ),
-    );
-
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -48,7 +36,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                     onTap: () {
                       print('Tapped Avatar');
                     },
-                    child: Consumer<User>(
+                    child: Consumer<UserMe>(
                         builder: (context,user,child)=>Column(
                             children: [
                               Container(
@@ -61,7 +49,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                       color: Colors.white,
                                       image: DecorationImage(
                                         fit: BoxFit.fitWidth,
-                                        image: AssetImage(user.avatar),
+                                        image: NetworkImage(user.payload.avatar),
                                         // read: lấy dữ liệu 1 lần
                                         // watch: lấy và luôn lắng nghe sự thay đổi
                                         // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
@@ -74,7 +62,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                     Container(
                                       padding: EdgeInsets.only(top: 10,bottom: 10),
                                       child: Text(
-                                        user.name,
+                                        user.payload.name,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 20,
@@ -82,7 +70,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                       ),
                                     ),
                                     Text(
-                                      user.type,
+                                      user.payload.type,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black45,
@@ -110,7 +98,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                                Text(user.favoriteCategories.length.toString())
+                                                Text(user.payload.favoriteCategories.length.toString())
                                               ],
                                             ),
                                           ),
@@ -127,7 +115,7 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                                Text(user.favoriteCategories.length.toString())
+                                                Text(user.payload.favoriteCategories.length.toString())
                                               ],
                                             ),
                                           )

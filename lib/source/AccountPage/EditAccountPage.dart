@@ -9,6 +9,8 @@ TextEditingController editPhoneController = new TextEditingController();
 
 class EditAccountPage extends StatefulWidget{
   static String tag = 'edit-account-page';
+  Future<UserMe> user;
+  EditAccountPage(this.user);
   @override
   _EditAccountPage createState() => new _EditAccountPage();
 }
@@ -22,8 +24,9 @@ class _EditAccountPage extends State<EditAccountPage>{
         backgroundColor: Colors.indigo,
       ),
         body: Center(
-         child: Consumer<User>(
-          builder: (context, user, child)=> Column(
+         child: FutureBuilder<UserMe>(
+           future: widget.user,
+             builder: (context, snap)=> Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -33,7 +36,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                 controller: editNameController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  hintText: user.name,
+                  hintText: snap.data.payload.name == null ? "Name" : snap.data.payload.name,
                 ),
               ),
             ),
@@ -43,7 +46,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                 controller: editEmailController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  hintText: user.email,
+                  hintText: snap.data.payload.email,
                 ),
               ),
             ),
@@ -53,7 +56,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                 controller: editPhoneController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  hintText: user.phone,
+                  hintText: snap.data.payload.phone,
                 ),
               )
             ),
@@ -63,17 +66,17 @@ class _EditAccountPage extends State<EditAccountPage>{
               height: 60,
               child: RaisedButton(
                 onPressed: () => {
-                  if (editNameController.text.isNotEmpty)
-                    user.editName(editNameController.text),
-                  if (editEmailController.text.isNotEmpty)
-                    user.editEmail(editEmailController.text),
-                  if (editPhoneController.text.isNotEmpty)
-                    user.editPhone(editPhoneController.text),
-                  editNameController.clear(),
-                  editEmailController.clear(),
-                  editPhoneController.clear(),
-                  Navigator.pop(context),
-                  print(user.name),
+                  // if (editNameController.text.isNotEmpty)
+                  //   user.editName(editNameController.text),
+                  // if (editEmailController.text.isNotEmpty)
+                  //   user.editEmail(editEmailController.text),
+                  // if (editPhoneController.text.isNotEmpty)
+                  //   user.editPhone(editPhoneController.text),
+                  // editNameController.clear(),
+                  // editEmailController.clear(),
+                  // editPhoneController.clear(),
+                  // Navigator.pop(context),
+                  // print(user.name),
                 },
                 child: Text('SAVE',style: TextStyle(color: Colors.white),),
                 color: Colors.indigo,
