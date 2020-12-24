@@ -195,7 +195,7 @@ class _LoginPage extends State<LoginPage> {
                             return AlertDialog(
                               title: new Text("Failed", style: TextStyle(
                                   color: Colors.indigo, fontSize: 18.0)),
-                              content: new Text("Email is not existed"),
+                              content: new Text("Email does not existed"),
                               actions: <Widget>[
                                 // usually buttons at the bottom of the dialog
                                 new FlatButton(

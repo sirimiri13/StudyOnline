@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 class DetailAccountPage extends StatefulWidget {
   static String tag = 'detail-account-page';
-
+  Future<UserMe> user;
+  DetailAccountPage(this.user);
   @override
   _DetailAccountPage createState() => new _DetailAccountPage();
 }
@@ -28,108 +29,119 @@ class _DetailAccountPage extends State<DetailAccountPage> {
           backgroundColor: Colors.indigo,
         ),
         body: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                GestureDetector(
-                    onTap: () {
-                      print('Tapped Avatar');
-                    },
-                    child: Consumer<UserMe>(
-                        builder: (context,user,child)=>Column(
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  width: MediaQuery.of(context).size.width/2,
-                                  height: MediaQuery.of(context).size.width/2,
-                                  decoration:BoxDecoration(
-                                      border: Border.all(color: Colors.indigo, width: 4),
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        image: NetworkImage(user.payload.avatar),
-                                        // read: lấy dữ liệu 1 lần
-                                        // watch: lấy và luôn lắng nghe sự thay đổi
-                                        // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
+          child: FutureBuilder<UserMe>(
+            future: widget.user,
+            builder: (context,snap){
+              if (snap.hasData){
+                return
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () {
+                            print('Tapped Avatar');
+                          },
+                          child: Column(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        width: MediaQuery.of(context).size.width/2,
+                                        height: MediaQuery.of(context).size.width/2,
+                                        decoration:BoxDecoration(
+                                            border: Border.all(color: Colors.indigo, width: 4),
+                                            shape: BoxShape.circle,
+                                            color: Colors.white,
+                                            image: DecorationImage(
+                                              fit: BoxFit.fitWidth,
+                                              image: NetworkImage(snap.data.payload.avatar),
+                                              // read: lấy dữ liệu 1 lần
+                                              // watch: lấy và luôn lắng nghe sự thay đổi
+                                              // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
 
-                                      )
-                                  )
-                              ),
-                              Column(
-                                  children : [
-                                    Container(
-                                      padding: EdgeInsets.only(top: 10,bottom: 10),
-                                      child: Text(
-                                        user.payload.name,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
+                                            )
+                                        )
                                     ),
-                                    Text(
-                                      user.payload.type,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.black45,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(top: 20, bottom: 20),
-                                      height: 110,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
+                                    Column(
+                                        children : [
                                           Container(
-
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'DOWNLOADED',
-                                                  style: TextStyle(
-                                                    color: Colors.indigo,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(user.payload.favoriteCategories.length.toString())
-                                              ],
+                                            padding: EdgeInsets.only(top: 10,bottom: 10),
+                                            child: Text(
+                                            snap.data.payload.name,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                          snap.data.payload.type,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black45,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 12,
                                             ),
                                           ),
                                           Container(
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                            padding: EdgeInsets.only(top: 20, bottom: 20),
+                                            height: 110,
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Text(
-                                                  'COURSES',
-                                                  style: TextStyle(
-                                                    color: Colors.indigo,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
+                                                Container(
+
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                        'DOWNLOADED',
+                                                        style: TextStyle(
+                                                          color: Colors.indigo,
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text(snap.data.payload.favoriteCategories.length.toString())
+                                                    ],
                                                   ),
                                                 ),
-                                                Text(user.payload.favoriteCategories.length.toString())
+                                                Container(
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                        'COURSES',
+                                                        style: TextStyle(
+                                                          color: Colors.indigo,
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text(snap.data.payload.favoriteCategories.length.toString())
+                                                    ],
+                                                  ),
+                                                )
                                               ],
                                             ),
-                                          )
-                                        ],
-                                      ),
+                                          ),
+                                        ]
                                     ),
                                   ]
-                              ),
-                            ]
-                        )
-                    )
-                )
-              ],
-            )
+                              )
+                          )
+
+                    ],
+                  );
+              }
+              else if (snap.hasError){
+                print(snap.error);
+              }
+               return CircularProgressIndicator();
+            },
+          )
         )
     );
   }

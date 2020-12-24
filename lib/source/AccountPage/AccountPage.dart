@@ -7,7 +7,7 @@ import 'DetailAccountPage.dart';
 import 'EditAccountPage.dart';
 import 'package:provider/provider.dart';
 
-
+Future<UserMe> futureUserMe;
 class AccountPage extends StatefulWidget {
   static String tag = 'account-page';
   @override
@@ -15,63 +15,19 @@ class AccountPage extends StatefulWidget {
 }
 
 
-
 class _AccountPage extends State<AccountPage> {
-  var futureUserMe = APIServer().fetchUserInfo();
+
+
+  @override initState(){
+    super.initState();
+    setState(() {
+      futureUserMe = APIServer().fetchUserInfo();
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    final profileRow = GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (_) =>
-                      ChangeNotifierProvider.value(
-                          child: DetailAccountPage())
-              )
-          );
-        },
-        child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                    bottom: BorderSide(
-                      color: Colors.indigo,
-                      //   color: AppColors.greyColor,
-                      width: 1,
-                    )
-                )
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    Icons.person,
-                    size: 30,
-                    color: Colors.indigo,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 20),
-                  child: Text(
-                    'Profile',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                )
-              ],
-            )
-        )
-    );
 
     final manageInfo = GestureDetector(
         onTap: () {
@@ -264,19 +220,37 @@ class _AccountPage extends State<AccountPage> {
                                     ),
 
                                     Container(
-                                      padding: EdgeInsets.all(20),
-                                      child: Text(
-                                        snap.data.payload.name.toString(),
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snap.data.payload.name.toString(),
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            snap.data.payload.email,
+                                            style: TextStyle(
+                                              fontSize: 15,fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          Text(
+                                            snap.data.payload.type,
+                                            style: TextStyle(
+                                              fontSize: 16
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ),
                                   ]
                               )
                           ),
-                          profileRow,
+                        //  profileRow,
                           manageInfo,
                           supportRow,
                           logoutRow,

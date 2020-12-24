@@ -75,13 +75,23 @@ class APIServer{
     }
 
   }
-  
+
+  Future updateUserInfo(String name, String avatar, String phone) async{
+    Map data = {
+      'name': name,
+      'avatar': avatar,
+      'phone': phone,
+    };
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    final response = await http.put(api_server + "/user/update-profile",headers: {"Authorization": "Bearer $token"},body:data );
+    return response;
+  }
   
  Future getNewCourse(int limit, int page) async{
    var response = await http.post(api_server + "/course/top_new",body: {'limit':limit,'page':page});
    return response;
  }
-
 
   
   Future<Instructor> getInstructor()  async{

@@ -73,7 +73,10 @@ List<Widget> _listPage = <Widget>[
           selectedLabelStyle: textTheme.caption,
           unselectedLabelStyle: textTheme.caption,
           onTap: (value) {
-            setState(() => _currentIndex = value);
+            setState(() {
+              _currentIndex = value;
+            });
+
           },
           items: [
             BottomNavigationBarItem(
