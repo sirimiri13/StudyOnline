@@ -1,6 +1,7 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/AccountPage/AccountPage.dart';
 import 'package:finalproject_1712061/source/BottomNavigation.dart';
+import 'package:finalproject_1712061/source/LoginPage/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Model/User.dart';
@@ -8,7 +9,8 @@ import 'package:http/http.dart' as http;
 
 
 TextEditingController editNameController = new TextEditingController();
-TextEditingController editPwController = new TextEditingController();
+TextEditingController oldPwController = new TextEditingController();
+TextEditingController newPwController = new TextEditingController();
 TextEditingController editPhoneController = new TextEditingController();
 
 class EditAccountPage extends StatefulWidget{
@@ -78,7 +80,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                                                 style: TextStyle(
                                                     color: Colors.indigo)),
                                             onPressed: () {
-                                              Navigator.of(context).popAndPushNamed(AccountPage.tag);
+                                              Navigator.of(context).pop();
                                             }),
                                       ],
                                     );
@@ -110,10 +112,11 @@ class _EditAccountPage extends State<EditAccountPage>{
                                               child: const Text('OK',
                                                   style: TextStyle(
                                                       color: Colors.indigo)),
-                                                onPressed: () {
-                                                print('tapp');
-                                                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                                                      builder: (context) => BottomNavigation(), maintainState: false));
+                                              onPressed: () {
+                                                editNameController.text = "";
+                                                editPhoneController.text = "";
+                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                                    builder: (context) => BottomNavigation(), maintainState: false));
                                               }),
                                         ],
                                       );
@@ -159,28 +162,33 @@ class _EditAccountPage extends State<EditAccountPage>{
                                 builder: (BuildContext context) {
                                   return new AlertDialog(
                                       titleTextStyle : TextStyle(color: Colors.indigo),
-                                     // contentPadding: const EdgeInsets.all(16.0),
+                                      // contentPadding: const EdgeInsets.all(16.0),
                                       content:Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           TextField(
-                                                controller: editPwController,
-                                                autofocus: true,
-                                                decoration: new InputDecoration(
-                                                    labelText: 'Old Password',
-                                                    hintText: 'Type old password...',
-                                                    labelStyle: TextStyle(color: Colors.indigo)
-                                                ),
-                                              ),
-                                        TextField(
-                                                controller: editPwController,
-                                                autofocus: true,
-                                                decoration: new InputDecoration(
-                                                    labelText: 'New Password',
-                                                    hintText: 'Type new password...',
-                                                    labelStyle: TextStyle(color: Colors.indigo)
-                                                ),
-                                              )
+                                            controller: oldPwController,
+                                            autofocus: true,
+                                            keyboardType: TextInputType.visiblePassword,
+                                            obscureText: true,
+                                            decoration: new InputDecoration(
+                                                labelText: 'Old Password',
+                                                hintText: 'Type old password...',
+                                                labelStyle: TextStyle(color: Colors.indigo)
+                                            ),
+                                          ),
+                                          TextField(
+                                            controller: newPwController,
+                                            autofocus: true,
+                                            keyboardType: TextInputType.visiblePassword,
+                                            obscureText: true, 
+                                            decoration: new InputDecoration(
+
+                                                labelText: 'New Password',
+                                                hintText: 'Type new password...',
+                                                labelStyle: TextStyle(color: Colors.indigo)
+                                            ),
+                                          )
                                         ],
                                       ),
                                       actions: <Widget>[
@@ -192,7 +200,75 @@ class _EditAccountPage extends State<EditAccountPage>{
                                         new FlatButton(
                                             child: const Text('DONE',style: TextStyle(color: Colors.indigo)),
                                             onPressed: () async {
-                                              var email = editPwController.text;
+                                              if (newPwController.text.isEmpty || oldPwController.text.isEmpty){
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: Text('Update Information'),
+                                                        content: Text('Please fill information'),
+                                                        actions: [
+                                                          new FlatButton(
+                                                              child: const Text('OK',
+                                                                  style: TextStyle(
+                                                                      color: Colors.indigo)),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop();
+                                                              }),
+                                                        ],
+                                                      );
+                                                    });
+                                              }
+                                              else {
+                                                http.Response response = await APIServer().changePw(user.payload.id, oldPwController.text, newPwController.text);
+                                                if (response.statusCode == 200){
+                                                  Navigator.pop(context);
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text('Change Password'),
+                                                          content: Text('Your password has been changed'),
+                                                          actions: [
+                                                            new FlatButton(
+                                                                child: const Text('OK',
+                                                                    style: TextStyle(
+                                                                        color: Colors.indigo)),
+                                                                onPressed: () {
+                                                                  oldPwController.text = "";
+                                                                  newPwController.text = "";
+                                                                  Navigator.of(context).pop();
+                                                                }),
+                                                          ],
+                                                        );
+                                                      }
+                                                  );
+                                                }
+                                                else {
+                                                  print(user.payload.id);
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text('Change Password'),
+                                                          content: Text(response.body),
+                                                          actions: [
+                                                            new FlatButton(
+                                                                child: const Text('Try again',
+                                                                    style: TextStyle(
+                                                                        color: Colors.indigo)),
+                                                                onPressed: () {
+                                                                  editNameController.text = "";
+                                                                  editPhoneController.text = "";
+                                                                  Navigator.of(context).pop();
+                                                                }),
+                                                          ],
+                                                        );
+                                                      }
+                                                  );
+                                                }
+                                              }
+
                                             }),
                                       ]
                                   );

@@ -87,7 +87,19 @@ class APIServer{
     final response = await http.put(api_server + "/user/update-profile",headers: {"Authorization": "Bearer $token"},body:data );
     return response;
   }
-  
+
+
+  Future changePw(String id, String oldPw, String newPw) async{
+    Map data = {
+      'id' :id,
+      'oldPass' : oldPw,
+      'newPass' : newPw
+    };
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    final response = await http.post(api_server + "/user/change-password", headers: {"Authorization": "Bearer $token"},body: data);
+    return response;
+  }
  Future getNewCourse(int limit, int page) async{
    var response = await http.post(api_server + "/course/top_new",body: {'limit':limit,'page':page});
    return response;
