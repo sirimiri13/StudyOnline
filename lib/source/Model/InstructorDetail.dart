@@ -1,12 +1,104 @@
- import 'package:flutter/material.dart';
-
 import 'dart:convert';
 
-import 'ListClip.dart';
+InstructorDetail instructorDetailFromJson(String str) => InstructorDetail.fromJson(json.decode(str));
 
-Course courseFromJson(String str) => Course.fromJson(json.decode(str));
+String instructorDetailToJson(InstructorDetail data) => json.encode(data.toJson());
 
-String courseToJson(Course data) => json.encode(data.toJson());
+class InstructorDetail {
+  InstructorDetail({
+    this.payload,
+  });
+
+  Payload payload;
+
+  factory InstructorDetail.fromJson(Map<String, dynamic> json) => InstructorDetail(
+    payload: Payload.fromJson(json["payload"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "payload": payload.toJson(),
+  };
+}
+
+class Payload {
+  Payload({
+    this.id,
+    this.userId,
+    this.name,
+    this.email,
+    this.avatar,
+    this.phone,
+    this.major,
+    this.intro,
+    this.skills,
+    this.createdAt,
+    this.updatedAt,
+    this.totalCourse,
+    this.averagePoint,
+    this.countRating,
+    this.ratedNumber,
+    this.soldNumber,
+    this.courses,
+  });
+
+  String id;
+  String userId;
+  String name;
+  String email;
+  String avatar;
+  String phone;
+  String major;
+  String intro;
+  List<String> skills;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int totalCourse;
+  double averagePoint;
+  int countRating;
+  int ratedNumber;
+  int soldNumber;
+  List<Course> courses;
+
+  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+    id: json["id"],
+    userId: json["userId"],
+    name: json["name"],
+    email: json["email"],
+    avatar: json["avatar"],
+    phone: json["phone"],
+    major: json["major"],
+    intro: json["intro"],
+    skills: List<String>.from(json["skills"].map((x) => x)),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    totalCourse: json["totalCourse"],
+    averagePoint: json["averagePoint"].toDouble(),
+    countRating: json["countRating"],
+    ratedNumber: json["ratedNumber"],
+    soldNumber: json["soldNumber"],
+    courses: List<Course>.from(json["courses"].map((x) => Course.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "userId": userId,
+    "name": name,
+    "email": email,
+    "avatar": avatar,
+    "phone": phone,
+    "major": major,
+    "intro": intro,
+    "skills": List<dynamic>.from(skills.map((x) => x)),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "totalCourse": totalCourse,
+    "averagePoint": averagePoint,
+    "countRating": countRating,
+    "ratedNumber": ratedNumber,
+    "soldNumber": soldNumber,
+    "courses": List<dynamic>.from(courses.map((x) => x.toJson())),
+  };
+}
 
 class Course {
   Course({
@@ -32,8 +124,7 @@ class Course {
     this.createdAt,
     this.updatedAt,
     this.instructorId,
-    this.categoryIds,
-    this.downloaded,
+    this.typeUploadVideoLesson,
   });
 
   String id;
@@ -58,12 +149,7 @@ class Course {
   DateTime createdAt;
   DateTime updatedAt;
   String instructorId;
-  List<String> categoryIds;
-  bool downloaded;
-
-  void addCourse(List<Course> listCourse, Course newCourse){
-    listCourse.add(newCourse);
-  }
+  int typeUploadVideoLesson;
 
   factory Course.fromJson(Map<String, dynamic> json) => Course(
     id: json["id"],
@@ -88,7 +174,7 @@ class Course {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     instructorId: json["instructorId"],
-    categoryIds: List<String>.from(json["categoryIds"].map((x) => x)),
+    typeUploadVideoLesson: json["typeUploadVideoLesson"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -114,9 +200,6 @@ class Course {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "instructorId": instructorId,
-    "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
-
+    "typeUploadVideoLesson": typeUploadVideoLesson,
   };
 }
-
-

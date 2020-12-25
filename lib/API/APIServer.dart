@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:finalproject_1712061/source/Model/Course.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
+import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
+import 'package:finalproject_1712061/source/Model/Courses.dart';
 import 'package:finalproject_1712061/source/Model/User.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Constant-server.dart';
@@ -20,9 +21,6 @@ class APIServer{
     if(response.statusCode == 200){
       final prefs = await SharedPreferences.getInstance();
       print('data : ${jsData["token"]}');
-      // await storage.write(key: "token",value: jsData["token"]);
-      // var takeToke = storage.read(key: "token");
-      // print(takeToke);
       save(jsData["token"]);
 
     }
@@ -100,22 +98,57 @@ class APIServer{
     final response = await http.post(api_server + "/user/change-password", headers: {"Authorization": "Bearer $token"},body: data);
     return response;
   }
- Future getNewCourse(int limit, int page) async{
-   var response = await http.post(api_server + "/course/top_new",body: {'limit':limit,'page':page});
-   return response;
- }
+
+
 
   
   Future<Instructor> getInstructor()  async{
     var response = await http.get(api_server + "/instructor");
-    return Instructor.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200){
+      return Instructor.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print('No data');
+    }
   }
 
 
   Future<InstructorDetail> getInstructorDetail(String id) async {
     var  response = await http.get(api_server + "/instructor/detail/${id}");
-    return InstructorDetail.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200){
+      return InstructorDetail.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print("error: ${response.body}");
+    }
   }
+
+
+  Future<Courses> getNewCourse(int limit, int page) async{
+    Map<String, String> body = {
+      'limit': limit.toString(),
+      'page': page.toString()
+    };
+    var response = await http.post(api_server +"/course/top-new",body: body);
+    print(response.body);
+    return Courses.fromJson(jsonDecode(response.body));
+
+  }
+
+  Future<Courses> getCourseRate(int limit, int page) async{
+    print("{'limit':$limit,'page':$page}");
+    Map<String, String> body = {
+      'limit': limit.toString(),
+      'page': page.toString()
+    };
+    var response = await http.post(api_server + "/course/top-rate",body: body);
+    print(response.body);
+    return Courses.fromJson(jsonDecode(response.body));
+    return null;
+  }
+
+
+
 
   read() async {
     final prefs = await SharedPreferences.getInstance();

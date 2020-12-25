@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/source/Model/Courses.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
+import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/source/Model/ListCourses.dart';
-import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:provider/provider.dart';
@@ -25,22 +29,33 @@ class BrowsePage extends StatefulWidget{
 
 class _BrowsePage extends State<BrowsePage>{
 
-  Future<Instructor> futureInstructor;
-  Future<InstructorDetail> futureInstructorDetail;
+  Future<Instructor> futureInstructor = APIServer().getInstructor();
+  // Future<InstructorDetail> futureInstructorDetail;
+  Future futureInstructorDetail;
+  Instructor instructor = Instructor();
+  InstructorDetail instructorDetail = InstructorDetail();
+  List<InstructorDetail> listInstructorDetail = [];
 
-
-
+  fetchData() async{
+    instructor = await APIServer().getInstructor();
+    print(instructor.payload.length);
+    for (var i =0;i<instructor.payload.length;i++) {
+      instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
+      print("get: ${instructorDetail.payload.name}");
+      listInstructorDetail.add(instructorDetail);
+    }
+   print(listInstructorDetail);
+ //   print("---${instructor.payload.length}");
+  }
   @override
   void initState(){
     super.initState();
-    futureInstructor = APIServer().getInstructor();
+    fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ListCourses>(
-        builder: (context,listCourses,child) =>
-            Scaffold(
+    return Scaffold(
                 body: Container(
                     padding: EdgeInsets.only( top: 10.0),
                     child: ListView.builder  (
@@ -64,14 +79,10 @@ class _BrowsePage extends State<BrowsePage>{
                                   unpressedImage: Image.asset(
                                     "Assets/images/code8.jpg",),
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (_) =>
-                                            ChangeNotifierProvider.value(
-                                                value: Provider.of<ListCourses>(
-                                                    context, listen: false),
-                                                child: ListCoursePage(
-                                                    dataCourse: listCourses.listCourse))
-                                    )
+                                    Future<Courses> listCourseNew = APIServer().getNewCourse(10, 1);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourseNew,)),
                                     );
                                   },
                                 )
@@ -81,7 +92,6 @@ class _BrowsePage extends State<BrowsePage>{
                             return Container(
                               margin: EdgeInsets.all(5.0),
                               child: ImageButton(
-
                                 children: <Widget>[
                                   Text('FOR YOU', style: TextStyle(
                                       color: Colors.white, fontSize: 30.0)),
@@ -90,21 +100,16 @@ class _BrowsePage extends State<BrowsePage>{
                                 height: 200,
                                 paddingTop: 5,
                                 pressedImage: Image.asset(
-                                  "Assets/images/code8.jpg",
+                                  "Assets/images/code3.jpg",
                                 ),
                                 unpressedImage: Image.asset(
                                   "Assets/images/code3.jpg",),
                                 onTap: () {
-
-                                  // Navigator.push(context, MaterialPageRoute(
-                                  //     builder: (_) =>
-                                  //         ChangeNotifierProvider.value(
-                                  //             value: Provider.of<ListCourses>(
-                                  //                 context, listen: false),
-                                  //             child: ListCoursePage(
-                                  //                 dataCourse: listCourses.listCourse))
-                                  // )
-                                  // );
+                                  Future<Courses> listCourseNew = APIServer().getCourseRate(10, 1);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourseNew,)),
+                                  );
                                 },
                               ),
                             );
@@ -290,7 +295,7 @@ class _BrowsePage extends State<BrowsePage>{
                                     return
                                             ListView.builder(
                                                 scrollDirection: Axis.horizontal,
-                                                itemCount: snapshot.data.payload.length,
+                                                itemCount: 11,
                                                 itemBuilder: (context, indexAuthor) {
                                                   return Container(
                                                     padding: EdgeInsets.only(right: 15.0),
@@ -309,11 +314,10 @@ class _BrowsePage extends State<BrowsePage>{
                                                               // Navigator.push(
                                                               //   context,
                                                               //   MaterialPageRoute(builder: (context) => InformationAuthor(dataInstructor: snapshot.data,)),
-                                                              // );
+                                                              // )
                                                             },
                                                             child: Center(
-
-                                                                      child: Text(snapshot.data.payload[indexAuthor].userId, style: TextStyle(fontSize: 11.0)),
+                                                                     child: Text(snapshot.data.payload[index].id, style: TextStyle(fontSize: 11.0)),
                                                             ),
                                                           ),
                                                         )
@@ -325,9 +329,9 @@ class _BrowsePage extends State<BrowsePage>{
                                 //    );
                                   }
                                   else if (snapshot.hasError) {
-                                    return Text("${snapshot.error}");
+                                    return Text("${snapshot.data}");
                                   }
-                            return CircularProgressIndicator();
+                                  return CircularProgressIndicator();
                                 },
                               )
 
@@ -335,8 +339,7 @@ class _BrowsePage extends State<BrowsePage>{
                           }
                         })
                 )
-            )
-    );
+            );
   }
 
 

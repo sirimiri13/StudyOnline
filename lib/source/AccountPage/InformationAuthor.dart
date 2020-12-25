@@ -1,14 +1,9 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
-import 'package:finalproject_1712061/source/Model/ListCourses.dart';
-import 'package:finalproject_1712061/source/Model/User.dart';
+import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../CoursePage/DetailCoursePage.dart';
-import '../CoursePage/ListCoursePage.dart';
 import '../Model/Instructor.dart';
-import '../../main.dart';
-import '../Model/Course.dart';
+
 
 
 InstructorDetail instructorDetail = InstructorDetail();
@@ -26,15 +21,15 @@ class InformationAuthor extends StatefulWidget{
 
 class _InformationAuthor extends State<InformationAuthor>{
 
-  getInstructorDetail() async{
-    var idInstructor =  widget.dataInstructor.payload[0].id;
-    instructorDetail = await APIServer().getInstructorDetail(idInstructor);
-  }
+  // getInstructorDetail() async{
+  //   var idInstructor =  widget.dataInstructor.payload[0].id;
+  //   instructorDetail = await APIServer().getInstructorDetail(idInstructor);
+  // }
 
   @override initState()  {
     super.initState();
-    getInstructorDetail();
-    print(instructorDetail.payloadDetail);
+   // getInstructorDetail();
+   // print(instructorDetail.payloadDetail);
   }
   @override
   Widget build(BuildContext context) {
@@ -90,8 +85,8 @@ class _InformationAuthor extends State<InformationAuthor>{
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        Text("Teacher's Information",style: TextStyle(fontWeight: FontWeight.bold),),
-                       Text('- Email: '+ instructorDetail.payloadDetail.email),
-                       Text('- Phone: '+instructorDetail.payloadDetail.phone)
+                       Text('- Email: '+ instructorDetail.payload.email),
+                       Text('- Phone: '+instructorDetail.payload.phone)
                      ],
                      )
                  );
@@ -119,7 +114,7 @@ class _InformationAuthor extends State<InformationAuthor>{
                            child: Row(
                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                children: <Widget>[
-                                 Image.network(instructorDetail.payloadDetail.avatar,width: 125,),
+                                 Image.network(instructorDetail.payload.avatar,width: 125,),
                                  Expanded(
                                      child: Container(
                                          padding: EdgeInsets.all(5),
@@ -127,9 +122,9 @@ class _InformationAuthor extends State<InformationAuthor>{
                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: <Widget>[
-                                             Text(instructorDetail.payloadDetail.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                                             Text('Total hours: '+instructorDetail.payloadDetail.countRating.toString()),
-                                             Text('Total clips: '+instructorDetail.payloadDetail.countRating.toString()),
+                                             Text(instructorDetail.payload.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                                             Text('Total hours: '+instructorDetail.payload.countRating.toString()),
+                                             Text('Total clips: '+instructorDetail.payload.countRating.toString()),
                                              // RatingBox(),
                                            ],
                                          )

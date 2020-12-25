@@ -181,7 +181,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                                             controller: newPwController,
                                             autofocus: true,
                                             keyboardType: TextInputType.visiblePassword,
-                                            obscureText: true, 
+                                            obscureText: true,
                                             decoration: new InputDecoration(
 
                                                 labelText: 'New Password',
@@ -195,6 +195,8 @@ class _EditAccountPage extends State<EditAccountPage>{
                                         new FlatButton(
                                             child: const Text('CANCEL',style: TextStyle(color: Colors.indigo)),
                                             onPressed: () {
+                                              editNameController.text = "";
+                                              editPhoneController.text = "";
                                               Navigator.pop(context);
                                             }),
                                         new FlatButton(

@@ -24,25 +24,6 @@ class _LoginPage extends State<LoginPage> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController emailForgetPassController = new TextEditingController();
 
-
-
-  // read() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final key = 'token';
-  //   final value = prefs.get(key ) ?? 0;
-  //   if(value != '0'){
-  //     Navigator.of(context).push(
-  //         new MaterialPageRoute(
-  //           builder: (BuildContext context) => new BottomNavigation(),
-  //         )
-  //     );
-  //   }
-  // }
-
-  // @override
-  // initState(){
-  //   read();
-  // }
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -92,7 +73,8 @@ class _LoginPage extends State<LoginPage> {
           onPressed: () async{
             var email = emailController.text;
             var pw = passwordController.text;
-            http.Response response = await APIServer().login(email, pw);
+          //  http.Response response = await APIServer().login(email, pw);
+            http.Response response = await APIServer().login("barobaro2406@gmail.com", "Qwerty1234");
               if (response.statusCode == 200) {
                 Navigator.of(context).pushNamed(BottomNavigation.tag);
               }
