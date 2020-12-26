@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:finalproject_1712061/source/Model/Category.dart';
 import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
@@ -140,9 +141,9 @@ class APIServer{
       'limit': limit.toString(),
       'page': page.toString()
     };
-    print(body);
+    //print(body);
     var response = await http.post(api_server +"/course/top-sell",body: {'limit':limit.toString(),'page':page.toString()});
-    print(response.body);
+    //print(response.body);
     return Courses.fromJson(jsonDecode(response.body));
     return null;
   }
@@ -164,6 +165,15 @@ class APIServer{
 
 
 
+  Future<Category> getCategory()async{
+    final response = await http.get(api_server+"/category/all");
+    print("category: ${response.body}");
+
+    if (response.statusCode == 200) {
+      return Category.fromJson(jsonDecode(response.body));
+    }
+   return null;
+  }
   read() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';

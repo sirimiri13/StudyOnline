@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/source/Model/Category.dart';
 import 'package:finalproject_1712061/source/Model/Courses.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
@@ -15,7 +16,6 @@ import '../CoursePage/ListCoursePage.dart';
 
 
 
-//final itemCourseSuggest = getCourseSuggest();
 final _listSkill = ['C++','Swift','Machine Learning'];
 class BrowsePage extends StatefulWidget{
   static String tag = 'browse-page';
@@ -25,7 +25,7 @@ class BrowsePage extends StatefulWidget{
 
 
 class _BrowsePage extends State<BrowsePage>{
-
+  Future<Category> category;
   Future<Instructor> futureInstructor = APIServer().getInstructor();
   Future futureInstructorDetail;
   Instructor instructor = Instructor();
@@ -33,12 +33,13 @@ class _BrowsePage extends State<BrowsePage>{
   List<InstructorDetail> listInstructorDetail = [];
 
   fetchData() async{
-    instructor = await APIServer().getInstructor();
-    print(instructor.payload.length);
-    for (var i =0;i<instructor.payload.length;i++) {
-      instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
-    }
-   print(listInstructorDetail);
+   //  instructor = await APIServer().getInstructor();
+   // // print(instructor.payload.length);
+   //  for (var i =0;i<instructor.payload.length;i++) {
+   //    instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
+   //  }
+  // print(listInstructorDetail);
+    category = APIServer().getCategory();
  //   print("---${instructor.payload.length}");
   }
   @override
@@ -120,81 +121,92 @@ class _BrowsePage extends State<BrowsePage>{
                           }
                           else if (index == 3) {
                             return Container(
-                              child: CarouselSlider(
-                                  options: CarouselOptions(
-                                    aspectRatio: 2.0,
-                                    enlargeCenterPage: true,
-                                    scrollDirection: Axis.horizontal,
-                                  ),
-                                  items: _listSkill.map((item) =>
-                                      GestureDetector(
-                                          onTap: () {
-                                            // print(index);
-                                            // List<Course> data;
-                                            // if (item == 'C++') {
-                                            //   data = listCourses.listCourseC;
-                                            // }
-                                            // else {
-                                            //   if (item == 'Swift') {
-                                            //     data = listCourses.listCourseSwift;
-                                            //   }
-                                            //   else {
-                                            //     data = listCourses.listCourseML;
-                                            //   }
-                                            // }
-                                            // Navigator.push(context, MaterialPageRoute(
-                                            //     builder: (_) =>
-                                            //         ChangeNotifierProvider.value(
-                                            //             value: Provider.of<ListCourses>(
-                                            //                 context, listen: false),
-                                            //             child: ListCoursePage(
-                                            //                 dataCourse: data))
-                                            // )
-                                            // );
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.all(2.0),
-                                            child: ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                                child: Stack(
-                                                  children: <Widget>[
-                                                    Image.asset("Assets/images/code4.jpg",
-                                                        fit: BoxFit.cover, width: 350.0),
-                                                    //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                                                    Positioned(
-                                                      bottom: 0.0,
-                                                      left: 0.0,
-                                                      right: 0.0,
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                            colors: [
-                                                              Color.fromARGB(200, 0, 0, 0),
-                                                              Color.fromARGB(0, 0, 0, 0)
-                                                            ],
-                                                            begin: Alignment.bottomCenter,
-                                                            end: Alignment.topCenter,
+                              child: FutureBuilder<Category>(
+                                future: category,
+                                builder: (context,snap){
+                                  if (snap.hasData){
+                                    return CarouselSlider(
+                                        options: CarouselOptions(
+                                          aspectRatio: 2.0,
+                                          enlargeCenterPage: true,
+                                          scrollDirection: Axis.horizontal,
+                                        ),
+                                        items: snap.data.payload.map((item) =>
+                                            GestureDetector(
+                                                onTap: () {
+                                                  // print(index);
+                                                  // List<Course> data;
+                                                  // if (item == 'C++') {
+                                                  //   data = listCourses.listCourseC;
+                                                  // }
+                                                  // else {
+                                                  //   if (item == 'Swift') {
+                                                  //     data = listCourses.listCourseSwift;
+                                                  //   }
+                                                  //   else {
+                                                  //     data = listCourses.listCourseML;
+                                                  //   }
+                                                  // }
+                                                  // Navigator.push(context, MaterialPageRoute(
+                                                  //     builder: (_) =>
+                                                  //         ChangeNotifierProvider.value(
+                                                  //             value: Provider.of<ListCourses>(
+                                                  //                 context, listen: false),
+                                                  //             child: ListCoursePage(
+                                                  //                 dataCourse: data))
+                                                  // )
+                                                  // );
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.all(2.0),
+                                                  child: ClipRRect(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(5.0)),
+                                                      child: Stack(
+                                                        children: <Widget>[
+                                                          Image.asset("Assets/images/code4.jpg",
+                                                              fit: BoxFit.cover, width: 350.0),
+                                                          //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                                                          Positioned(
+                                                            bottom: 0.0,
+                                                            left: 0.0,
+                                                            right: 0.0,
+                                                            child: Container(
+                                                              decoration: BoxDecoration(
+                                                                gradient: LinearGradient(
+                                                                  colors: [
+                                                                    Color.fromARGB(200, 0, 0, 0),
+                                                                    Color.fromARGB(0, 0, 0, 0)
+                                                                  ],
+                                                                  begin: Alignment.bottomCenter,
+                                                                  end: Alignment.topCenter,
+                                                                ),
+                                                              ),
+                                                              padding: EdgeInsets.symmetric(
+                                                                  vertical: 10.0,
+                                                                  horizontal: 20.0),
+                                                              child: Text(item.name,
+                                                                style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 20.0,
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        padding: EdgeInsets.symmetric(
-                                                            vertical: 10.0,
-                                                            horizontal: 20.0),
-                                                        child: Text(item,
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 20.0,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                        ],
+                                                      )
+                                                  ),
                                                 )
-                                            ),
-                                          )
-                                      )).toList()
-                              ),
+                                            )).toList()
+                                    );
+                                  }
+                                  else if (snap.hasError){
+                                    print(snap.error);
+                                  }
+                                  return CircularProgressIndicator();
+                                }
+                              )
                             );
                           }
                           else if (index == 4) {
