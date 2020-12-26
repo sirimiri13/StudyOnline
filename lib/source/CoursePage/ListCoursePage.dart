@@ -1,12 +1,8 @@
 import 'dart:convert';
 
+import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../Model/Course.dart';
-import 'DetailCoursePage.dart';
-import '../Model/ListCourses.dart';
-import '../../API/APIServer.dart';
-import 'package:http/http.dart' as http;
 import '../Model/Courses.dart';
 
 class ListCoursePage extends StatefulWidget{
@@ -16,6 +12,7 @@ class ListCoursePage extends StatefulWidget{
   @override
   _ListCoursePage createState() => new _ListCoursePage();
 }
+
 
 
 class _ListCoursePage extends State<ListCoursePage>{
@@ -41,13 +38,15 @@ class _ListCoursePage extends State<ListCoursePage>{
                       padding: EdgeInsets.all(2),
                       height: 100,
                       child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             // Navigator.push(context, MaterialPageRoute(
                             //     builder: (_) =>
                             //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
                             //             child:(DetailCoursePage(dataCourse: widget.dataCourse[index])))
                             // )
                             // );
+                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data.payload[index].id);
+                            print(courseInfo);
                           },
                           child: Card(
                             child: Row(

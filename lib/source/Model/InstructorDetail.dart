@@ -52,11 +52,11 @@ class Payload {
   List<String> skills;
   DateTime createdAt;
   DateTime updatedAt;
-  int totalCourse;
+  double totalCourse;
   double averagePoint;
-  int countRating;
-  int ratedNumber;
-  int soldNumber;
+  double countRating;
+  double ratedNumber;
+  double soldNumber;
   List<Course> courses;
 
   factory Payload.fromJson(Map<String, dynamic> json) => Payload(
@@ -71,11 +71,11 @@ class Payload {
     skills: List<String>.from(json["skills"].map((x) => x)),
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    totalCourse: json["totalCourse"],
+    totalCourse: json["totalCourse"].toDouble(),
     averagePoint: json["averagePoint"].toDouble(),
-    countRating: json["countRating"],
-    ratedNumber: json["ratedNumber"],
-    soldNumber: json["soldNumber"],
+    countRating: json["countRating"].toDouble(),
+    ratedNumber: json["ratedNumber"].toDouble(),
+    soldNumber: json["soldNumber"].toDouble(),
     courses: List<Course>.from(json["courses"].map((x) => Course.fromJson(x))),
   );
 
@@ -130,17 +130,17 @@ class Course {
   String id;
   String title;
   String subtitle;
-  int price;
+  double price;
   String description;
   List<String> requirement;
   List<String> learnWhat;
-  int soldNumber;
-  int ratedNumber;
-  int videoNumber;
-  int totalHours;
-  int formalityPoint;
-  int contentPoint;
-  int presentationPoint;
+  double soldNumber;
+  double ratedNumber;
+  double videoNumber;
+  double totalHours;
+  double formalityPoint;
+  double contentPoint;
+  double presentationPoint;
   String imageUrl;
   String promoVidUrl;
   String status;
@@ -149,23 +149,23 @@ class Course {
   DateTime createdAt;
   DateTime updatedAt;
   String instructorId;
-  int typeUploadVideoLesson;
+  double typeUploadVideoLesson;
 
   factory Course.fromJson(Map<String, dynamic> json) => Course(
     id: json["id"],
     title: json["title"],
     subtitle: json["subtitle"],
-    price: json["price"],
+    price: json["price"].toDouble(),
     description: json["description"],
     requirement: List<String>.from(json["requirement"].map((x) => x)),
     learnWhat: List<String>.from(json["learnWhat"].map((x) => x)),
-    soldNumber: json["soldNumber"],
-    ratedNumber: json["ratedNumber"],
-    videoNumber: json["videoNumber"],
-    totalHours: json["totalHours"],
-    formalityPoint: json["formalityPoint"],
-    contentPoint: json["contentPoint"],
-    presentationPoint: json["presentationPoint"],
+    soldNumber: json["soldNumber"].toDouble(),
+    ratedNumber: json["ratedNumber"].toDouble(),
+    videoNumber: json["videoNumber"].toDouble(),
+    totalHours: json["totalHours"].toDouble(),
+    formalityPoint: json["formalityPoint"].toDouble(),
+    contentPoint: json["contentPoint"].toDouble(),
+    presentationPoint: json["presentationPoint"].toDouble(),
     imageUrl: json["imageUrl"],
     promoVidUrl: json["promoVidUrl"],
     status: json["status"],
@@ -174,7 +174,7 @@ class Course {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     instructorId: json["instructorId"],
-    typeUploadVideoLesson: json["typeUploadVideoLesson"],
+    typeUploadVideoLesson: json["typeUploadVideoLesson"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {

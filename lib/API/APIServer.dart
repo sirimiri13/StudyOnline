@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:finalproject_1712061/source/Model/Course.dart';
+import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/source/Model/Courses.dart';
@@ -135,18 +134,33 @@ class APIServer{
 
   }
 
+
   Future<Courses> getCourseRate(int limit, int page) async{
-    print("{'limit':$limit,'page':$page}");
     Map<String, String> body = {
       'limit': limit.toString(),
       'page': page.toString()
     };
-    var response = await http.post(api_server + "/course/top-rate",body: body);
+    print(body);
+    var response = await http.post(api_server +"/course/top-sell",body: {'limit':limit.toString(),'page':page.toString()});
     print(response.body);
     return Courses.fromJson(jsonDecode(response.body));
     return null;
   }
 
+
+  Future<CourseInfo> getCourseInfo(String id) async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    final response = await http.get(api_server + "/course/detail-with-lesson/${id}", headers: {"Authorization": "Bearer $token"});
+    if (response.statusCode == 200){
+      return CourseInfo.fromJson(jsonDecode(response.body));
+    }
+
+    else {
+      // print(response.body);
+      return null;
+    }
+  }
 
 
 

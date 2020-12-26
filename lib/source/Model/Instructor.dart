@@ -44,7 +44,7 @@ class Payload {
   String major;
   String intro;
   List<String> skills;
-  int cumulativeTuition;
+  double cumulativeTuition;
   bool isDeleted;
   DateTime createdAt;
   DateTime updatedAt;
@@ -55,7 +55,7 @@ class Payload {
     major: json["major"],
     intro: json["intro"],
     skills: List<String>.from(json["skills"].map((x) => x)),
-    cumulativeTuition: json["cumulativeTuition"],
+    cumulativeTuition: json["cumulativeTuition"].toDouble(),
     isDeleted: json["isDeleted"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),

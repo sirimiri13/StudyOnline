@@ -4,22 +4,19 @@ import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/Model/Courses.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
-import 'package:finalproject_1712061/source/Model/ListCourses.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'package:provider/provider.dart';
-import '../Model/Course.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import '../CoursePage/ListCoursePage.dart';
-import '../AccountPage/InformationAuthor.dart';
+
 
 
 
 
 //final itemCourseSuggest = getCourseSuggest();
 final _listSkill = ['C++','Swift','Machine Learning'];
-final _listTopicPic = ['Assets/images/code7.jpg','Assets/images/code5.jpg''Assets/images/code4.jpg'];
 class BrowsePage extends StatefulWidget{
   static String tag = 'browse-page';
   @override _BrowsePage createState() => new _BrowsePage();
@@ -30,7 +27,6 @@ class BrowsePage extends StatefulWidget{
 class _BrowsePage extends State<BrowsePage>{
 
   Future<Instructor> futureInstructor = APIServer().getInstructor();
-  // Future<InstructorDetail> futureInstructorDetail;
   Future futureInstructorDetail;
   Instructor instructor = Instructor();
   InstructorDetail instructorDetail = InstructorDetail();
@@ -41,8 +37,6 @@ class _BrowsePage extends State<BrowsePage>{
     print(instructor.payload.length);
     for (var i =0;i<instructor.payload.length;i++) {
       instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
-      print("get: ${instructorDetail.payload.name}");
-      listInstructorDetail.add(instructorDetail);
     }
    print(listInstructorDetail);
  //   print("---${instructor.payload.length}");
@@ -105,7 +99,7 @@ class _BrowsePage extends State<BrowsePage>{
                                 unpressedImage: Image.asset(
                                   "Assets/images/code3.jpg",),
                                 onTap: () {
-                                  Future<Courses> listCourseNew = APIServer().getCourseRate(10, 1);
+                                  Future<Courses> listCourseNew = APIServer().getNewCourse(5, 1);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourseNew,)),
@@ -317,6 +311,7 @@ class _BrowsePage extends State<BrowsePage>{
                                                               // )
                                                             },
                                                             child: Center(
+
                                                                      child: Text(snapshot.data.payload[index].id, style: TextStyle(fontSize: 11.0)),
                                                             ),
                                                           ),

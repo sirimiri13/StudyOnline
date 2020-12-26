@@ -86,12 +86,12 @@ class _SearchPage extends State<SearchPage> {
                             print(items.length);
                             return GestureDetector (
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (_) =>
-                                        ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                            child: DetailCoursePage(dataCourse: listCourses[index]))
-                                )
-                                );
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (_) =>
+                                //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                                //             child: DetailCoursePage(dataCourse: listCourses[index]))
+                                // )
+                                // );
                               },
                               onLongPress:(){
                               },

@@ -37,15 +37,15 @@ class _DownloadPage extends State<DownloadPage> {
                     itemCount: listCourses.listCourseDownloaded.length,
                     itemBuilder: (context,index){
                       return GestureDetector (
-                        onTap: () {
-                          print(index);
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (_) =>
-                                  ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                      child: DetailCoursePage(dataCourse: listCourses.listCourseDownloaded[index]))
-                          )
-                          );
-                        },
+                        // onTap: () {
+                        //   print(index);
+                        //   Navigator.push(context, MaterialPageRoute(
+                        //       builder: (_) =>
+                        //           ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
+                        //               child: DetailCoursePage(dataCourse: listCourses.listCourseDownloaded[index]))
+                        //   )
+                        //   );
+                        // },
                         onLongPress:(){
                         },
                         child: Container(
