@@ -5,6 +5,7 @@ import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/source/Model/Courses.dart';
 import 'package:finalproject_1712061/source/Model/User.dart';
+import 'package:finalproject_1712061/source/Model/UserCourse.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Constant-server.dart';
@@ -135,17 +136,24 @@ class APIServer{
 
   }
 
+  Future<UserCourse> getUserCourse() async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.get(api_server +"/user/get-process-courses",headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    return UserCourse.fromJson(jsonDecode(response.body));
+  }
 
   Future<Courses> getCourseRate(int limit, int page) async{
     Map<String, String> body = {
       'limit': limit.toString(),
       'page': page.toString()
     };
-    //print(body);
+
     var response = await http.post(api_server +"/course/top-sell",body: {'limit':limit.toString(),'page':page.toString()});
-    //print(response.body);
+
     return Courses.fromJson(jsonDecode(response.body));
-    return null;
+
   }
 
 
@@ -158,7 +166,6 @@ class APIServer{
     }
 
     else {
-      // print(response.body);
       return null;
     }
   }
@@ -167,8 +174,6 @@ class APIServer{
 
   Future<Category> getCategory()async{
     final response = await http.get(api_server+"/category/all");
-    print("category: ${response.body}");
-
     if (response.statusCode == 200) {
       return Category.fromJson(jsonDecode(response.body));
     }

@@ -33,13 +33,13 @@ class _BrowsePage extends State<BrowsePage>{
   List<InstructorDetail> listInstructorDetail = [];
 
   fetchData() async{
-   //  instructor = await APIServer().getInstructor();
-   // // print(instructor.payload.length);
-   //  for (var i =0;i<instructor.payload.length;i++) {
-   //    instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
-   //  }
-  // print(listInstructorDetail);
+
     category = APIServer().getCategory();
+    instructor = await APIServer().getInstructor();
+    for (var i =0;i<instructor.payload.length;i++) {
+      instructorDetail = await APIServer().getInstructorDetail("${instructor.payload[i].id}");
+    }
+    print(listInstructorDetail);
  //   print("---${instructor.payload.length}");
   }
   @override
@@ -100,10 +100,10 @@ class _BrowsePage extends State<BrowsePage>{
                                 unpressedImage: Image.asset(
                                   "Assets/images/code3.jpg",),
                                 onTap: () {
-                                  Future<Courses> listCourseNew = APIServer().getNewCourse(5, 1);
+                                  Future<Courses> listCourse = APIServer().getCourseRate(10, 1);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourseNew,)),
+                                    MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourse,)),
                                   );
                                 },
                               ),
@@ -301,7 +301,7 @@ class _BrowsePage extends State<BrowsePage>{
                                     return
                                             ListView.builder(
                                                 scrollDirection: Axis.horizontal,
-                                                itemCount: 11,
+                                                itemCount: snapshot.data.payload.length,
                                                 itemBuilder: (context, indexAuthor) {
                                                   return Container(
                                                     padding: EdgeInsets.only(right: 15.0),
@@ -323,8 +323,9 @@ class _BrowsePage extends State<BrowsePage>{
                                                               // )
                                                             },
                                                             child: Center(
-
-                                                                     child: Text(snapshot.data.payload[index].id, style: TextStyle(fontSize: 11.0)),
+                                                                     child: Text(
+                                                                        "",
+                                                                         style: TextStyle(fontSize: 11.0)),
                                                             ),
                                                           ),
                                                         )
