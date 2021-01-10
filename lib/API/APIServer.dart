@@ -113,6 +113,12 @@ class APIServer{
     }
   }
 
+  Future<List<Instructor>> fetchInstructors()  async {
+    var response = await http.get(api_server + "/instructor");
+    print("fetchInstructor : " + response.body);
+    List<Instructor> instructors = (json.decode(response.body)['payload'] as List).map((data) => Instructor.fromJson(data)).toList();
+    return instructors;
+  }
 
   Future<InstructorDetail> getInstructorDetail(String id) async {
     var  response = await http.get(api_server + "/instructor/detail/${id}");
