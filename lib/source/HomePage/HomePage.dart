@@ -224,6 +224,7 @@ class _HomePage extends State<HomePage> {
                                                       children: <Widget>[
                                                         Text(snapshot.data[indexUserCourse].courseTitle, style: TextStyle(fontWeight: FontWeight.bold)),
                                                         Text('Author: ' + snapshot.data[indexUserCourse].instructorName),
+                                                        Text('Videos: '+ snapshot.data[indexUserCourse].total.toInt().toString()),
                                                         //  RatingBox(),
                                                       ],
                                                     )

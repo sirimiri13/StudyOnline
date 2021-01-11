@@ -23,7 +23,6 @@ class APIServer{
       final prefs = await SharedPreferences.getInstance();
       print('data : ${jsData["token"]}');
       save(jsData["token"]);
-
     }
     return response;
   }
@@ -104,7 +103,7 @@ class APIServer{
 
   Future<List<Instructor>> fetchInstructors()  async {
     var response = await http.get(api_server + "/instructor");
-    print("fetchInstructor : " + response.body);
+  //  print("fetchInstructor : " + response.body);
     List<Instructor> instructors = (json.decode(response.body)['payload'] as List).map((data) => Instructor.fromJson(data)).toList();
     return instructors;
   }
@@ -131,14 +130,14 @@ class APIServer{
   }
   Future<List<Courses>> fetchTopRateCourses(int limit, int page) async {
     var response = await http.post(api_server + "/course/top-rate", body: {'limit':limit.toString(),'page':page.toString()});
-    print("fetchTopRateCourses : " + response.body);
+   // print("fetchTopRateCourses : " + response.body);
     List<Courses> courses = (json.decode(response.body)['payload'] as List).map((data) => Courses.fromJson(data)).toList();
     return courses;
   }
 
   Future<List<Courses>> fetchTopSellCourses(int limit, int page) async {
     var response = await http.post(api_server + "/course/top-sell", body: {'limit':limit.toString(),'page':page.toString()});
-    print("fetchTopRateCourses : " + response.body);
+   // print("fetchTopRateCourses : " + response.body);
     List<Courses> courses = (json.decode(response.body)['payload'] as List).map((data) => Courses.fromJson(data)).toList();
     return courses;
   }
@@ -147,21 +146,31 @@ class APIServer{
     final prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token');
     var response = await http.get(api_server +"/user/get-process-courses",headers: {"Authorization": "Bearer $token"});
-    print("fetch User Course: " + response.body);
+  //  print("fetch User Course: " + response.body);
     List<UserCourse> courses = (json.decode(response.body)['payload'] as List).map((data) => UserCourse.fromJson(data)).toList();
     return courses;
 
   }
 
-
-  Future<CourseInfo> getCourseInfo(String id) async{
+  Future getUserCourse(String id) async{
     final prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token');
-    final response = await http.get(api_server + "/course/detail-with-lesson/${id}", headers: {"Authorization": "Bearer $token"});
-    if (response.statusCode == 200){
-      return CourseInfo.fromJson(jsonDecode(response.body));
-    }
+    var response = await http.get(api_server + "/course/process-course/${id}",headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    return response;
+  }
 
+  Future<CourseInfo> getCourseInfo(String id,String userId) async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    print(token);
+    print(id);
+    final response = await http.get(api_server + "/course/get-course-detail/${id}/${userId}");
+    print(response.body);
+    if (response.statusCode == 200){
+      CourseInfo course = CourseInfo.fromJson(json.decode(response.body)['payload']);
+      return course;
+    }
     else {
       return null;
     }

@@ -17,7 +17,6 @@ class DetailCoursePage extends StatefulWidget{
 
 //Course _dataCourse;
 class _DetailCoursePage extends State<DetailCoursePage>{
-
   @override
   Widget build(BuildContext context){
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
 import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
 import 'package:flutter/material.dart';
 import '../Model/Courses.dart';
@@ -39,14 +40,20 @@ class _ListCoursePage extends State<ListCoursePage>{
                       height: 100,
                       child: GestureDetector(
                           onTap: () async {
+
                             // Navigator.push(context, MaterialPageRoute(
                             //     builder: (_) =>
                             //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
                             //             child:(DetailCoursePage(dataCourse: widget.dataCourse[index])))
                             // )
                             // );
-                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id);
-                            print(courseInfo);
+                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id,null);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
+                            );
+                            //print("Course: " + courseInfo.message);
+                           // print(courseInfo);
                           },
                           child: Card(
                             child: Row(

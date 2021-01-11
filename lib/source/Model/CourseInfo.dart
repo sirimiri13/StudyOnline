@@ -1,38 +1,18 @@
 import 'dart:convert';
-
 CourseInfo courseInfoFromJson(String str) => CourseInfo.fromJson(json.decode(str));
 
 String courseInfoToJson(CourseInfo data) => json.encode(data.toJson());
 
+
 class CourseInfo {
   CourseInfo({
-    this.message,
-    this.payload,
-  });
-
-  String message;
-  Payload payload;
-
-  factory CourseInfo.fromJson(Map<String, dynamic> json) => CourseInfo(
-    message: json["message"],
-    payload: Payload.fromJson(json["payload"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "message": message,
-    "payload": payload.toJson(),
-  };
-}
-
-class Payload {
-  Payload({
     this.id,
     this.title,
     this.subtitle,
     this.price,
     this.description,
-    this.requirement,
-    this.learnWhat,
+  //  this.requirement,
+  //  this.learnWhat,
     this.soldNumber,
     this.ratedNumber,
     this.videoNumber,
@@ -48,24 +28,23 @@ class Payload {
     this.createdAt,
     this.updatedAt,
     this.instructorId,
-    this.instructorName,
-    this.section,
+ //   this.categoryIds,
   });
 
   String id;
   String title;
   String subtitle;
-  int price;
+  double price;
   String description;
-  List<String> requirement;
-  List<String> learnWhat;
-  int soldNumber;
-  int ratedNumber;
-  int videoNumber;
-  int totalHours;
-  int formalityPoint;
-  int contentPoint;
-  int presentationPoint;
+ // List<String> requirement;
+ // List<String> learnWhat;
+  double soldNumber;
+  double ratedNumber;
+  double videoNumber;
+  double totalHours;
+  double formalityPoint;
+  double contentPoint;
+  double presentationPoint;
   String imageUrl;
   String promoVidUrl;
   String status;
@@ -74,24 +53,23 @@ class Payload {
   DateTime createdAt;
   DateTime updatedAt;
   String instructorId;
-  String instructorName;
-  List<Section> section;
+//  List<String> categoryIds;
 
-  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+  factory CourseInfo.fromJson(Map<String, dynamic> json) => CourseInfo(
     id: json["id"],
     title: json["title"],
     subtitle: json["subtitle"],
-    price: json["price"],
+    price: json["price"].toDouble(),
     description: json["description"],
-    requirement: List<String>.from(json["requirement"].map((x) => x)),
-    learnWhat: List<String>.from(json["learnWhat"].map((x) => x)),
-    soldNumber: json["soldNumber"],
-    ratedNumber: json["ratedNumber"],
-    videoNumber: json["videoNumber"],
-    totalHours: json["totalHours"],
-    formalityPoint: json["formalityPoint"],
-    contentPoint: json["contentPoint"],
-    presentationPoint: json["presentationPoint"],
+  //  requirement: List<String>.from(json["requirement"].map((x) => x)),
+   // learnWhat: List<String>.from(json["learnWhat"].map((x) => x)),
+    soldNumber: json["soldNumber"].toDouble(),
+    ratedNumber: json["ratedNumber"].toDouble(),
+    videoNumber: json["videoNumber"].toDouble(),
+    totalHours: json["totalHours"].toDouble(),
+    formalityPoint: json["formalityPoint"].toDouble(),
+    contentPoint: json["contentPoint"].toDouble(),
+    presentationPoint: json["presentationPoint"].toDouble(),
     imageUrl: json["imageUrl"],
     promoVidUrl: json["promoVidUrl"],
     status: json["status"],
@@ -100,8 +78,7 @@ class Payload {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     instructorId: json["instructorId"],
-    instructorName: json["instructorName"],
-    section: List<Section>.from(json["section"].map((x) => Section.fromJson(x))),
+   // categoryIds: List<String>.from(json["categoryIds"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -110,8 +87,8 @@ class Payload {
     "subtitle": subtitle,
     "price": price,
     "description": description,
-    "requirement": List<dynamic>.from(requirement.map((x) => x)),
-    "learnWhat": List<dynamic>.from(learnWhat.map((x) => x)),
+    // "requirement": List<dynamic>.from(requirement.map((x) => x)),
+    // "learnWhat": List<dynamic>.from(learnWhat.map((x) => x)),
     "soldNumber": soldNumber,
     "ratedNumber": ratedNumber,
     "videoNumber": videoNumber,
@@ -127,155 +104,6 @@ class Payload {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "instructorId": instructorId,
-    "instructorName": instructorName,
-    "section": List<dynamic>.from(section.map((x) => x.toJson())),
-  };
-}
-
-class Section {
-  Section({
-    this.id,
-    this.courseId,
-    this.numberOrder,
-    this.name,
-    this.isDeleted,
-    this.createdAt,
-    this.updatedAt,
-    this.lesson,
-  });
-
-  String id;
-  String courseId;
-  int numberOrder;
-  String name;
-  bool isDeleted;
-  DateTime createdAt;
-  DateTime updatedAt;
-  List<Lesson> lesson;
-
-  factory Section.fromJson(Map<String, dynamic> json) => Section(
-    id: json["id"],
-    courseId: json["courseId"],
-    numberOrder: json["numberOrder"],
-    name: json["name"],
-    isDeleted: json["isDeleted"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    lesson: List<Lesson>.from(json["lesson"].map((x) => Lesson.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "courseId": courseId,
-    "numberOrder": numberOrder,
-    "name": name,
-    "isDeleted": isDeleted,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "lesson": List<dynamic>.from(lesson.map((x) => x.toJson())),
-  };
-}
-
-class Lesson {
-  Lesson({
-    this.id,
-    this.courseId,
-    this.sectionId,
-    this.numberOrder,
-    this.name,
-    this.content,
-    this.videoName,
-    this.captionName,
-    this.hours,
-    this.isPreview,
-    this.isDeleted,
-    this.createdAt,
-    this.updatedAt,
-    this.resource,
-  });
-
-  String id;
-  String courseId;
-  String sectionId;
-  int numberOrder;
-  String name;
-  String content;
-  String videoName;
-  String captionName;
-  int hours;
-  bool isPreview;
-  bool isDeleted;
-  DateTime createdAt;
-  DateTime updatedAt;
-  List<Resource> resource;
-
-  factory Lesson.fromJson(Map<String, dynamic> json) => Lesson(
-    id: json["id"],
-    courseId: json["courseId"],
-    sectionId: json["sectionId"],
-    numberOrder: json["numberOrder"],
-    name: json["name"],
-    content: json["content"],
-    videoName: json["videoName"],
-    captionName: json["captionName"],
-    hours: json["hours"],
-    isPreview: json["isPreview"],
-    isDeleted: json["isDeleted"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    resource: List<Resource>.from(json["resource"].map((x) => Resource.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "courseId": courseId,
-    "sectionId": sectionId,
-    "numberOrder": numberOrder,
-    "name": name,
-    "content": content,
-    "videoName": videoName,
-    "captionName": captionName,
-    "hours": hours,
-    "isPreview": isPreview,
-    "isDeleted": isDeleted,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "resource": List<dynamic>.from(resource.map((x) => x.toJson())),
-  };
-}
-
-class Resource {
-  Resource({
-    this.id,
-    this.lessonId,
-    this.name,
-    this.url,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  String id;
-  String lessonId;
-  String name;
-  String url;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory Resource.fromJson(Map<String, dynamic> json) => Resource(
-    id: json["id"],
-    lessonId: json["lessonId"],
-    name: json["name"],
-    url: json["url"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "lessonId": lessonId,
-    "name": name,
-    "url": url,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
+  //  "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
   };
 }
