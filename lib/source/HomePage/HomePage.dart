@@ -8,8 +8,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
 
 
-Future<Courses> listCourseRecommend;
-Future<UserCourse> listUserCourse;
+Future<List<Courses>> listCourseRecommend;
+Future<List<UserCourse>>  listUserCourse;
 class HomePage extends StatefulWidget{
   static String tag = 'home-page';
   @override
@@ -21,18 +21,18 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage> {
 
-  fetchDataRecomment() {
-    listCourseRecommend = APIServer().getNewCourse(5, 1);
-    listUserCourse = APIServer().getUserCourse();
+  bool _isLoading = false;
+
+  void _fetchData() async {
+
+    listCourseRecommend =  APIServer().fetchTopRateCourses(10, 1);
+    listUserCourse = APIServer().fetchUserCourse();
+
   }
 
-
   @override void initState() {
-    // TODO: implement initState
     super.initState();
-    setState(() {
-      fetchDataRecomment();
-    });
+    _fetchData();
   }
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _HomePage extends State<HomePage> {
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Container(
-                    child: FutureBuilder<Courses>(
+                    child: FutureBuilder<List<Courses>>(
                         future: listCourseRecommend,
                         builder: (context, snap) {
                           if (snap.hasData) {
@@ -61,7 +61,7 @@ class _HomePage extends State<HomePage> {
                                 scrollDirection: Axis.horizontal,
                                 autoPlay: true,
                               ),
-                              items: snap.data.payload.map((item) =>
+                              items: snap.data.map((item) =>
                                   GestureDetector(
                                       onTap: () {
                                         // Navigator.push(context, MaterialPageRoute(
@@ -150,7 +150,7 @@ class _HomePage extends State<HomePage> {
                       fontWeight: FontWeight.bold)),
                 );
               else if (index == 2)
-                return FutureBuilder<Courses>(
+                return FutureBuilder<List<Courses>>(
                     future: listCourseRecommend,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
@@ -161,7 +161,7 @@ class _HomePage extends State<HomePage> {
                               },
                               child: CarouselSlider(
                                 options: CarouselOptions(),
-                                items: snapshot.data.payload.map((item) =>
+                                items: snapshot.data.map((item) =>
                                     Container(
                                       height: 200,
                                       margin: EdgeInsets.all(10.0),
@@ -190,11 +190,11 @@ class _HomePage extends State<HomePage> {
               else
                 return Container(padding: EdgeInsets.all(2),
                     height: 100,
-                    child : FutureBuilder<UserCourse> (
+                    child : FutureBuilder<List<UserCourse>> (
                         future: listUserCourse,
                         builder: (context,snapshot){
                           if (snapshot.hasData){
-                            return (snapshot.data.payload.length == 0)? Container (
+                            return (snapshot.data.length == 0)? Container (
                               alignment: Alignment.center,
                               child: Text(
                                 'There are no  courses!',
@@ -216,7 +216,7 @@ class _HomePage extends State<HomePage> {
                                   child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                        Image.network(snapshot.data.payload[index-4].courseImage,width: 125),
+                                        Image.network(snapshot.data[index-4].courseImage,width: 125),
                                         Expanded(
                                             child: Container(
                                                 padding: EdgeInsets.all(5),
@@ -224,8 +224,8 @@ class _HomePage extends State<HomePage> {
                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: <Widget>[
-                                                    Text(snapshot.data.payload[index-4].courseTitle, style: TextStyle(fontWeight: FontWeight.bold)),
-                                                    Text('Author: ' + snapshot.data.payload[index-4].instructorName),
+                                                    Text(snapshot.data[index-4].courseTitle, style: TextStyle(fontWeight: FontWeight.bold)),
+                                                    Text('Author: ' + snapshot.data[index-4].instructorName),
                                                     //  RatingBox(),
                                                   ],
                                                 )

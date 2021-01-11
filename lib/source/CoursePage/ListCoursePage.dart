@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../Model/Courses.dart';
 
 class ListCoursePage extends StatefulWidget{
-  Future<Courses> listCourse;
+  Future<List<Courses>> listCourse;
   static String tag = 'list-course';
   ListCoursePage({Key key, this.listCourse}) : super(key: key);
   @override
@@ -27,12 +27,12 @@ class _ListCoursePage extends State<ListCoursePage>{
           backgroundColor: Colors.indigo,
           title: Text('Courses'),
         ),
-        body: FutureBuilder<Courses>(
+        body: FutureBuilder<List<Courses>>(
           future: widget.listCourse,
           builder: (context,snap){
             if (snap.hasData){
               return  ListView.builder(
-                  itemCount: snap.data.payload.length,
+                  itemCount: snap.data.length,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: EdgeInsets.all(2),
@@ -45,14 +45,14 @@ class _ListCoursePage extends State<ListCoursePage>{
                             //             child:(DetailCoursePage(dataCourse: widget.dataCourse[index])))
                             // )
                             // );
-                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data.payload[index].id);
+                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id);
                             print(courseInfo);
                           },
                           child: Card(
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  Image.network(snap.data.payload[index].imageUrl,width: 125),
+                                  Image.network(snap.data[index].imageUrl,width: 125),
                                   Expanded(
                                       child: Container(
                                           padding: EdgeInsets.all(5),
@@ -62,10 +62,10 @@ class _ListCoursePage extends State<ListCoursePage>{
                                             crossAxisAlignment: CrossAxisAlignment
                                                 .start,
                                             children: <Widget>[
-                                              Text(snap.data.payload[index].title, style: TextStyle(
+                                              Text(snap.data[index].title, style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
-                                              Text('Total clip: ${snap.data.payload[index].videoNumber}'),
-                                              Text('Hour: ${snap.data.payload[index].totalHours}'),
+                                              Text('Total clip: ${snap.data[index].videoNumber}'),
+                                             // Text('Hour: ${snap.data[index].totalHours}'),
                                             ],
                                           )
                                       )

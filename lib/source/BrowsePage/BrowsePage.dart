@@ -26,11 +26,6 @@ class BrowsePage extends StatefulWidget{
 
 class _BrowsePage extends State<BrowsePage>{
   Future<Category> category;
-  // Future<Instructor> futureInstructor = APIServer()..
-  //Future futureInstructorDetail;
-  //Instructor instructor = Instructor();
-  // InstructorDetail instructorDetail = InstructorDetail();
-  // List<InstructorDetail> listInstructorDetail = [];
   Future<List<Instructor>> listInstructor;
 
   bool _isLoading = false;
@@ -77,10 +72,10 @@ class _BrowsePage extends State<BrowsePage>{
                           unpressedImage: Image.asset(
                             "Assets/images/code8.jpg",),
                           onTap: () {
-                            Future<Courses> listCourseNew = APIServer().getNewCourse(10, 1);
+                            Future<List<Courses>>  listCourse = APIServer().fetchNewCourses(10, 1);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourseNew,)),
+                              MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourse)),
                             );
                           },
                         )
@@ -103,7 +98,7 @@ class _BrowsePage extends State<BrowsePage>{
                         unpressedImage: Image.asset(
                           "Assets/images/code3.jpg",),
                         onTap: () {
-                          Future<Courses> listCourse = APIServer().getCourseRate(10, 1);
+                          Future<List<Courses>> listCourse = APIServer().fetchTopRateCourses(10, 1);
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => ListCoursePage(listCourse: listCourse,)),
