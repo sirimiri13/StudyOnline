@@ -13,13 +13,13 @@ class CourseInfo {
     this.description,
   //  this.requirement,
   //  this.learnWhat,
-    this.soldNumber,
+  //  this.soldNumber,
     this.ratedNumber,
     this.videoNumber,
     this.totalHours,
-    this.formalityPoint,
-    this.contentPoint,
-    this.presentationPoint,
+    // this.formalityPoint,
+    // this.contentPoint,
+    // this.presentationPoint,
     this.imageUrl,
     this.promoVidUrl,
     this.status,
@@ -28,7 +28,7 @@ class CourseInfo {
     this.createdAt,
     this.updatedAt,
     this.instructorId,
- //   this.categoryIds,
+  // this.categoryIds,
   });
 
   String id;
@@ -38,13 +38,13 @@ class CourseInfo {
   String description;
  // List<String> requirement;
  // List<String> learnWhat;
-  double soldNumber;
+ // double soldNumber;
   double ratedNumber;
   double videoNumber;
   double totalHours;
-  double formalityPoint;
-  double contentPoint;
-  double presentationPoint;
+  // double formalityPoint;
+  // double contentPoint;
+  // double presentationPoint;
   String imageUrl;
   String promoVidUrl;
   String status;
@@ -53,7 +53,7 @@ class CourseInfo {
   DateTime createdAt;
   DateTime updatedAt;
   String instructorId;
-//  List<String> categoryIds;
+ //  List<String> categoryIds;
 
   factory CourseInfo.fromJson(Map<String, dynamic> json) => CourseInfo(
     id: json["id"],
@@ -63,13 +63,13 @@ class CourseInfo {
     description: json["description"],
   //  requirement: List<String>.from(json["requirement"].map((x) => x)),
    // learnWhat: List<String>.from(json["learnWhat"].map((x) => x)),
-    soldNumber: json["soldNumber"].toDouble(),
+  //  soldNumber: json["soldNumber"].toDouble(),
     ratedNumber: json["ratedNumber"].toDouble(),
     videoNumber: json["videoNumber"].toDouble(),
     totalHours: json["totalHours"].toDouble(),
-    formalityPoint: json["formalityPoint"].toDouble(),
-    contentPoint: json["contentPoint"].toDouble(),
-    presentationPoint: json["presentationPoint"].toDouble(),
+    // formalityPoint: json["formalityPoint"].toDouble(),
+    // contentPoint: json["contentPoint"].toDouble(),
+    // presentationPoint: json["presentationPoint"].toDouble(),
     imageUrl: json["imageUrl"],
     promoVidUrl: json["promoVidUrl"],
     status: json["status"],
@@ -89,13 +89,13 @@ class CourseInfo {
     "description": description,
     // "requirement": List<dynamic>.from(requirement.map((x) => x)),
     // "learnWhat": List<dynamic>.from(learnWhat.map((x) => x)),
-    "soldNumber": soldNumber,
+  //  "soldNumber": soldNumber,
     "ratedNumber": ratedNumber,
     "videoNumber": videoNumber,
     "totalHours": totalHours,
-    "formalityPoint": formalityPoint,
-    "contentPoint": contentPoint,
-    "presentationPoint": presentationPoint,
+    // "formalityPoint": formalityPoint,
+    // "contentPoint": contentPoint,
+    // "presentationPoint": presentationPoint,
     "imageUrl": imageUrl,
     "promoVidUrl": promoVidUrl,
     "status": status,
@@ -104,6 +104,6 @@ class CourseInfo {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "instructorId": instructorId,
-  //  "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
+   //  "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
   };
 }

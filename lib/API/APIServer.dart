@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:finalproject_1712061/source/Model/Category.dart';
 import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/source/Model/FavoriteCourse.dart';
 import 'package:finalproject_1712061/source/Model/Instructor.dart';
 import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/source/Model/Courses.dart';
@@ -141,6 +142,24 @@ class APIServer{
     List<Courses> courses = (json.decode(response.body)['payload'] as List).map((data) => Courses.fromJson(data)).toList();
     return courses;
   }
+  Future<List<FavoriteCourse>> fetchFavoriteCourse() async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.get(api_server +"/user/get-favorite-courses",headers: {"Authorization": "Bearer $token"});
+  //  print("favorite: " + response.body);
+  //  print(jsonDecode(response.body)['payload']);
+    List<FavoriteCourse> favoriteCourses = (jsonDecode(response.body)['payload'] as List).map((data) => FavoriteCourse.fromJson(data)).toList();
+    print(favoriteCourses);
+    return favoriteCourses;
+  }
+
+  Future getUserLikeCourse(String courseId) async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.post(api_server + "/user/like-course",body: {"courseId": courseId},headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    return response;
+  }
 
   Future<List<UserCourse>> fetchUserCourse() async{
     final prefs = await SharedPreferences.getInstance();
@@ -152,13 +171,6 @@ class APIServer{
 
   }
 
-  Future getUserCourse(String id) async{
-    final prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token');
-    var response = await http.get(api_server + "/course/process-course/${id}",headers: {"Authorization": "Bearer $token"});
-    print(response.body);
-    return response;
-  }
 
   Future<CourseInfo> getCourseInfo(String id,String userId) async{
     final prefs = await SharedPreferences.getInstance();
@@ -174,6 +186,16 @@ class APIServer{
     else {
       return null;
     }
+  }
+
+
+
+  Future getUserCourse(String id) async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.get(api_server + "/course/process-course/${id}",headers: {"Authorization": "Bearer $token"});
+   // print(response.body);
+    return response;
   }
 
 

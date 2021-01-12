@@ -40,20 +40,11 @@ class _ListCoursePage extends State<ListCoursePage>{
                       height: 100,
                       child: GestureDetector(
                           onTap: () async {
-
-                            // Navigator.push(context, MaterialPageRoute(
-                            //     builder: (_) =>
-                            //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                            //             child:(DetailCoursePage(dataCourse: widget.dataCourse[index])))
-                            // )
-                            // );
                             CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id,null);
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
                             );
-                            //print("Course: " + courseInfo.message);
-                           // print(courseInfo);
                           },
                           child: Card(
                             child: Row(
@@ -71,8 +62,10 @@ class _ListCoursePage extends State<ListCoursePage>{
                                             children: <Widget>[
                                               Text(snap.data[index].title, style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
+                                             // Text(snap.data[index].subtitle),
                                               Text('Total clip: ${snap.data[index].videoNumber}'),
-                                             // Text('Hour: ${snap.data[index].totalHours}'),
+                                            //  Text('Rated: ${snap.data[index].ratedNumber}'),
+                                            //  Text('Hour: ${snap.data[index].}'),
                                             ],
                                           )
                                       )

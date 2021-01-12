@@ -12,6 +12,7 @@ class Courses {
     this.description,
     this.videoNumber,
     this.imageUrl,
+   // this.ratedNumber,
   });
 
   String id;
@@ -20,15 +21,16 @@ class Courses {
   String description;
   int videoNumber;
   String imageUrl;
-
+//  double ratedNumber;
 
   factory Courses.fromJson(Map<String, dynamic> json) => Courses(
-    id: json["id"],
-    title: json["title"],
-    subtitle: json["subtitle"],
-    description: json["description"],
-    videoNumber: json["videoNumber"],
-    imageUrl: json["imageUrl"],
+      id: json["id"],
+      title: json["title"],
+      subtitle: json["subtitle"],
+      description: json["description"],
+      videoNumber: json["videoNumber"],
+      imageUrl: json["imageUrl"],
+   //   ratedNumber: json["ratedNumber"].toDouble()
 
   );
 
