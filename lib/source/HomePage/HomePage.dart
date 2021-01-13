@@ -4,6 +4,7 @@ import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/UserCourse.dart';
 import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
+import 'package:finalproject_1712061/source/CoursePage/ListFavoriteCoursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -134,10 +135,28 @@ class _HomePage extends State<HomePage> {
                       }
                   )
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Favorite Course', style: TextStyle(fontSize: 18.0,
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold)),
+                  OutlineButton(
+                    onPressed: () async {
+                      Future<List<FavoriteCourse>> listCourse = APIServer().fetchFavoriteCourse();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ListFavoriteCoursePage(listCourse: listCourse)),
+                      );
+                    },
+                    disabledBorderColor: Colors.transparent,
+                    padding: EdgeInsets.all(12),
+                    borderSide: BorderSide.none,
+                    child: Text('More', style: TextStyle(color: Colors.indigo,decoration:TextDecoration.underline)),
+                  )
+                ],
+              ),
 
-              Text('Favorite Course', style: TextStyle(fontSize: 18.0,
-                  color: Colors.indigo,
-                  fontWeight: FontWeight.bold)),
 
               FutureBuilder<List<FavoriteCourse>>(
                   future: listFavoriteCourse,

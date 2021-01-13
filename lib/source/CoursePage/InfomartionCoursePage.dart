@@ -15,7 +15,7 @@ class InformationCoursePage extends StatefulWidget{
   _InformationCoursePage createState() => new _InformationCoursePage();
 }
 
-var status = 0;
+
 class _InformationCoursePage extends State<InformationCoursePage>{
   @override
   Widget build(BuildContext context) {
@@ -101,10 +101,9 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
                           http.Response  responseLike = await APIServer().getUserLikeCourse(widget.Courses.id);
-                          status = responseLike.statusCode;
                         },
                         color: Colors.red,
-                        child: (status == 200)?Text('Liked', style: TextStyle(color: Colors.white)):Text('Like', style: TextStyle(color: Colors.white)) ,
+                        child: Text('Like', style: TextStyle(color: Colors.white)) ,
                       ),
                     ),
                     Container(
@@ -113,8 +112,8 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
-                          http.Response response = await APIServer().getUserCourse(widget.Courses.id);
-                          print(response.body);
+                          http.Response response = await APIServer().getJoinCourse(widget.Courses.id);
+
                         },
                         color: Colors.indigo,
                         child: Text('Join', style: TextStyle(color: Colors.white)),

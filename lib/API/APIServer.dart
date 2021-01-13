@@ -119,7 +119,6 @@ class APIServer{
     }
   }
 
-
   Future<List<Courses>> fetchNewCourses(int limit, int page) async{
     Map<String, String> body = {
       'limit': limit.toString(),
@@ -153,13 +152,6 @@ class APIServer{
     return favoriteCourses;
   }
 
-  Future getUserLikeCourse(String courseId) async {
-    final prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token');
-    var response = await http.post(api_server + "/user/like-course",body: {"courseId": courseId},headers: {"Authorization": "Bearer $token"});
-    print(response.body);
-    return response;
-  }
 
   Future<List<UserCourse>> fetchUserCourse() async{
     final prefs = await SharedPreferences.getInstance();
@@ -208,10 +200,25 @@ class APIServer{
   }
 
 
-
-  void checkFavoriteCourse(){
-
+// pt post
+  Future getUserLikeCourse(String courseId) async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.post(api_server + "/user/like-course",body: {"courseId": courseId},headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    return response;
   }
+
+  Future getJoinCourse(String courseId) async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    var response = await http.post(api_server + "/payment/get-free-courses",body: {"courseId": courseId},headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    return response;
+  }
+
+
+
   read() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
