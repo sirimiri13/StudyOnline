@@ -1,5 +1,5 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/source/Model/User.dart';
+import 'package:finalproject_1712061/Model/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';

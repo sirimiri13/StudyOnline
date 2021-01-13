@@ -1,8 +1,8 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/source/Model/Instructor.dart';
-import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
+import 'package:finalproject_1712061/Model/Instructor.dart';
+import 'package:finalproject_1712061/Model/InstructorDetail.dart';
 import 'package:flutter/material.dart';
-import '../Model/Instructor.dart';
+
 
 
 

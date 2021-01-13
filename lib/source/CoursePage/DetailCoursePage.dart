@@ -1,9 +1,8 @@
-import 'package:finalproject_1712061/source/Model/ListClip.dart';
-import 'package:finalproject_1712061/source/Model/ListCourses.dart';
+
+import 'package:finalproject_1712061/Model/ListCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Model/Course.dart';
-import '../../main.dart';
+
 
 
 //final itemCourse = getCourseSuggest();

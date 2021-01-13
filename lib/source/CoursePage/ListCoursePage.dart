@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
-import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:flutter/material.dart';
-import '../Model/Courses.dart';
+
 
 class ListCoursePage extends StatefulWidget{
   Future<List<Courses>> listCourse;
@@ -43,7 +44,7 @@ class _ListCoursePage extends State<ListCoursePage>{
                             CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id,null);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
+                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,isLiked: true))
                             );
                           },
                           child: Card(

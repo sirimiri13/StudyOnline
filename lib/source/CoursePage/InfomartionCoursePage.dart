@@ -1,14 +1,16 @@
 
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../Model/Courses.dart';
+
 
 class InformationCoursePage extends StatefulWidget{
   CourseInfo Courses;
+  bool isLiked;
+  bool isJoined;
   static String tag = 'list-course';
-  InformationCoursePage({Key key, this.Courses}) : super(key: key);
+  InformationCoursePage({Key key, this.Courses,this.isLiked,this.isJoined}) : super(key: key);
   @override
   _InformationCoursePage createState() => new _InformationCoursePage();
 }
@@ -89,6 +91,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                       ],
                     )
                 ),
+
                 Row(
                   children: [
                     Container(
@@ -117,11 +120,8 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                         child: Text('Join', style: TextStyle(color: Colors.white)),
                       ),
                     ),
-
                   ],
-                )
-
-
+                ),
               ],
 
             )

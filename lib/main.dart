@@ -10,10 +10,7 @@ import 'source/DownloadPage/DownloadPage.dart';
 import 'source/SearchPage/SearchPage.dart';
 import 'source/HomePage/HomePage.dart';
 import 'source/CoursePage/DetailCoursePage.dart';
-import 'source/Model/Instructor.dart';
-import 'source/Model/Clip.dart';
-import 'source/Model/Course.dart';
-import 'source/Model/User.dart';
+
 
 
 

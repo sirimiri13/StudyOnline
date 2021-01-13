@@ -1,19 +1,16 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/source/Model/Instructor.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:finalproject_1712061/source/Model/ListClip.dart';
-import 'package:finalproject_1712061/source/Model/ListInstructor.dart';
+import 'package:finalproject_1712061/Model/ListCourses.dart';
+import 'package:finalproject_1712061/Model/User.dart';
+import 'package:finalproject_1712061/Model/ListClip.dart';
+import 'package:finalproject_1712061/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'HomePage/HomePage.dart';
 import 'DownloadPage/DownloadPage.dart';
 import 'SearchPage/SearchPage.dart';
 import 'AccountPage/AccountPage.dart';
 import 'BrowsePage/BrowsePage.dart';
-import 'Model/User.dart';
-import 'Model/ListCourses.dart';
-import 'Model/Clip.dart';
+
 
 UserMe user = UserMe();
 class BottomNavigation extends StatefulWidget{

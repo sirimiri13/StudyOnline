@@ -1,10 +1,9 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
-import 'package:finalproject_1712061/source/CoursePage/ListCoursePage.dart';
-import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
-import 'package:finalproject_1712061/source/Model/Courses.dart';
-import 'package:finalproject_1712061/source/Model/UserCourse.dart';
-import 'package:finalproject_1712061/source/Model/FavoriteCourse.dart';
+import 'package:finalproject_1712061/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/Courses.dart';
+import 'package:finalproject_1712061/Model/UserCourse.dart';
+import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -145,29 +144,34 @@ class _HomePage extends State<HomePage> {
                   builder: (context, snap) {
                     if (snap.hasData) {
                       return Container(
-                        child: GestureDetector(
-                            onTap: () {
-
-                            },
-                            child: CarouselSlider(
-                              options: CarouselOptions(),
-                              items: snap.data.map((item) =>
-                                  Container(
-                                    height: 200,
-                                    margin: EdgeInsets.all(10.0),
-                                    child: Column(
-                                        children: <Widget>[
-                                          Image.network(item.courseImage,
-                                              fit: BoxFit.cover,
-                                              width: 300.0,
-                                              height: 160.0),
-                                          Text(item.courseTitle,
-                                              style: TextStyle(
-                                                  fontSize: 18.0))
-                                        ]
-                                    ),
-                                  )).toList(),
-                            )
+                        child: CarouselSlider(
+                            options: CarouselOptions(),
+                            items: snap.data.map((item) =>
+                                GestureDetector(
+                                    onTap: () async {
+                                      CourseInfo courseInfo = await APIServer().getCourseInfo(item.id,null);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,isLiked: true,isJoined: false))
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 200,
+                                      margin: EdgeInsets.all(10.0),
+                                      child: Column(
+                                          children: <Widget>[
+                                            Image.network(item.courseImage,
+                                                fit: BoxFit.cover,
+                                                width: 300.0,
+                                                height: 160.0),
+                                            Text(item.courseTitle,
+                                                style: TextStyle(
+                                                    fontSize: 18.0))
+                                          ]
+                                      ),
+                                    )
+                                ),
+                            ).toList()
                         ),
                       );
                     }

@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:finalproject_1712061/source/Model/Category.dart';
-import 'package:finalproject_1712061/source/Model/CourseInfo.dart';
-import 'package:finalproject_1712061/source/Model/FavoriteCourse.dart';
-import 'package:finalproject_1712061/source/Model/Instructor.dart';
-import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
-import 'package:finalproject_1712061/source/Model/Courses.dart';
-import 'package:finalproject_1712061/source/Model/User.dart';
-import 'package:finalproject_1712061/source/Model/UserCourse.dart';
+import 'package:finalproject_1712061/Model/Category.dart';
+import 'package:finalproject_1712061/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
+import 'package:finalproject_1712061/Model/Instructor.dart';
+import 'package:finalproject_1712061/Model/InstructorDetail.dart';
+import 'package:finalproject_1712061/Model/Courses.dart';
+import 'package:finalproject_1712061/Model/User.dart';
+import 'package:finalproject_1712061/Model/UserCourse.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Constant-server.dart';
@@ -189,7 +189,6 @@ class APIServer{
   }
 
 
-
   Future getUserCourse(String id) async{
     final prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token');
@@ -206,6 +205,12 @@ class APIServer{
       return Category.fromJson(jsonDecode(response.body));
     }
    return null;
+  }
+
+
+
+  void checkFavoriteCourse(){
+
   }
   read() async {
     final prefs = await SharedPreferences.getInstance();

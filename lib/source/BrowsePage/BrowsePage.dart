@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/source/Model/Category.dart';
-import 'package:finalproject_1712061/source/Model/Courses.dart';
-import 'package:finalproject_1712061/source/Model/Instructor.dart';
-import 'package:finalproject_1712061/source/Model/InstructorDetail.dart';
+import 'package:finalproject_1712061/Model/Category.dart';
+import 'package:finalproject_1712061/Model/Courses.dart';
+import 'package:finalproject_1712061/Model/Instructor.dart';
+import 'package:finalproject_1712061/Model/InstructorDetail.dart';
 
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
