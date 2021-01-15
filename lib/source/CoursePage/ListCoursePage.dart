@@ -44,7 +44,7 @@ class _ListCoursePage extends State<ListCoursePage>{
                             CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id,null);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,isLiked: true))
+                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,))
                             );
                           },
                           child: Card(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:finalproject_1712061/Model/Category.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
 import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
 import 'package:finalproject_1712061/Model/Instructor.dart';
 import 'package:finalproject_1712061/Model/InstructorDetail.dart';
@@ -167,8 +168,6 @@ class APIServer{
   Future<CourseInfo> getCourseInfo(String id,String userId) async{
     final prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token');
-    print(token);
-    print(id);
     final response = await http.get(api_server + "/course/get-course-detail/${id}/${userId}");
     print(response.body);
     if (response.statusCode == 200){
@@ -180,6 +179,21 @@ class APIServer{
     }
   }
 
+
+  Future<CourseWithLesson> getCourseWithLession(String courseId) async{
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    print("token" + token);
+    final response = await http.get(api_server + "/course/detail-with-lesson/${courseId}/",headers: {"Authorization": "Bearer $token"});
+    print(response.body);
+    if (response.statusCode == 200){
+      CourseWithLesson course = CourseWithLesson.fromJson(json.decode(response.body)['payload']);
+      return course;
+    }
+    else {
+      return null;
+    }
+  }
 
   Future getUserCourse(String id) async{
     final prefs = await SharedPreferences.getInstance();

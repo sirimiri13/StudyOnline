@@ -1,4 +1,6 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
+import 'package:finalproject_1712061/source/CoursePage/DetailCoursePage.dart';
 import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
@@ -9,9 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 
-Future<List<Courses>> listCourseRecommend;
-Future<List<UserCourse>>  listUserCourse;
-Future<List<FavoriteCourse>> listFavoriteCourse;
 
 var lenghtCourseUser;
 class HomePage extends StatefulWidget{
@@ -23,6 +22,11 @@ class HomePage extends StatefulWidget{
 
 
 class _HomePage extends State<HomePage> {
+
+  Future<List<Courses>> listCourseRecommend;
+  Future<List<UserCourse>>  listUserCourse;
+  Future<List<FavoriteCourse>> listFavoriteCourse;
+
   void _fetchData() async {
     listCourseRecommend =  APIServer().fetchTopSellCourses(10, 1);
     listUserCourse = APIServer().fetchUserCourse();
@@ -35,10 +39,10 @@ class _HomePage extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    // double _width = MediaQuery
+    //     .of(context)
+    //     .size
+    //     .width;
     return Scaffold(
       body: Container(
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
@@ -63,7 +67,7 @@ class _HomePage extends State<HomePage> {
                                       CourseInfo courseInfo = await APIServer().getCourseInfo(item.id,null);
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
+                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,))
                                       );
                                     },
                                     child: Container(
@@ -143,10 +147,10 @@ class _HomePage extends State<HomePage> {
                       fontWeight: FontWeight.bold)),
                   OutlineButton(
                     onPressed: () async {
-                      Future<List<FavoriteCourse>> listCourse = APIServer().fetchFavoriteCourse();
+                      Future<List<FavoriteCourse>> listFavoriteCourse = APIServer().fetchFavoriteCourse();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ListFavoriteCoursePage(listCourse: listCourse)),
+                        MaterialPageRoute(builder: (context) => ListFavoriteCoursePage(listCourse: listFavoriteCourse)),
                       );
                     },
                     disabledBorderColor: Colors.transparent,
@@ -156,8 +160,6 @@ class _HomePage extends State<HomePage> {
                   )
                 ],
               ),
-
-
               FutureBuilder<List<FavoriteCourse>>(
                   future: listFavoriteCourse,
                   builder: (context, snap) {
@@ -169,9 +171,11 @@ class _HomePage extends State<HomePage> {
                                 GestureDetector(
                                     onTap: () async {
                                       CourseInfo courseInfo = await APIServer().getCourseInfo(item.id,null);
+                                      List<UserCourse> listCourse = await APIServer().fetchUserCourse();
+                                      bool isJoined = listCourse.where((element) => element.id == courseInfo.id) != null? true: false;
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,isLiked: true,isJoined: false))
+                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
                                       );
                                     },
                                     child: Container(
@@ -197,9 +201,7 @@ class _HomePage extends State<HomePage> {
                     return CircularProgressIndicator();
                   }
               ),
-
-              Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold)),
-
+              Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold)), 
               FutureBuilder<List<UserCourse>> (
                   future: listUserCourse,
                   builder: (context,snapshot){
@@ -216,25 +218,24 @@ class _HomePage extends State<HomePage> {
                           ),
                         ),):
                       Container (
-                          height: 100 * snapshot.data.length.toDouble() + 50,
-                          child:  GestureDetector(
-                              onTap: () {
-                                // Navigator.push(context, MaterialPageRoute(
-                                //     builder: (_) =>
-                                //         ChangeNotifierProvider.value(value: Provider.of<ListCourses>(context,listen: false),
-                                //             child: DetailCoursePage(dataCourse: listCourses.myCourses[index-4]))
-                                // )
-                                //);
-                              },
+                          height: 120 * snapshot.data.length.toDouble(),
+                          child: ListView.builder(
+                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.only(top: 20),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
 
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 20),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  physics: const ClampingScrollPhysics(),
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (context, indexUserCourse) {
-                                    return  Card(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, indexUserCourse) {
+                                return  Card(
+                                    child:  GestureDetector(
+                                          onTap: () async {
+                                       CourseWithLesson courseInfo = await APIServer().getCourseWithLession(snapshot.data[indexUserCourse].id);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => DetailCoursePage(course: courseInfo,))
+                                        );
+                                      },
                                       child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: <Widget>[
@@ -256,10 +257,9 @@ class _HomePage extends State<HomePage> {
                                             )
                                           ]
                                       ),
-                                    );
-                                  }
-                              )
-                          )
+                                    )
+                                );
+                              })
                       );
                     }
                     return CircularProgressIndicator();

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 
 
-InstructorDetail instructorDetail = InstructorDetail();
+
 class InformationAuthor extends StatefulWidget{
   static String tag = 'information-author';
   final Instructor dataInstructor;
@@ -21,15 +21,11 @@ class InformationAuthor extends StatefulWidget{
 
 class _InformationAuthor extends State<InformationAuthor>{
 
-  // getInstructorDetail() async{
-  //   var idInstructor =  widget.dataInstructor.payload[0].id;
-  //   instructorDetail = await APIServer().getInstructorDetail(idInstructor);
-  // }
+  InstructorDetail instructorDetail = InstructorDetail();
 
   @override initState()  {
     super.initState();
-   // getInstructorDetail();
-   // print(instructorDetail.payloadDetail);
+
   }
   @override
   Widget build(BuildContext context) {

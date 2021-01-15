@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
-TextEditingController editNameController = new TextEditingController();
-TextEditingController oldPwController = new TextEditingController();
-TextEditingController newPwController = new TextEditingController();
-TextEditingController editPhoneController = new TextEditingController();
+
 
 class EditAccountPage extends StatefulWidget{
   static String tag = 'edit-account-page';
@@ -19,6 +16,10 @@ class EditAccountPage extends StatefulWidget{
 }
 
 class _EditAccountPage extends State<EditAccountPage>{
+  TextEditingController editNameController = new TextEditingController();
+  TextEditingController oldPwController = new TextEditingController();
+  TextEditingController newPwController = new TextEditingController();
+  TextEditingController editPhoneController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

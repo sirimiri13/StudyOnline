@@ -7,7 +7,7 @@ import 'DetailAccountPage.dart';
 import 'EditAccountPage.dart';
 import 'package:provider/provider.dart';
 
-Future<UserMe> futureUserMe;
+
 class AccountPage extends StatefulWidget {
   static String tag = 'account-page';
   @override
@@ -16,8 +16,7 @@ class AccountPage extends StatefulWidget {
 
 
 class _AccountPage extends State<AccountPage> {
-
-
+  Future<UserMe> futureUserMe;
   @override initState(){
     super.initState();
     setState(() {

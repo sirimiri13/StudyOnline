@@ -1,22 +1,44 @@
 
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
+import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
+import 'package:finalproject_1712061/Model/UserCourse.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
 class InformationCoursePage extends StatefulWidget{
   CourseInfo Courses;
-  bool isLiked;
-  bool isJoined;
   static String tag = 'list-course';
-  InformationCoursePage({Key key, this.Courses,this.isLiked,this.isJoined}) : super(key: key);
+  InformationCoursePage({Key key, this.Courses}) : super(key: key);
   @override
   _InformationCoursePage createState() => new _InformationCoursePage();
 }
 
-
 class _InformationCoursePage extends State<InformationCoursePage>{
+  List<FavoriteCourse> listCourseFavorite;
+  List<UserCourse> listCourse;
+  bool isLike;
+  bool isJoin;
+  void checkStatus() async{
+    listCourseFavorite = await APIServer().fetchFavoriteCourse();
+    listCourse = await APIServer().fetchUserCourse();
+    print("favorite ${listCourseFavorite}");
+    print("couser ${listCourse}");
+
+    print("like ${isLike}" );
+    print("join ${isJoin}" );
+
+    setState(() {
+      isLike = listCourseFavorite.where((element) => element.id == widget.Courses.id).toList().length == 0 ? false : true;
+      isJoin = listCourse.where((element) => element.id == widget.Courses.id).toList().length == 0 ? false : true;
+    });
+  }
+
+  @override void initState(){
+    super.initState();
+    checkStatus();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,10 +122,17 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
-                          http.Response  responseLike = await APIServer().getUserLikeCourse(widget.Courses.id);
+                          if (isLike == false){
+                            http.Response responseLike = await APIServer().getUserLikeCourse(widget.Courses.id);
+                            if (responseLike.statusCode == 200){
+                              setState(() {
+                                isLike = true;
+                              });
+                            }
+                          }
                         },
                         color: Colors.red,
-                        child: Text('Like', style: TextStyle(color: Colors.white)) ,
+                        child: (isLike != null) ? (isLike ? Text('Liked', style: TextStyle(color: Colors.white)): Text('Like', style: TextStyle(color: Colors.white))):Text("Like", style: TextStyle(color: Colors.white)),
                       ),
                     ),
                     Container(
@@ -113,20 +142,21 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
                           http.Response response = await APIServer().getJoinCourse(widget.Courses.id);
-
+                          if (response.statusCode == 200){
+                            setState(() {
+                              isJoin = true;
+                            });
+                          }
                         },
                         color: Colors.indigo,
-                        child: Text('Join', style: TextStyle(color: Colors.white)),
+                        child: (isJoin != null) ? (isJoin ? Text('Joined', style: TextStyle(color: Colors.white)): Text('Join', style: TextStyle(color: Colors.white))):Text("Join", style: TextStyle(color: Colors.white))),
                       ),
-                    ),
                   ],
                 ),
               ],
-
             )
         )
     );
-
   }
 //
 

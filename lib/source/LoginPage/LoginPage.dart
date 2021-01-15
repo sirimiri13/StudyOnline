@@ -1,12 +1,11 @@
-import 'dart:convert';
-
 
 import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/API/SignInGG.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../BottomNavigation.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 
@@ -206,6 +205,21 @@ class _LoginPage extends State<LoginPage> {
         child: Text('Forget password?', style: TextStyle(color: Colors.indigo,decoration:TextDecoration.underline)),
       )
     );
+    final signInGoogleButton = Container(
+        width: 200,
+        padding: EdgeInsets.all(20),
+        child: OutlineButton(
+          onPressed: () {
+            SignInGG().signInWithGoogle().whenComplete(() {
+              Navigator.of(context).pushNamed(BottomNavigation.tag);
+            });
+          },
+          disabledBorderColor: Colors.transparent,
+          padding: EdgeInsets.all(12),
+          borderSide: BorderSide.none,
+          child: Text('Sign In With Google', style: TextStyle(color: Colors.indigo)),
+        )
+    );
     return Scaffold(
       backgroundColor: Colors.white,
         appBar: AppBar(
@@ -227,6 +241,8 @@ class _LoginPage extends State<LoginPage> {
                     SizedBox(height: 8.0),
                     loginButton,
                     ForgotPasswordButton,
+
+                    signInGoogleButton,
                   ]
               )
           )
