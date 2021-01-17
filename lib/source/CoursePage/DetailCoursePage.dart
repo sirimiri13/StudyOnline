@@ -62,7 +62,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LessonPage(section: widget.course.section[index-2],))
+                          MaterialPageRoute(builder: (context) => LessonPage(section: widget.course.section[index-2],videoURL: widget.course.promoVidUrl,))
                       );
                     },
                     child: Card(

@@ -1,10 +1,6 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/Model/ListCourses.dart';
 import 'package:finalproject_1712061/Model/User.dart';
-import 'package:finalproject_1712061/Model/ListClip.dart';
-import 'package:finalproject_1712061/Model/ListInstructor.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'HomePage/HomePage.dart';
 import 'DownloadPage/DownloadPage.dart';
 import 'SearchPage/SearchPage.dart';
@@ -51,17 +47,8 @@ List<Widget> _listPage = <Widget>[
        onWillPop: () async => false,
       child: Scaffold(
         body: Center(
-          child: MultiProvider(
-            providers: [
-             // ChangeNotifierProvider<UserMe>(create: (context) => user),
-              ChangeNotifierProvider<ListCourses>(create: (context) => ListCourses()),
-              ChangeNotifierProvider<ListClip>(create: (context)=> ListClip()),
-              ChangeNotifierProvider<ListInstructor>(create: (context) => ListInstructor())
-            ],
             child: _listPage[_currentIndex],
-          )
-
-        ),
+          ),
 
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

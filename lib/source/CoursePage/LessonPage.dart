@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 
 class LessonPage extends StatefulWidget{
   Section section;
+  String videoURL;
   static String tag = 'list-course';
-  LessonPage({Key key, this.section}) : super(key: key);
+  LessonPage({Key key, this.section,this.videoURL}) : super(key: key);
   @override
   _LessonPage createState() => new _LessonPage();
 }
@@ -34,7 +35,7 @@ class _LessonPage extends State<LessonPage>{
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => VideoPlayerScreen())
+                          MaterialPageRoute(builder: (context) => VideoPlayerScreen(videoURL: widget.videoURL,))
                       );
                     },
                     child: Card(

@@ -110,15 +110,15 @@ class APIServer{
     return instructors;
   }
 
-  Future<InstructorDetail> getInstructorDetail(String id) async {
-    var  response = await http.get(api_server + "/instructor/detail/${id}");
-    if (response.statusCode == 200){
-      return InstructorDetail.fromJson(jsonDecode(response.body));
-    }
-    else {
-      print("error: ${response.body}");
-    }
-  }
+  // Future<InstructorDetail> getInstructorDetail(String id) async {
+  //   var  response = await http.get(api_server + "/instructor/detail/${id}");
+  //   if (response.statusCode == 200){
+  //     return InstructorDetail.fromJson(jsonDecode(response.body));
+  //   }
+  //   else {
+  //     print("error: ${response.body}");
+  //   }
+  // }
 
   Future<List<Courses>> fetchNewCourses(int limit, int page) async{
     Map<String, String> body = {

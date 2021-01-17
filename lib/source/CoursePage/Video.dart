@@ -14,8 +14,8 @@ class VideoPlayerApp extends StatelessWidget {
 }
 
 class VideoPlayerScreen extends StatefulWidget {
-
-  //VideoPlayerScreen({Key key) : super(key: key);
+  String videoURL;
+  VideoPlayerScreen({Key key,this.videoURL}): super(key: key);
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
@@ -26,12 +26,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   void initState() {
-    // Create and store the VideoPlayerController. The VideoPlayerController
-    // offers several different constructors to play videos from assets, files,
-    // or the internet.
-    _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-    );
+
+    // _controller = VideoPlayerController.network(
+    //   'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+    // );
+    _controller = VideoPlayerController.network(widget.videoURL);
 
     // Initialize the controller and store the Future for later use.
     _initializeVideoPlayerFuture = _controller.initialize();
@@ -54,7 +53,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Butterfly Video'),
+        title: Text('Video'),
+        backgroundColor: Colors.indigo,
       ),
       // Use a FutureBuilder to display a loading spinner while waiting for the
       // VideoPlayerController to finish initializing.
@@ -66,17 +66,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             // the data it provides to limit the aspect ratio of the video.
             return AspectRatio(
               aspectRatio: _controller.value.aspectRatio,
-              // Use the VideoPlayer widget to display the video.
               child: VideoPlayer(_controller),
             );
           } else {
-            // If the VideoPlayerController is still initializing, show a
-            // loading spinner.
             return Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.indigo,
         onPressed: () {
           // Wrap the play or pause in a call to `setState`. This ensures the
           // correct icon is shown.
