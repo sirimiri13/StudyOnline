@@ -4,11 +4,9 @@ import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/Category.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/Instructor.dart';
-import 'package:finalproject_1712061/Model/InstructorDetail.dart';
-
+import 'package:finalproject_1712061/source/CoursePage/ListCourseFromCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import '../CoursePage/ListCoursePage.dart';
 
@@ -25,7 +23,7 @@ class BrowsePage extends StatefulWidget{
 
 
 class _BrowsePage extends State<BrowsePage>{
-  Future<Category> category;
+  List<Category> listCategory;
   Future<List<Instructor>> listInstructor;
 
   bool _isLoading = false;
@@ -35,7 +33,7 @@ class _BrowsePage extends State<BrowsePage>{
       _isLoading = true;
     });
     listInstructor =  APIServer().fetchInstructors();
-    category = APIServer().getCategory();
+    listCategory = await APIServer().getCategory();
     setState(() {
       _isLoading = false;
     });
@@ -118,93 +116,64 @@ class _BrowsePage extends State<BrowsePage>{
                     );
                   }
                   else if (index == 3) {
-                    return Container(
-                        child: FutureBuilder<Category>(
-                            future: category,
-                            builder: (context,snap){
-                              if (snap.hasData){
-                                return CarouselSlider(
-                                    options: CarouselOptions(
-                                      aspectRatio: 2.0,
-                                      enlargeCenterPage: true,
-                                      scrollDirection: Axis.horizontal,
-                                    ),
-                                    items: snap.data.payload.map((item) =>
-                                        GestureDetector(
-                                            onTap: () {
-                                              // print(index);
-                                              // List<Course> data;
-                                              // if (item == 'C++') {
-                                              //   data = listCourses.listCourseC;
-                                              // }
-                                              // else {
-                                              //   if (item == 'Swift') {
-                                              //     data = listCourses.listCourseSwift;
-                                              //   }
-                                              //   else {
-                                              //     data = listCourses.listCourseML;
-                                              //   }
-                                              // }
-                                              // Navigator.push(context, MaterialPageRoute(
-                                              //     builder: (_) =>
-                                              //         ChangeNotifierProvider.value(
-                                              //             value: Provider.of<ListCourses>(
-                                              //                 context, listen: false),
-                                              //             child: ListCoursePage(
-                                              //                 dataCourse: data))
-                                              // )
-                                              // );
-                                            },
+                    return CarouselSlider(
+                        options: CarouselOptions(
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        items: listCategory == null ? <Widget>[Container(height: 0)] : listCategory.map((item) =>
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ListCouresFromCategory(categoryID: item.id)
+                                      )
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(2.0),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Image.asset("Assets/images/code4.jpg",
+                                              fit: BoxFit.cover, width: 350.0),
+                                          //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                                          Positioned(
+                                            bottom: 0.0,
+                                            left: 0.0,
+                                            right: 0.0,
                                             child: Container(
-                                              margin: EdgeInsets.all(2.0),
-                                              child: ClipRRect(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(5.0)),
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      Image.asset("Assets/images/code4.jpg",
-                                                          fit: BoxFit.cover, width: 350.0),
-                                                      //  Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                                                      Positioned(
-                                                        bottom: 0.0,
-                                                        left: 0.0,
-                                                        right: 0.0,
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                            gradient: LinearGradient(
-                                                              colors: [
-                                                                Color.fromARGB(200, 0, 0, 0),
-                                                                Color.fromARGB(0, 0, 0, 0)
-                                                              ],
-                                                              begin: Alignment.bottomCenter,
-                                                              end: Alignment.topCenter,
-                                                            ),
-                                                          ),
-                                                          padding: EdgeInsets.symmetric(
-                                                              vertical: 10.0,
-                                                              horizontal: 20.0),
-                                                          child: Text(item.name,
-                                                            style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 20.0,
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(200, 0, 0, 0),
+                                                    Color.fromARGB(0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
                                               ),
-                                            )
-                                        )).toList()
-                                );
-                              }
-                              else if (snap.hasError){
-                                print(snap.error);
-                              }
-                              return CircularProgressIndicator();
-                            }
-                        )
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0,
+                                                  horizontal: 20.0),
+                                              child: Text(item.name,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                  ),
+                                )
+                            )
+                        ).toList()
                     );
                   }
                   else if (index == 4) {
@@ -230,28 +199,6 @@ class _BrowsePage extends State<BrowsePage>{
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                   onTap: () {
-                                    // print(index);
-                                    // List<Course> data;
-                                    // if (index == 0) {
-                                    //   data = listCourses.listCourseC;
-                                    // }
-                                    // else {
-                                    //   if (index == 1) {
-                                    //     data = listCourses.listCourseSwift;
-                                    //   }
-                                    //   else {
-                                    //     data = listCourses.listCourseML;
-                                    //   }
-                                    // }
-                                    // Navigator.push(context, MaterialPageRoute(
-                                    //     builder: (_) =>
-                                    //         ChangeNotifierProvider.value(
-                                    //             value: Provider.of<ListCourses>(
-                                    //                 context, listen: false),
-                                    //             child: ListCoursePage(
-                                    //                 dataCourse: data))
-                                    // )
-                                    // );
                                   },
                                   child: Container(
                                     width: MediaQuery

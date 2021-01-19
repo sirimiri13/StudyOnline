@@ -229,19 +229,18 @@ class _LoginPage extends State<LoginPage> {
         ),
         body: Center(
           child: Container (
-              padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: 50.0),
+              padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: 30.0),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     logo,
-                    SizedBox(height: 28.0),
+                    SizedBox(height: 20.0),
                     emailTextField,
                     SizedBox(height: 8.0),
                     passwordTextField,
                     SizedBox(height: 8.0),
                     loginButton,
                     ForgotPasswordButton,
-
                     signInGoogleButton,
                   ]
               )

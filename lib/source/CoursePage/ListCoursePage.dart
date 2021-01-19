@@ -1,9 +1,6 @@
-import 'dart:convert';
 
-import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
-import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,11 +37,10 @@ class _ListCoursePage extends State<ListCoursePage>{
                       padding: EdgeInsets.all(2),
                       height: 100,
                       child: GestureDetector(
-                          onTap: () async {
-                            CourseInfo courseInfo = await APIServer().getCourseInfo(snap.data[index].id,null);
+                          onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,))
+                              MaterialPageRoute(builder: (context) => InformationCoursePage(id: snap.data[index].id))
                             );
                           },
                           child: Card(

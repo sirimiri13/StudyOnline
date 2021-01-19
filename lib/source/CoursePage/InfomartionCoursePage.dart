@@ -8,9 +8,9 @@ import 'package:http/http.dart' as http;
 
 
 class InformationCoursePage extends StatefulWidget{
-  CourseInfo Courses;
+  String id;
   static String tag = 'list-course';
-  InformationCoursePage({Key key, this.Courses}) : super(key: key);
+  InformationCoursePage({Key key,this.id}) : super(key: key);
   @override
   _InformationCoursePage createState() => new _InformationCoursePage();
 }
@@ -18,20 +18,18 @@ class InformationCoursePage extends StatefulWidget{
 class _InformationCoursePage extends State<InformationCoursePage>{
   List<FavoriteCourse> listCourseFavorite;
   List<UserCourse> listCourse;
+  CourseInfo Course;
   bool isLike;
   bool isJoin;
+  bool isLoaded = false ;
   void checkStatus() async{
+    Course = await APIServer().getCourseInfo(widget.id, null);
     listCourseFavorite = await APIServer().fetchFavoriteCourse();
     listCourse = await APIServer().fetchUserCourse();
-    print("favorite ${listCourseFavorite}");
-    print("couser ${listCourse}");
-
-    print("like ${isLike}" );
-    print("join ${isJoin}" );
-
     setState(() {
-      isLike = listCourseFavorite.where((element) => element.id == widget.Courses.id).toList().length == 0 ? false : true;
-      isJoin = listCourse.where((element) => element.id == widget.Courses.id).toList().length == 0 ? false : true;
+      isLike = listCourseFavorite.where((element) => element.id ==Course.id).toList().length == 0 ? false : true;
+      isJoin = listCourse.where((element) => element.id == Course.id).toList().length == 0 ? false : true;
+      isLoaded = true;
     });
   }
 
@@ -46,7 +44,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
           backgroundColor: Colors.indigo,
           title: Text('Detail Course'),
         ),
-        body: Container(
+        body: (isLoaded == true)?Container(
             child: ListView(
               children: [
                 Container(
@@ -63,17 +61,17 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                         color: Colors.white,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(widget.Courses.imageUrl),
+                          image: NetworkImage(Course.imageUrl),
                         )
                     )
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 10,top:5,right:10),
-                  child: Text(widget.Courses.title, style: TextStyle(fontSize: 20.0,color: Colors.indigo, fontWeight: FontWeight.bold)),
+                  child: Text(Course.title, style: TextStyle(fontSize: 20.0,color: Colors.indigo, fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 10,top:5,right:10),
-                  child: Text(widget.Courses.subtitle,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.indigo)),
+                  child: Text(Course.subtitle,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.indigo)),
                 ),
                 Container(
                     padding: EdgeInsets.only(left: 10,top:5,right:10),
@@ -81,7 +79,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Description: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(widget.Courses.description),
+                        Text(Course.description),
                       ],
                     )
                 ),
@@ -90,7 +88,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                     child: Row(
                       children: [
                         Text("Total Hours: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(widget.Courses.totalHours.toString())
+                        Text(Course.totalHours.toString())
                       ],
                     )
 
@@ -100,7 +98,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                     child: Row(
                       children: [
                         Text("Price: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(widget.Courses.price == 0.0 ? "Free": widget.Courses.price.toString() )
+                        Text(Course.price == 0.0 ? "Free": Course.price.toString() )
                       ],
                     )
                 ),
@@ -109,7 +107,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                     child: Row(
                       children: [
                         Text("Rate: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(widget.Courses.ratedNumber.toString())
+                        Text(Course.ratedNumber.toString())
                       ],
                     )
                 ),
@@ -123,7 +121,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
                           if (isLike == false){
-                            http.Response responseLike = await APIServer().getUserLikeCourse(widget.Courses.id);
+                            http.Response responseLike = await APIServer().getUserLikeCourse(Course.id);
                             if (responseLike.statusCode == 200){
                               setState(() {
                                 isLike = true;
@@ -141,7 +139,7 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                         onPressed:() async {
-                          http.Response response = await APIServer().getJoinCourse(widget.Courses.id);
+                          http.Response response = await APIServer().getJoinCourse(Course.id);
                           if (response.statusCode == 200){
                             setState(() {
                               isJoin = true;
@@ -155,6 +153,28 @@ class _InformationCoursePage extends State<InformationCoursePage>{
                 ),
               ],
             )
+        ):
+        new Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Color.fromRGBO(0, 0, 0, 0.2),
+            ),
+            Align(
+              child: Container(
+                width: 70.0,
+                height: 70.0,
+                child: new Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: new Center(
+                        child: new CircularProgressIndicator()
+                    )
+                ),
+              ),
+              alignment: FractionalOffset.center,
+            )
+          ],
         )
     );
   }

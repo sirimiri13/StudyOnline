@@ -23,14 +23,18 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage> {
 
-  Future<List<Courses>> listCourseRecommend;
-  Future<List<UserCourse>>  listUserCourse;
-  Future<List<FavoriteCourse>> listFavoriteCourse;
-
+  List<Courses> listCourseRecommend;
+  List<UserCourse>  listUserCourse;
+   List<FavoriteCourse> listFavoriteCourse;
+  bool isLoaded = false;
   void _fetchData() async {
-    listCourseRecommend =  APIServer().fetchTopSellCourses(10, 1);
-    listUserCourse = APIServer().fetchUserCourse();
-    listFavoriteCourse = APIServer().fetchFavoriteCourse();
+    listCourseRecommend =  await APIServer().fetchTopSellCourses(10, 1);
+    listUserCourse = await APIServer().fetchUserCourse();
+    listFavoriteCourse = await  APIServer().fetchFavoriteCourse();
+    setState(() {
+      isLoaded = true;
+    });
+
   }
 
   @override void initState() {
@@ -39,35 +43,28 @@ class _HomePage extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    // double _width = MediaQuery
-    //     .of(context)
-    //     .size
-    //     .width;
+
     return Scaffold(
-      body: Container(
+      body: isLoaded ? Container(
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
               Container(
-                  child: FutureBuilder<List<Courses>>(
-                      future: listCourseRecommend,
-                      builder: (context, snap) {
-                        if (snap.hasData) {
-                          return CarouselSlider(
+                  child: CarouselSlider(
                             options: CarouselOptions(
                               aspectRatio: 2.0,
                               enlargeCenterPage: true,
                               scrollDirection: Axis.horizontal,
                               autoPlay: true,
                             ),
-                            items: snap.data.map((item) =>
+                            items: listCourseRecommend.map((item) =>
                                 GestureDetector(
                                     onTap: () async {
                                       CourseInfo courseInfo = await APIServer().getCourseInfo(item.id,null);
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo,))
+                                          MaterialPageRoute(builder: (context) => InformationCoursePage(id: courseInfo.id,))
                                       );
                                     },
                                     child: Container(
@@ -130,15 +127,10 @@ class _HomePage extends State<HomePage> {
                                     )
                                 )
                             ).toList(),
-                          );
-                        }
-                        else if (snap.hasError) {
-                          print(snap.error);
-                        }
-                        return CircularProgressIndicator();
-                      }
-                  )
+                   )
               ),
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -160,14 +152,10 @@ class _HomePage extends State<HomePage> {
                   )
                 ],
               ),
-              FutureBuilder<List<FavoriteCourse>>(
-                  future: listFavoriteCourse,
-                  builder: (context, snap) {
-                    if (snap.hasData) {
-                      return Container(
+               Container(
                         child: CarouselSlider(
                             options: CarouselOptions(),
-                            items: snap.data.map((item) =>
+                            items: listFavoriteCourse.map((item) =>
                                 GestureDetector(
                                     onTap: () async {
                                       CourseInfo courseInfo = await APIServer().getCourseInfo(item.id,null);
@@ -175,7 +163,7 @@ class _HomePage extends State<HomePage> {
                                       bool isJoined = listCourse.where((element) => element.id == courseInfo.id) != null? true: false;
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => InformationCoursePage(Courses: courseInfo))
+                                          MaterialPageRoute(builder: (context) => InformationCoursePage(id: courseInfo.id))
                                       );
                                     },
                                     child: Container(
@@ -196,17 +184,9 @@ class _HomePage extends State<HomePage> {
                                 ),
                             ).toList()
                         ),
-                      );
-                    }
-                    return CircularProgressIndicator();
-                  }
-              ),
+                      ),
               Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold)), 
-              FutureBuilder<List<UserCourse>> (
-                  future: listUserCourse,
-                  builder: (context,snapshot){
-                    if (snapshot.hasData){
-                      return (snapshot.data.length == 0)? Container (
+              (listUserCourse.length == 0)? Container (
                         padding: EdgeInsets.only(top: 20),
                         alignment: Alignment.center,
                         //    height: 100,
@@ -216,21 +196,22 @@ class _HomePage extends State<HomePage> {
                             fontSize: 18,
                             color: Colors.grey,
                           ),
-                        ),):
+                        ),
+                        ):
                       Container (
-                          height: 120 * snapshot.data.length.toDouble(),
+                          height: 120 * listUserCourse.length.toDouble(),
                           child: ListView.builder(
                                physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.only(top: 20),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
 
-                              itemCount: snapshot.data.length,
+                              itemCount: listUserCourse.length,
                               itemBuilder: (context, indexUserCourse) {
                                 return  Card(
                                     child:  GestureDetector(
                                           onTap: () async {
-                                       CourseWithLesson courseInfo = await APIServer().getCourseWithLession(snapshot.data[indexUserCourse].id);
+                                       CourseWithLesson courseInfo = await APIServer().getCourseWithLession(listUserCourse[indexUserCourse].id);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => DetailCoursePage(course: courseInfo,))
@@ -239,7 +220,7 @@ class _HomePage extends State<HomePage> {
                                       child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: <Widget>[
-                                            Image.network(snapshot.data[indexUserCourse].courseImage,width: 125),
+                                            Image.network(listUserCourse[indexUserCourse].courseImage,width: 125),
                                             Expanded(
                                                 child: Container(
                                                     padding: EdgeInsets.all(5),
@@ -247,9 +228,9 @@ class _HomePage extends State<HomePage> {
                                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: <Widget>[
-                                                        Text(snapshot.data[indexUserCourse].courseTitle, style: TextStyle(fontWeight: FontWeight.bold)),
-                                                        Text('Author: ' + snapshot.data[indexUserCourse].instructorName),
-                                                        Text('Videos: '+ snapshot.data[indexUserCourse].total.toInt().toString()),
+                                                        Text(listUserCourse[indexUserCourse].courseTitle, style: TextStyle(fontWeight: FontWeight.bold)),
+                                                        Text('Author: ' + listUserCourse[indexUserCourse].instructorName),
+                                                        Text('Videos: '+ listUserCourse[indexUserCourse].total.toInt().toString()),
                                                         //  RatingBox(),
                                                       ],
                                                     )
@@ -260,16 +241,34 @@ class _HomePage extends State<HomePage> {
                                     )
                                 );
                               })
-                      );
-                    }
-                    return CircularProgressIndicator();
-                  }
-              ),
-            ],
+                      ),
 
+            ],
           )
 
-      ),
+      ):
+      new Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Color.fromRGBO(0, 0, 0, 0.2),
+          ),
+          Align(
+            child: Container(
+              width: 70.0,
+              height: 70.0,
+              child: new Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: new Center(
+                      child: new CircularProgressIndicator()
+                  )
+              ),
+            ),
+            alignment: FractionalOffset.center,
+          )
+        ],
+      )
     );
   }
 }
