@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Course.dart';
 import 'dart:convert';
 
 Instructor InstructorFromJson(String str) => Instructor.fromJson(json.decode(str));

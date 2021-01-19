@@ -1,23 +1,25 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
-import 'package:finalproject_1712061/source/CoursePage/Video.dart';
+import 'package:finalproject_1712061/source/CoursePage/ExercisePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LessonPage extends StatefulWidget{
   Section section;
-  String videoURL;
+  String courseId;
   static String tag = 'list-course';
-  LessonPage({Key key, this.section,this.videoURL}) : super(key: key);
+  LessonPage({Key key, this.section,this.courseId}) : super(key: key);
   @override
   _LessonPage createState() => new _LessonPage();
 }
 
 
 class _LessonPage extends State<LessonPage>{
+
   @override void initState() {
     super.initState();
+
   }
 
   @override
@@ -33,9 +35,11 @@ class _LessonPage extends State<LessonPage>{
             return Container(
                 child : GestureDetector(
                     onTap: () {
+                      print(widget.section.lesson[index].id);
+
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => VideoPlayerScreen(videoURL: widget.videoURL,))
+                          MaterialPageRoute(builder: (context) => ExercisePage(courseId: widget.courseId,lesson: widget.section.lesson[index]))
                       );
                     },
                     child: Card(
@@ -49,7 +53,9 @@ class _LessonPage extends State<LessonPage>{
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text("Lesson ${index + 1}: ${widget.section.lesson[index].name}",style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Container (
+                                          child:  Text("Lesson ${index + 1}: ${widget.section.lesson[index].name}",style: TextStyle(fontWeight: FontWeight.bold)),
+                                        )
                                         // RatingBox(),
                                       ],
                                     )

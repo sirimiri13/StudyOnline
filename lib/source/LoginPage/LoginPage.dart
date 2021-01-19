@@ -1,11 +1,8 @@
 
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/API/SignInGG.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../BottomNavigation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 
 
@@ -63,7 +60,6 @@ class _LoginPage extends State<LoginPage> {
 
     final loginButton = Container (
       width: 200,
-
         padding: EdgeInsets.all(20),
         child: RaisedButton(
           shape: RoundedRectangleBorder(
@@ -210,9 +206,7 @@ class _LoginPage extends State<LoginPage> {
         padding: EdgeInsets.all(20),
         child: OutlineButton(
           onPressed: () {
-            SignInGG().signInWithGoogle().whenComplete(() {
-              Navigator.of(context).pushNamed(BottomNavigation.tag);
-            });
+
           },
           disabledBorderColor: Colors.transparent,
           padding: EdgeInsets.all(12),

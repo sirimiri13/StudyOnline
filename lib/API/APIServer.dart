@@ -3,12 +3,14 @@ import 'package:finalproject_1712061/Model/Category.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/Model/CourseSearch.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
+import 'package:finalproject_1712061/Model/Exercise.dart';
 import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
 import 'package:finalproject_1712061/Model/Instructor.dart';
 import 'package:finalproject_1712061/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/User.dart';
 import 'package:finalproject_1712061/Model/UserCourse.dart';
+import 'package:finalproject_1712061/Model/LessonVideo.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Constant-server.dart';
@@ -25,7 +27,6 @@ class APIServer{
 
     if(response.statusCode == 200){
       final prefs = await SharedPreferences.getInstance();
-      print('data : ${jsData["token"]}');
       save(jsData["token"]);
     }
     return response;
@@ -199,6 +200,7 @@ class APIServer{
   }
 
 
+
 // fetch khoá học với bài học
   Future<CourseWithLesson> getCourseWithLession(String courseId) async{
     final prefs = await SharedPreferences.getInstance();
@@ -215,6 +217,34 @@ class APIServer{
     }
   }
 
+
+  // lấy bài tập theo lesson
+
+Future<List<Exercise>> fetchExercises(String lessonId) async{
+  Map body = {
+    'limit': lessonId
+  };
+  final prefs = await SharedPreferences.getInstance();
+  String token = await prefs.get('token');
+  final response = await http.post(api_server + "/exercise/student/list-exercise-lesson", headers: {"Authorization": "Bearer $token", "content-type": "application/json"}, body: json.encode(body));
+  if (response.statusCode == 200) {
+    List<Exercise> exercises = (json.decode(response.body)["payload"]["exercises"] as List).map((data) => Exercise.fromJson(data)).toList();
+    return exercises;
+  }
+  return null;
+}
+
+// lấy video lesson
+  Future<LessonVideo> fetchLessonVideo(String courseID, String lessonID) async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token');
+    final response = await http.get(api_server + "/lesson/video/" + courseID + "/" + lessonID, headers: {"Authorization": "Bearer $token", "content-type": "application/json"});
+    if (response.statusCode == 200) {
+      LessonVideo lessonVideo = LessonVideo.fromJson(json.decode(response.body)['payload']);
+      return lessonVideo;
+    }
+    return null;
+  }
 
   Future getUserCourse(String id) async{
     final prefs = await SharedPreferences.getInstance();

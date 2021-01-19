@@ -4,7 +4,6 @@ import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import '../LoginPage/LoginPage.dart';
 import '../RegisterPage/RegisterPage.dart';
-import '../../main.dart';
 
 
 
@@ -16,15 +15,11 @@ class MainPage extends StatefulWidget {
 
 class _MainPage extends State<MainPage> {
 
-  bool isLoaded = false;
+  bool isLoaded = true;
   checkToken() async {
     UserMe currentUser = await APIServer().fetchUserInfo();
     if (currentUser != null) {
-      Navigator.of(context).push(
-          new MaterialPageRoute(
-            builder: (BuildContext context) => new BottomNavigation(),
-          )
-      );
+          Navigator.of(context).pushNamed(BottomNavigation.tag);
       setState(() {
         isLoaded = true;
       });
@@ -33,7 +28,7 @@ class _MainPage extends State<MainPage> {
 
   @override void initState() {
     super.initState();
-    checkToken();
+   // checkToken();
   }
   @override
   Widget build(BuildContext context) {
@@ -70,7 +65,6 @@ class _MainPage extends State<MainPage> {
     );
 
     final WelcomeLabel = Container(
-
       child:Text(
           "WELCOME!",
           style: TextStyle(

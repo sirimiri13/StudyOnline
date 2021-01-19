@@ -1,12 +1,9 @@
-
+import 'package:share/share.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
 import 'package:finalproject_1712061/source/CoursePage/LessonPage.dart';
 import 'package:flutter/material.dart';
 
 
-
-
-//final itemCourse = getCourseSuggest();
 class DetailCoursePage extends StatefulWidget{
   static String tag = 'detail-course-page';
   CourseWithLesson course;
@@ -22,6 +19,14 @@ class _DetailCoursePage extends State<DetailCoursePage>{
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         title: Text('Detail Course'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              Share.share("http://dev.letstudy.org/course-detail/${widget.course.id}");
+            },
+           icon: Icon(Icons.share_outlined),
+          ),
+        ],
       ),
       body: Container(
         child: ListView.builder(
@@ -62,7 +67,7 @@ class _DetailCoursePage extends State<DetailCoursePage>{
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LessonPage(section: widget.course.section[index-2],videoURL: widget.course.promoVidUrl,))
+                          MaterialPageRoute(builder: (context) => LessonPage(section: widget.course.section[index-2],courseId: widget.course.id,))
                       );
                     },
                     child: Card(

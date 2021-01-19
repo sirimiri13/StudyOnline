@@ -1,7 +1,6 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
-import 'package:finalproject_1712061/Model/Course.dart';
 import 'package:finalproject_1712061/Model/CourseSearch.dart';
-import 'package:finalproject_1712061/Model/ListCourses.dart';
+
 import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +17,6 @@ class SearchPage extends StatefulWidget{
 class _SearchPage extends State<SearchPage> {
   TextEditingController textController = new TextEditingController();
   List<SearchCourse> listSearchCourses;
-  List<String> list = ListCourses().getTitle();
 
   bool isLoaded = false;
   void _fetchData() async {

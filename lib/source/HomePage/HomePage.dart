@@ -22,7 +22,6 @@ class HomePage extends StatefulWidget{
 
 
 class _HomePage extends State<HomePage> {
-
   List<Courses> listCourseRecommend;
   List<UserCourse>  listUserCourse;
    List<FavoriteCourse> listFavoriteCourse;

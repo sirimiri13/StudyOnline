@@ -16,7 +16,6 @@ class BottomNavigation extends StatefulWidget{
 }
 
 class _BottomNavigation extends State<BottomNavigation>{
-  //UserMe user = UserMe();
   int _currentIndex = 0;
 List<Widget> _listPage = <Widget>[
   HomePage(),
@@ -26,19 +25,9 @@ List<Widget> _listPage = <Widget>[
   AccountPage(),
 ];
 
-  // fetchData() async {
-  //   UserMe userRes;
-  //   userRes = await APIServer().fetchUserInfo();
-  //   setState(() {
-  //     user = userRes;
-  //   });
-  //   return userRes;
-  // }
 
   @override initState(){
     super.initState();
-
-   // fetchData();
   }
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
