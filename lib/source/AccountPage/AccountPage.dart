@@ -16,7 +16,6 @@ class AccountPage extends StatefulWidget {
 
 
 class _AccountPage extends State<AccountPage> {
-  Future<UserMe> futureUserMe;
   UserMe user;
   bool isLoaded = false;
   void _fetchData() async {

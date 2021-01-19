@@ -8,7 +8,7 @@ import 'AccountPage/AccountPage.dart';
 import 'BrowsePage/BrowsePage.dart';
 
 
-UserMe user = UserMe();
+
 class BottomNavigation extends StatefulWidget{
   static String tag = 'bottom-navigation';
   @override
@@ -16,7 +16,7 @@ class BottomNavigation extends StatefulWidget{
 }
 
 class _BottomNavigation extends State<BottomNavigation>{
-
+  //UserMe user = UserMe();
   int _currentIndex = 0;
 List<Widget> _listPage = <Widget>[
   HomePage(),
@@ -26,19 +26,19 @@ List<Widget> _listPage = <Widget>[
   AccountPage(),
 ];
 
-  fetchData() async {
-    UserMe userRes;
-    userRes = await APIServer().fetchUserInfo();
-    setState(() {
-      user = userRes;
-    });
-    return userRes;
-  }
+  // fetchData() async {
+  //   UserMe userRes;
+  //   userRes = await APIServer().fetchUserInfo();
+  //   setState(() {
+  //     user = userRes;
+  //   });
+  //   return userRes;
+  // }
 
   @override initState(){
     super.initState();
 
-    fetchData();
+   // fetchData();
   }
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;

@@ -39,9 +39,9 @@ class _EditAccountPage extends State<EditAccountPage>{
                     controller: editNameController,
                     autofocus: true,
                     decoration: InputDecoration(
-                      hintText: user.payload.name == null
+                      hintText: widget.user.payload.name == null
                           ? "Name"
-                          : user.payload.name,
+                          : widget.user.payload.name,
                     ),
                   ),
                 ),
@@ -51,7 +51,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                       controller: editPhoneController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        hintText: user.payload.phone,
+                        hintText: widget.user.payload.phone,
                       ),
                     )
                 ),
@@ -88,8 +88,8 @@ class _EditAccountPage extends State<EditAccountPage>{
                               : "";
                           var phone = editPhoneController.text.isNotEmpty
                               ? editPhoneController.text
-                              : user.payload.phone;
-                          var avatar = user.payload.avatar;
+                              : widget.user.payload.phone;
+                          var avatar = widget.user.payload.avatar;
                           print(name);
                           print(phone);
                           print(avatar);
@@ -218,7 +218,7 @@ class _EditAccountPage extends State<EditAccountPage>{
                                                 });
                                           }
                                           else {
-                                            http.Response response = await APIServer().changePw(user.payload.id, oldPwController.text, newPwController.text);
+                                            http.Response response = await APIServer().changePw(widget.user.payload.id, oldPwController.text, newPwController.text);
                                             if (response.statusCode == 200){
                                               Navigator.pop(context);
                                               showDialog(
@@ -243,7 +243,6 @@ class _EditAccountPage extends State<EditAccountPage>{
                                               );
                                             }
                                             else {
-                                              print(user.payload.id);
                                               showDialog(
                                                   context: context,
                                                   builder: (BuildContext context) {

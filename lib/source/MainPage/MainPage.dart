@@ -1,3 +1,6 @@
+import 'package:finalproject_1712061/API/APIServer.dart';
+import 'package:finalproject_1712061/Model/User.dart';
+import 'package:finalproject_1712061/source/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import '../LoginPage/LoginPage.dart';
 import '../RegisterPage/RegisterPage.dart';
@@ -12,6 +15,26 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
+
+  bool isLoaded = false;
+  checkToken() async {
+    UserMe currentUser = await APIServer().fetchUserInfo();
+    if (currentUser != null) {
+      Navigator.of(context).push(
+          new MaterialPageRoute(
+            builder: (BuildContext context) => new BottomNavigation(),
+          )
+      );
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
+
+  @override void initState() {
+    super.initState();
+    checkToken();
+  }
   @override
   Widget build(BuildContext context) {
     final loginButton = Container(
@@ -58,7 +81,7 @@ class _MainPage extends State<MainPage> {
       )
     ) ;
 
-    return Container(
+    return isLoaded? Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
@@ -80,6 +103,28 @@ class _MainPage extends State<MainPage> {
           )
       )
 
-      );
+      ):
+    new Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Color.fromRGBO(0, 0, 0, 0.2),
+        ),
+        Align(
+          child: Container(
+            width: 70.0,
+            height: 70.0,
+            child: new Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: new Center(
+                    child: new CircularProgressIndicator()
+                )
+            ),
+          ),
+          alignment: FractionalOffset.center,
+        )
+      ],
+    );
   }
 }
