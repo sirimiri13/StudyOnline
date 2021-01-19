@@ -221,29 +221,62 @@ class _LoginPage extends State<LoginPage> {
           backgroundColor: Colors.indigo
 
         ),
-        body: Center(
-          child: Container (
-              padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: 30.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    logo,
-                    SizedBox(height: 20.0),
-                    emailTextField,
-                    SizedBox(height: 8.0),
-                    passwordTextField,
-                    SizedBox(height: 8.0),
-                    loginButton,
-                    ForgotPasswordButton,
-                    signInGoogleButton,
-                  ]
-              )
-          )
+        body:
+        GestureDetector(
+            onTap:() {
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: Stack(
+              children: <Widget>[
+                Center(
+                    child: Container (
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: SingleChildScrollView(
+                          reverse: true,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                logo,
+                                SizedBox(height: 10.0),
+                                emailTextField,
+                                SizedBox(height: 10.0),
+                                passwordTextField,
+                                SizedBox(height: 20.0),
+                                loginButton,
+                                ForgotPasswordButton,
+                              ]
+                          ),
+                        )
+                    )
+                ),
+              ],
+            )
+        )
+        //Center (
+
+          // child: Container (
+          //     padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: 30.0),
+          //     child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: <Widget>[
+          //           logo,
+          //           SizedBox(height: 20.0),
+          //           emailTextField,
+          //           SizedBox(height: 8.0),
+          //           passwordTextField,
+          //           SizedBox(height: 8.0),
+          //           loginButton,
+          //           ForgotPasswordButton,
+          //           signInGoogleButton,
+          //         ]
+          //     )
+          // )
 
           // child: Column(
 
 
-            )
+          //  )
         );
     //);
   }
