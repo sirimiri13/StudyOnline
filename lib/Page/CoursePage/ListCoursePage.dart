@@ -1,6 +1,6 @@
 
 import 'package:finalproject_1712061/Model/Courses.dart';
-import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/InfomartionCoursePage.dart';
 import 'package:flutter/material.dart';
 
 

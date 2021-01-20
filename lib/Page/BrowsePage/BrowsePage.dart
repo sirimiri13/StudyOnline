@@ -4,7 +4,7 @@ import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/Category.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/Instructor.dart';
-import 'package:finalproject_1712061/source/CoursePage/ListCourseFromCategory.dart';
+import 'package:finalproject_1712061/Page/CoursePage/ListCourseFromCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:carousel_slider/carousel_slider.dart';

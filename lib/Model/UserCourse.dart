@@ -4,25 +4,6 @@ UserCourse userCourseFromJson(String str) => UserCourse.fromJson(json.decode(str
 
 String userCourseToJson(UserCourse data) => json.encode(data.toJson());
 
-// class UserCourse {
-//   UserCourse({
-//     this.message,
-//     this.payload,
-//   });
-//
-//   String message;
-//   List<Payload> payload;
-//
-//   factory UserCourse.fromJson(Map<String, dynamic> json) => UserCourse(
-//     message: json["message"],
-//     payload: List<Payload>.from(json["payload"].map((x) => Payload.fromJson(x))),
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "message": message,
-//     "payload": List<dynamic>.from(payload.map((x) => x.toJson())),
-//   };
-// }
 
 class UserCourse {
   UserCourse({

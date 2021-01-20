@@ -1,12 +1,12 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
-import 'package:finalproject_1712061/source/CoursePage/DetailCoursePage.dart';
-import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/DetailCoursePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/InfomartionCoursePage.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/UserCourse.dart';
 import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
-import 'package:finalproject_1712061/source/CoursePage/ListFavoriteCoursePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/ListFavoriteCoursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

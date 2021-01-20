@@ -1,15 +1,14 @@
 //Main.dart
-import 'package:finalproject_1712061/source/AccountPage/AccountPage.dart';
+import 'package:finalproject_1712061/Page/AccountPage/AccountPage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'source/LoginPage/LoginPage.dart';
-import 'source/MainPage/MainPage.dart';
-import 'source/RegisterPage/RegisterPage.dart';
-import 'source/BottomNavigation.dart';
-import 'source/DownloadPage/DownloadPage.dart';
-import 'source/SearchPage/SearchPage.dart';
-import 'source/HomePage/HomePage.dart';
-import 'source/CoursePage/DetailCoursePage.dart';
+import 'Page/LoginPage/LoginPage.dart';
+import 'Page/MainPage/MainPage.dart';
+import 'Page/RegisterPage/RegisterPage.dart';
+import 'Page/BottomNavigation.dart';
+import 'Page/DownloadPage/DownloadPage.dart';
+import 'Page/SearchPage/SearchPage.dart';
+import 'Page/HomePage/HomePage.dart';
+import 'Page/CoursePage/DetailCoursePage.dart';
 
 
 

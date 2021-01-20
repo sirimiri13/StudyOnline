@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
-import 'package:finalproject_1712061/source/CoursePage/ExercisePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/ExercisePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

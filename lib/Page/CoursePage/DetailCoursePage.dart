@@ -1,6 +1,6 @@
 import 'package:share/share.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
-import 'package:finalproject_1712061/source/CoursePage/LessonPage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/LessonPage.dart';
 import 'package:flutter/material.dart';
 
 

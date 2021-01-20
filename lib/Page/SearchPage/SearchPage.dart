@@ -1,7 +1,7 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/CourseSearch.dart';
 
-import 'package:finalproject_1712061/source/CoursePage/InfomartionCoursePage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/InfomartionCoursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';

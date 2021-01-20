@@ -1,6 +1,6 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/User.dart';
-import 'package:finalproject_1712061/source/BottomNavigation.dart';
+import 'package:finalproject_1712061/Page/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

@@ -37,7 +37,6 @@ dependencies:
   imagebutton: ^0.0.6
   http: ^0.12.0+4
   shared_preferences: ^0.5.2+1
-  flutter_secure_storage: ^3.3.5
   video_player:
   share: ^0.6.5+4
 

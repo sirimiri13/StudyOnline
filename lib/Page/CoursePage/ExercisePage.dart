@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
 import 'package:finalproject_1712061/Model/Exercise.dart';
-import 'package:finalproject_1712061/source/CoursePage/PlayVideoPage.dart';
+import 'package:finalproject_1712061/Page/CoursePage/PlayVideoPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
