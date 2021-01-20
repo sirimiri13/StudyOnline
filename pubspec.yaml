@@ -39,11 +39,17 @@ dependencies:
   shared_preferences: ^0.5.2+1
   video_player:
   share: ^0.6.5+4
+  path_provider: ^1.6.5
+  downloads_path_provider: ^0.1.0
+  permission_handler: ^4.4.0+hotfix.2
+  open_file: ^3.0.1
+  flutter_local_notifications: ^1.3.0
+  dio: ^3.0.9
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  dio: ^1.0.0
+
 
 
 # For information on the generic Dart part of this file, see the

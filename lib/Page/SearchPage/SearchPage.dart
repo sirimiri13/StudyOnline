@@ -38,6 +38,10 @@ class _SearchPage extends State<SearchPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('SEARCH'),
+        backgroundColor: Colors.indigo,
+      ),
         body: isLoaded? Stack(
           children: <Widget>[
             SafeArea(
@@ -133,8 +137,7 @@ class _SearchPage extends State<SearchPage> {
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: <Widget>[
                                                                 Text(listSearchCourses[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                                                                listSearchCourses[index].description.length <= 100 ? Text(listSearchCourses[index].description, style: TextStyle(fontSize: 10)) : Text(listSearchCourses[index].description.substring(0,95) + "...", style: TextStyle(fontSize: 10)),
-                                                                Text('Rated: ' + listSearchCourses[index].ratedNumber.toString(), style: TextStyle(fontSize: 10)),
+
                                                               ],
                                                             )
                                                         )

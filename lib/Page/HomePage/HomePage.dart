@@ -1,5 +1,6 @@
 import 'package:finalproject_1712061/API/APIServer.dart';
 import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
+import 'package:finalproject_1712061/Model/User.dart';
 import 'package:finalproject_1712061/Page/CoursePage/DetailCoursePage.dart';
 import 'package:finalproject_1712061/Page/CoursePage/InfomartionCoursePage.dart';
 import 'package:finalproject_1712061/Model/CourseInfo.dart';
@@ -24,7 +25,9 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage> {
   List<Courses> listCourseRecommend;
   List<UserCourse>  listUserCourse;
-   List<FavoriteCourse> listFavoriteCourse;
+  List<FavoriteCourse> listFavoriteCourse;
+
+  UserMe currentUser;
   bool isLoaded = false;
   void _fetchData() async {
     listCourseRecommend =  await APIServer().fetchTopSellCourses(10, 1);
@@ -33,7 +36,6 @@ class _HomePage extends State<HomePage> {
     setState(() {
       isLoaded = true;
     });
-
   }
 
   @override void initState() {
@@ -129,7 +131,6 @@ class _HomePage extends State<HomePage> {
                    )
               ),
 
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -204,7 +205,6 @@ class _HomePage extends State<HomePage> {
                               padding: EdgeInsets.only(top: 20),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
-
                               itemCount: listUserCourse.length,
                               itemBuilder: (context, indexUserCourse) {
                                 return  Card(

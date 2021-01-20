@@ -15,20 +15,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPage extends State<MainPage> {
 
-  bool isLoaded = true;
-  checkToken() async {
-    UserMe currentUser = await APIServer().fetchUserInfo();
-    if (currentUser != null) {
-          Navigator.of(context).pushNamed(BottomNavigation.tag);
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
 
   @override void initState() {
     super.initState();
-   // checkToken();
   }
   @override
   Widget build(BuildContext context) {
@@ -75,7 +64,7 @@ class _MainPage extends State<MainPage> {
       )
     ) ;
 
-    return isLoaded? Container(
+    return  Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
@@ -96,29 +85,8 @@ class _MainPage extends State<MainPage> {
               ]
           )
       )
-
-      ):
-    new Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Color.fromRGBO(0, 0, 0, 0.2),
-        ),
-        Align(
-          child: Container(
-            width: 70.0,
-            height: 70.0,
-            child: new Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: new Center(
-                    child: new CircularProgressIndicator()
-                )
-            ),
-          ),
-          alignment: FractionalOffset.center,
-        )
-      ],
     );
+
+
   }
 }

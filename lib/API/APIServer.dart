@@ -71,7 +71,6 @@ class APIServer{
     );
     if (response.statusCode == 200){
       final responseJson = jsonDecode(response.body);
-      print(response.body + " ---- ");
       UserMe  userMe = new UserMe.fromJson(responseJson);
       return userMe;
     }
@@ -337,12 +336,6 @@ Future<List<Exercise>> fetchExercises(String lessonId) async{
   }
 
 
-  read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key ) ?? 0;
-    print('read : $value');
-  }
 
 
 }
