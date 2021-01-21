@@ -137,6 +137,7 @@ class _HomePage extends State<HomePage> {
                   Text('Favorite Course', style: TextStyle(fontSize: 18.0,
                       color: Colors.indigo,
                       fontWeight: FontWeight.bold)),
+                  listFavoriteCourse.isEmpty ? new Container ():
                   OutlineButton(
                     onPressed: () async {
                       Future<List<FavoriteCourse>> listFavoriteCourse = APIServer().fetchFavoriteCourse();
@@ -152,6 +153,18 @@ class _HomePage extends State<HomePage> {
                   )
                 ],
               ),
+              (listFavoriteCourse.isEmpty)? Container (
+                padding: EdgeInsets.only(top: 20),
+                alignment: Alignment.center,
+                //    height: 100,
+                child: Text(
+                  "You haven't liked any course",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
+                ),
+              ):
                Container(
                         child: CarouselSlider(
                             options: CarouselOptions(),
@@ -191,7 +204,7 @@ class _HomePage extends State<HomePage> {
                         alignment: Alignment.center,
                         //    height: 100,
                         child: Text(
-                          'There are no  courses!',
+                         "Take the course!",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey,

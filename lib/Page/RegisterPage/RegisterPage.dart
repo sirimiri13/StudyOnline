@@ -125,34 +125,48 @@ class _RegisterPage extends State<RegisterPage>{
         title: Text('REGISTER'),
         backgroundColor: Colors.indigo,
       ),
-      body: Container(
-          padding: EdgeInsets.only(left: 24.0, right: 24.0,),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 10.0),
-            Text('Username'),
-            //SizedBox(height: 4.0),
-            usernameTextField,
-            SizedBox(height: 6.0),
-            Text('Email'),
-            //SizedBox(height: 4.0),
-            emailTextField,
-            SizedBox(height: 6.0),
-            Text('Phone Number'),
-           // SizedBox(height: 4.0),
-            phoneNumberTextField,
-            SizedBox(height: 6.0),
-            Text('Password'),
-           // SizedBox(height: 4.0),
-            pwTextField,
-            SizedBox(height: 6.0),
-            Center(
-              child: registerButton,
-            )
+      body: GestureDetector(
+          onTap:() {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Stack(
+            children: <Widget>[
+               Container (
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: SingleChildScrollView(
+                        reverse: true,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(height: 10.0),
+                              Text('Username'),
+                              //SizedBox(height: 4.0),
+                              usernameTextField,
+                              SizedBox(height: 6.0),
+                              Text('Email'),
+                              //SizedBox(height: 4.0),
+                              emailTextField,
+                              SizedBox(height: 6.0),
+                              Text('Phone Number'),
+                              // SizedBox(height: 4.0),
+                              phoneNumberTextField,
+                              SizedBox(height: 6.0),
+                              Text('Password'),
+                              // SizedBox(height: 4.0),
+                              pwTextField,
+                              SizedBox(height: 6.0),
+                              Center(
+                                child: registerButton,
+                              )
 
-          ]
-        )
+                            ]
+                        ),
+                      )
+                  )
+            ],
+          )
       )
     );
   }
