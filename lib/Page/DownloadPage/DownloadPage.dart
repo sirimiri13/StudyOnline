@@ -14,28 +14,33 @@ class DownloadPage extends StatefulWidget{
 
 class _DownloadPage extends State<DownloadPage> {
 
-  String appDirectory;
-  List<FileSystemEntity> listVideoFiles = [];
+  String folderDirectory;
+  List<FileSystemEntity> listVideo = [];
+  String endPath = ".mov";
+
 
   bool isLoaded = false;
-  void listofFiles() async {
-    final dir = await getApplicationDocumentsDirectory();
-    appDirectory = dir.path;
+  void getListFile() async {
+    final  directory = await getApplicationDocumentsDirectory();
+    folderDirectory = directory.path;
     setState(() {
-      dir.list(recursive: false, followLinks: false)
+      directory.list(recursive: false, followLinks: false)
           .listen((FileSystemEntity entity) {
-        if (entity.path.substring(dir.path.length+1, entity.path.length) != ".Trash") {
-          listVideoFiles.add(entity);
+        if (entity.path.substring(directory.path.length+1, entity.path.length) != ".Trash") {
+          listVideo.add(entity);
         }
       });
       isLoaded = true;
     });
   }
 
+
+
+
   @override
   void initState() {
     super.initState();
-    listofFiles();
+    getListFile();
   }
 
 
@@ -56,7 +61,7 @@ class _DownloadPage extends State<DownloadPage> {
                crossAxisAlignment: CrossAxisAlignment.stretch,
                children: <Widget>[
                  Expanded(
-                   child: listVideoFiles == null || listVideoFiles.length == 0 ? Container(
+                   child: listVideo == null || listVideo.length == 0 ? Container(
                      alignment: Alignment.center,
                      child: Text(
                        'No video download',
@@ -66,17 +71,18 @@ class _DownloadPage extends State<DownloadPage> {
                        ),
                      ),
                    ): Container(
-                       height: listVideoFiles.length.toDouble()*60,
+                       height: listVideo.length.toDouble()*60,
                        child: ListView.builder(
                          physics: const NeverScrollableScrollPhysics(),
-                         itemCount: listVideoFiles.length,
+                         itemCount: listVideo.length,
                          itemBuilder: (context, index) {
                            return Container(
+                             height: 50,
                                child : GestureDetector(
                                    onTap: () {
-                                     OpenFile.open(listVideoFiles[index].path);
+                                     OpenFile.open(listVideo[index].path);
+                                     print(listVideo[index]);
                                    },
-                                   child: Card(
                                      child: Container(
                                          padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                                          child: Column(
@@ -84,13 +90,13 @@ class _DownloadPage extends State<DownloadPage> {
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: <Widget>[
                                              Text(
-                                                 listVideoFiles[index].path.substring(appDirectory.length + 1, listVideoFiles[index].path.length),
+                                                // listVideo[index].path.substring(folderDirectory.length + 1, listVideo[index].path.length),
+                                                 listVideo[index].path.substring(folderDirectory.length + 1, listVideo[index].path.indexOf(endPath)),
                                                  style: TextStyle(fontWeight: FontWeight.bold)),
                                            ],
                                          )
                                      ),
                                    )
-                               )
                            );
                          },
                        )

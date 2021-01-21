@@ -40,6 +40,7 @@ class _SearchPage extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('SEARCH'),
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.indigo,
       ),
         body: isLoaded? Stack(
