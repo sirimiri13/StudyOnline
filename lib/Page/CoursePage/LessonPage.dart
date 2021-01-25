@@ -17,17 +17,13 @@ class LessonPage extends StatefulWidget{
 
 class _LessonPage extends State<LessonPage>{
 
-  @override void initState() {
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
         appBar: AppBar(
           backgroundColor: Colors.indigo,
-          title: Text('Courses'),
+          title: Text(widget.section.name),
         ),
         body: ListView.builder(
           itemCount: widget.section.lesson.length,
@@ -36,7 +32,7 @@ class _LessonPage extends State<LessonPage>{
                 child : GestureDetector(
                     onTap: () {
                       print(widget.section.lesson[index].id);
-
+                    //  print(widget.section.)
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => ExercisePage(courseId: widget.courseId,lesson: widget.section.lesson[index]))

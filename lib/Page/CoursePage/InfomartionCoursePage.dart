@@ -163,13 +163,31 @@ class _InformationCoursePage extends State<InformationCoursePage>{
             ),
             Align(
               child: Container(
-                width: 70.0,
-                height: 70.0,
-                child: new Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: new Center(
-                        child: new CircularProgressIndicator()
+                color: Colors.white70,
+                width: 120,
+                height: 120,
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Center(
+                            child: new CircularProgressIndicator()
+                        )
+                    ),
+                    Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Loading ...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.indigo,
+                            ),
+                          ),
+                        )
                     )
+                  ],
                 ),
               ),
               alignment: FractionalOffset.center,

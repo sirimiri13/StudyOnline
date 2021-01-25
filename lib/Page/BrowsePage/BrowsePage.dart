@@ -26,16 +26,16 @@ class _BrowsePage extends State<BrowsePage>{
   List<Category> listCategory;
   Future<List<Instructor>> listInstructor;
 
-  bool _isLoading = false;
+  bool isLoaded = false;
 
   void _fetchData() async {
     setState(() {
-      _isLoading = true;
+      isLoaded = false;
     });
     listInstructor =  APIServer().fetchInstructors();
     listCategory = await APIServer().getCategory();
     setState(() {
-      _isLoading = false;
+      isLoaded = true;
     });
   }
 
@@ -47,7 +47,7 @@ class _BrowsePage extends State<BrowsePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: isLoaded? Container(
             padding: EdgeInsets.only( top: 10.0),
             child: ListView.builder  (
                 scrollDirection: Axis.vertical,
@@ -290,6 +290,46 @@ class _BrowsePage extends State<BrowsePage>{
                   }
                 })
 
+        ):
+        new Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Color.fromRGBO(0, 0, 0, 0.2),
+            ),
+            Align(
+              child: Container(
+                color: Colors.white70,
+                width: 120,
+                height: 120,
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Center(
+                            child: new CircularProgressIndicator()
+                        )
+                    ),
+                    Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Loading ...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.indigo,
+                            ),
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              ),
+              alignment: FractionalOffset.center,
+            )
+          ],
         )
     );
   }

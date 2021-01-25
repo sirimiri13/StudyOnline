@@ -43,7 +43,8 @@ class _SearchPage extends State<SearchPage> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.indigo,
       ),
-        body: isLoaded? Stack(
+        body: isLoaded? Container(
+          child: ListView (
           children: <Widget>[
             SafeArea(
                 child: Container(
@@ -67,11 +68,11 @@ class _SearchPage extends State<SearchPage> {
 
                             },
                             decoration: InputDecoration(
-                              hintText: 'Search',
+                              hintText: 'Enter something ...',
                               suffixIcon: IconButton(
-                                  onPressed: (){
+                                  onPressed: () async{
                                     textController.clear();
-                                    listSearchCourses.clear();
+                                    listSearchCourses = await APIServer().fetchSearchCourses(textController.text);
                                     setState(() {});
                                   },
                                   icon: Icon(
@@ -81,14 +82,13 @@ class _SearchPage extends State<SearchPage> {
                               ),
                               contentPadding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
                                 borderSide: BorderSide(
                                   color: Colors.indigo,
                                   width: 1,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
+
                                 borderSide: BorderSide(
                                   color: Colors.indigo,
                                   width: 1,
@@ -150,23 +150,13 @@ class _SearchPage extends State<SearchPage> {
                                     );
                                   }
                               ): ListView.builder(
-                                  itemCount: listSearchCourses.length+1,
+                                  itemCount: listSearchCourses.length,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: (){
 
                                       },
-                                      child: (index == 0) ? Container(
-                                        padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
-                                        child: Text(
-                                          'History',
-                                          style: TextStyle(
-                                              color: Colors.indigo,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                      ): Container(
+                                    child:Container(
                                           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                           height: 120,
                                           child: Card(
@@ -191,9 +181,7 @@ class _SearchPage extends State<SearchPage> {
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: <Widget>[
                                                                 Text(listSearchCourses[index].title, style: TextStyle(fontWeight: FontWeight.bold)),
-                                                                listSearchCourses[index].description.length <= 100 ? Text(listSearchCourses[index].description, style: TextStyle(fontSize: 10)) : Text(listSearchCourses[index].description.substring(0,95) + "...", style: TextStyle(fontSize: 10)),
-                                                                Text('Rated: ' + listSearchCourses[index].ratedNumber.toString(), style: TextStyle(fontSize: 10)),
-                                                                // RatingBox(),
+
                                                               ],
                                                             )
                                                         )
@@ -213,6 +201,7 @@ class _SearchPage extends State<SearchPage> {
             ),
 
           ],
+        )
         ):
         new Stack(
           children: [
@@ -223,13 +212,31 @@ class _SearchPage extends State<SearchPage> {
             ),
             Align(
               child: Container(
-                width: 70.0,
-                height: 70.0,
-                child: new Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: new Center(
-                        child: new CircularProgressIndicator()
+                color: Colors.white70,
+                width: 120,
+                height: 120,
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Center(
+                            child: new CircularProgressIndicator()
+                        )
+                    ),
+                    Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Loading ...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.indigo,
+                            ),
+                          ),
+                        )
                     )
+                  ],
                 ),
               ),
               alignment: FractionalOffset.center,

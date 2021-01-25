@@ -175,110 +175,128 @@ class _AccountPage extends State<AccountPage> {
     );
 
     return Scaffold(
-      body: isLoaded? SafeArea(
-          child: Container(
-              color: Colors.indigo,
-              height: double.infinity,
-              width: double.infinity,
-              child:ListView(
-                children: <Widget>[
-                  Container(
-                      height: 120,
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                              bottom: BorderSide(
-                                color: Colors.indigo,
-                                width: 3,
-                              )
-                          )
-                      ),
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment
-                              .stretch,
-                          children: [
-                            AspectRatio(
-                                aspectRatio: 1 / 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius
-                                          .circular(
-                                          60),
-                                      border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1
-                                      )
-                                  ),
-                                  child: ClipOval(
-                                    child: Image.network(
-                                      user.payload.avatar,
-                                    ),
-                                  ),
-                                )
-                            ),
-
-                            Container(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      user.payload.name.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      user.payload.email,
-                                      style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    Text(
-                                      user.payload.type,
-                                      style: TextStyle(
-                                          fontSize: 16
-                                      ),
-                                    ),
-                                  ],
-                                )
-                            ),
-                          ]
-                      )
-                  ),
-                  //  profileRow,
-                  manageInfo,
-                  supportRow,
-                  logoutRow,
-                ],
-              )
-          )
-      ):
-      new Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Color.fromRGBO(0, 0, 0, 0.2),
-          ),
-          Align(
+        body: isLoaded? SafeArea(
             child: Container(
-              width: 70.0,
-              height: 70.0,
-              child: new Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: new Center(
-                      child: new CircularProgressIndicator()
-                  )
-              ),
+                color: Colors.indigo,
+                height: double.infinity,
+                width: double.infinity,
+                child:ListView(
+                  children: <Widget>[
+                    Container(
+                        height: 120,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.indigo,
+                                  width: 3,
+                                )
+                            )
+                        ),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment
+                                .stretch,
+                            children: [
+                              AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            60),
+                                        border: Border.all(
+                                            color: Colors.grey,
+                                            width: 1
+                                        )
+                                    ),
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        user.payload.avatar,
+                                      ),
+                                    ),
+                                  )
+                              ),
+
+                              Container(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        user.payload.name.toString(),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        user.payload.email,
+                                        style: TextStyle(
+                                            fontSize: 15,fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      Text(
+                                        user.payload.type,
+                                        style: TextStyle(
+                                            fontSize: 16
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                              ),
+                            ]
+                        )
+                    ),
+                    //  profileRow,
+                    manageInfo,
+                    supportRow,
+                    logoutRow,
+                  ],
+                )
+            )
+        ):
+        new Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Color.fromRGBO(0, 0, 0, 0.2),
             ),
-            alignment: FractionalOffset.center,
-          )
-        ],
-      ),
+            Align(
+              child: Container(
+                color: Colors.white70,
+                width: 120,
+                height: 120,
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Center(
+                            child: new CircularProgressIndicator()
+                        )
+                    ),
+                    Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Loading ...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.indigo,
+                            ),
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              ),
+              alignment: FractionalOffset.center,
+            )
+          ],
+        )
     );
   }
 }

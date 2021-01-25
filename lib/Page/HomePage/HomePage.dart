@@ -137,7 +137,7 @@ class _HomePage extends State<HomePage> {
                   Text('Favorite Course', style: TextStyle(fontSize: 18.0,
                       color: Colors.indigo,
                       fontWeight: FontWeight.bold)),
-                  listFavoriteCourse.isEmpty ? new Container ():
+                  listFavoriteCourse.isEmpty? new Container ():
                   OutlineButton(
                     onPressed: () async {
                       Future<List<FavoriteCourse>> listFavoriteCourse = APIServer().fetchFavoriteCourse();
@@ -149,7 +149,7 @@ class _HomePage extends State<HomePage> {
                     disabledBorderColor: Colors.transparent,
                     padding: EdgeInsets.all(12),
                     borderSide: BorderSide.none,
-                    child: Text('More', style: TextStyle(color: Colors.indigo,decoration:TextDecoration.underline)),
+                    child: listFavoriteCourse.length > 1 ?Text('More', style: TextStyle(color: Colors.indigo,decoration:TextDecoration.underline)): Container(),
                   )
                 ],
               ),
@@ -165,6 +165,7 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
               ):
+              ((listFavoriteCourse.length > 1)?
                Container(
                         child: CarouselSlider(
                             options: CarouselOptions(),
@@ -197,7 +198,22 @@ class _HomePage extends State<HomePage> {
                                 ),
                             ).toList()
                         ),
-                      ),
+                      ):
+                  Container (
+                    child: Column(
+                        children: <Widget>[
+                          Image.network(listFavoriteCourse[0].courseImage,
+                              fit: BoxFit.cover,
+                              width: 300.0,
+                              height: 160.0),
+                          Text(listFavoriteCourse[0].courseTitle,
+                              style: TextStyle(
+                                  fontSize: 18.0))
+                        ]
+                    ),
+                  )
+              ),
+
               Text('My Courses', style: TextStyle(fontSize: 18.0, color: Colors.indigo,fontWeight: FontWeight.bold)), 
               (listUserCourse.length == 0)? Container (
                         padding: EdgeInsets.only(top: 20),
@@ -268,13 +284,31 @@ class _HomePage extends State<HomePage> {
           ),
           Align(
             child: Container(
-              width: 70.0,
-              height: 70.0,
-              child: new Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: new Center(
-                      child: new CircularProgressIndicator()
+              color: Colors.white70,
+              width: 120,
+              height: 120,
+              child: Column(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: new Center(
+                          child: new CircularProgressIndicator()
+                      )
+                  ),
+                  Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          "Loading ...",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.indigo,
+                          ),
+                        ),
+                      )
                   )
+                ],
               ),
             ),
             alignment: FractionalOffset.center,

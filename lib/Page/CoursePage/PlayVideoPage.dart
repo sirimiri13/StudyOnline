@@ -113,7 +113,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       });
     }
     else {
-      print("User declined permission!");
+      print("declined permission!");
     }
   }
 
@@ -261,7 +261,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          widget.lesson.name,
+          "Watch Video",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
