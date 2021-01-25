@@ -19,8 +19,8 @@ class _ListCouresFromCategory extends State<ListCouresFromCategory>{
   List<SearchCourse> listSearchCourses;
   bool isLoaded = false;
   void _fetchData() async {
-    category = await APIServer().fetchCategoryWithID(widget.categoryID);
-    listSearchCourses = await APIServer().fetchCoursesFromCategoryID(category.id);
+    category = await APIServer().fetchCategory(widget.categoryID);
+    listSearchCourses = await APIServer().fetchCourseOfCategory(category.id);
     print(listSearchCourses[0].id);
     setState(() {
      isLoaded = true;
@@ -96,37 +96,20 @@ class _ListCouresFromCategory extends State<ListCouresFromCategory>{
             ),
             Align(
               child: Container(
-                color: Colors.white70,
-                width: 120,
-                height: 120,
-                child: Column(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Center(
-                            child: new CircularProgressIndicator()
-                        )
-                    ),
-                    Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            "Loading ...",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.indigo,
-                            ),
-                          ),
-                        )
+                width: 70.0,
+                height: 70.0,
+                child: new Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: new Center(
+                        child: new CircularProgressIndicator()
                     )
-                  ],
                 ),
               ),
               alignment: FractionalOffset.center,
             )
           ],
         )
+
         );
 
   }

@@ -6,7 +6,6 @@ import 'package:finalproject_1712061/Model/CourseWithLesson.dart';
 import 'package:finalproject_1712061/Model/Exercise.dart';
 import 'package:finalproject_1712061/Model/FavoriteCourse.dart';
 import 'package:finalproject_1712061/Model/Instructor.dart';
-import 'package:finalproject_1712061/Model/InstructorDetail.dart';
 import 'package:finalproject_1712061/Model/Courses.dart';
 import 'package:finalproject_1712061/Model/User.dart';
 import 'package:finalproject_1712061/Model/UserCourse.dart';
@@ -263,7 +262,7 @@ Future<List<Exercise>> fetchExercises(String lessonId) async{
     return null;
   }
 
-  Future<Category> fetchCategoryWithID(String cateID) async {
+  Future<Category> fetchCategory(String cateID) async {
     var response = await http.get(api_server + "/category/${cateID}");
     if (response.statusCode == 200) {
       final responseJson = jsonDecode(response.body)["payload"];
@@ -275,7 +274,7 @@ Future<List<Exercise>> fetchExercises(String lessonId) async{
     }
   }
 
-  Future<List<SearchCourse>> fetchCoursesFromCategoryID(String cateID) async {
+  Future<List<SearchCourse>> fetchCourseOfCategory(String cateID) async {
     Map<String, dynamic> data = {
       "keyword": "",
       "opt": {
@@ -325,16 +324,6 @@ Future<List<Exercise>> fetchExercises(String lessonId) async{
     }
     return null;
   }
-
-  Future<List<SearchCourse>> fetchHistorySearchCourses(String searchString) async {
-    final response = await http.get(api_server + "/course/course-history");
-    if (response.statusCode == 200) {
-      List<SearchCourse> courses = (json.decode(response.body)["payload"]["courses"]["data"] as List).map((data) => SearchCourse.fromJson(data)).toList();
-      return courses;
-    }
-    return null;
-  }
-
 
 
 
