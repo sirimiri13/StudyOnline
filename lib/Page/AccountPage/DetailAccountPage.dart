@@ -55,9 +55,6 @@ class _DetailAccountPage extends State<DetailAccountPage> {
                                             image: DecorationImage(
                                               fit: BoxFit.fitWidth,
                                               image: NetworkImage(snap.data.payload.avatar),
-                                              // read: lấy dữ liệu 1 lần
-                                              // watch: lấy và luôn lắng nghe sự thay đổi
-                                              // selector: lên đọc tài liệu, watch trên 1 property thay vì cả class
 
                                             )
                                         )

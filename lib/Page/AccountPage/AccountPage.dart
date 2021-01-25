@@ -32,147 +32,7 @@ class _AccountPage extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    final manageInfo = GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context) => EditAccountPage(user: user)
-                // builder: (context) => EditAccountPage(),
-              )
-          );
-        },
-        child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                    bottom: BorderSide(
-                      color: Colors.indigo,
-                      // color: AppColors.greyColor,
-                      width: 1,
-                    )
-                )
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    Icons.settings,
-                    size: 30,
-                    color: Colors.indigo,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 20),
-                  child: Text(
-                    'Manage',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                )
-              ],
-            )
-        )
-    );
 
-    final supportRow = GestureDetector(
-        onTap: () {
-          print('Clicked on Support');
-        },
-        child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                    bottom: BorderSide(
-                      color: Colors.indigo,
-                      width: 3,
-                    )
-                )
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    Icons.support,
-                    size: 30,
-                    color: Colors.indigo,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 20),
-                  child: Text(
-                    'Support',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                )
-              ],
-            )
-        )
-    );
-
-    final logoutRow = GestureDetector(
-        onTap: () {
-          APIServer().save('0');
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        },
-        child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                    bottom: BorderSide(
-                      color: Colors.indigo,
-                      width: 1,
-                    )
-                )
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    Icons.logout,
-                    size: 30,
-                    color: Colors.red,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 20),
-                  child: Text(
-                    'Logout',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                )
-              ],
-            )
-        )
-    );
 
     return Scaffold(
         body: isLoaded? SafeArea(
@@ -250,9 +110,101 @@ class _AccountPage extends State<AccountPage> {
                         )
                     ),
                     //  profileRow,
-                    manageInfo,
-                    supportRow,
-                    logoutRow,
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => EditAccountPage(user: user)
+                                // builder: (context) => EditAccountPage(),
+                              )
+                          );
+                        },
+                        child: Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.indigo,
+                                      // color: AppColors.greyColor,
+                                      width: 1,
+                                    )
+                                )
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  child: Icon(
+                                    Icons.app_registration,
+                                    size: 30,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 20, top: 20),
+                                  child: Text(
+                                    'Edit Infomation',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                        )
+                    ),
+              GestureDetector(
+                  onTap: () {
+                    APIServer().save('0');
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                  child: Container(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                              bottom: BorderSide(
+                                color: Colors.indigo,
+                                width: 1,
+                              )
+                          )
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Icon(
+                              Icons.logout,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, top: 20),
+                            child: Text(
+                              'Sign Out',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                  )
+              ),
                   ],
                 )
             )
