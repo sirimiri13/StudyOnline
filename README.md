@@ -1,6 +1,5 @@
 # finalproject_1712061
-
-A new Flutter project.
+App study online for student 
 
 ## Getting Started
 
